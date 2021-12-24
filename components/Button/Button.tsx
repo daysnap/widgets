@@ -1,5 +1,5 @@
 
-import React, { useState, ReactNode } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import { Icon } from '../Icon'
@@ -9,7 +9,7 @@ export interface BaseButtonProps {
   dashed?: boolean
   disabled?: boolean
   loading?: boolean
-  children?: ReactNode | ReactNode []
+  children?: React.ReactNode | React.ReactNode []
   className?: string
   icon?: string
 }
@@ -41,7 +41,7 @@ const Button: React.FC<ButtonProps> = ({
   ...restProps
 }) => {
 
-  const [loading] = useState(initialLoading)
+  const [loading] = React.useState(initialLoading)
   const cls = createPrefixCls('button')
   const classes = classnames(
     `${cls}`,
@@ -60,7 +60,7 @@ const Button: React.FC<ButtonProps> = ({
     onClick?.(e)
   }
 
-  const iconNode = icon && !loading
+  const iconNode = icon && !loading ? <Icon icon={icon}/> : <Icon.Loading/>
 
   return (
     <button

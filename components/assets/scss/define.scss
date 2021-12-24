@@ -87,6 +87,10 @@ $n: 'ds-';
     left: 50%;
 }
 
+%lh1{
+  line-height: 1;
+}
+
 %l0{
     left: 0;
 }
@@ -193,6 +197,10 @@ $n: 'ds-';
 
 %pf{
   position:fixed;
+}
+
+%wsn{
+  white-space: nowrap;
 }
 
 %dib{
@@ -347,7 +355,19 @@ $n: 'ds-';
 	color:#999;
 }
 
-%bgwhite{
+%on{
+  outline: none;
+}
+
+%m0{
+  margin: 0;
+}
+
+%p0{
+  padding: 0;
+}
+
+%bfff{
 	background:#fff;
 }
 

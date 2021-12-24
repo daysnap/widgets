@@ -47,7 +47,8 @@
     "sass-loader": "^8.0.2"
   },
   "dependencies": {
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "rc-motion": "^2.4.4"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

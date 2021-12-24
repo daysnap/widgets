@@ -1,7 +1,7 @@
 
-//@function j($px, $base-font-size: 37.5px) {
+//@function j($px, $bdse-font-size: 37.5px) {
 //    @if (unitless($px)) {
-//        @return (($px + 0px) / $base-font-size) * 1rem;
+//        @return (($px + 0px) / $bdse-font-size) * 1rem;
 //    } @else if (unit($px) == rem) {
 //        @return $px;
 //    } @else if (unit($px) == px) {
@@ -13,34 +13,34 @@
   @return $px * 1px;
 }
 
-@function f($px, $base-font-size: 37.5px) {
+@function f($px, $bdse-font-size: 37.5px) {
     @if (unitless($px)) {
         @return f($px + 0px); // That may fail.
     } @else if (unit($px) == rem) {
         @return $px;
     }
-    @return (($px/1125 * 750) / $base-font-size) * 0.5rem;
+    @return (($px/1125 * 750) / $bdse-font-size) * 0.5rem;
 }
 
 // 内边距
 $padding-size: j(16);
 
 // 主题色
-$color-primary: var(--as-primary-color);
-$color-success: var(--as-success-color);
-$color-danger: var(--as-danger-color);
-$color-warning: var(--as-warning-color);
-$color-info: var(--as-info-color);
-$color-text: var(--as-text-color);
-$color-active: var(--as-active-color);
-$color-background: var(--as-background-color);
-$color-background-light: var(--as-background-color-light);
-$color-text-link: var(--as-text-link-color);
+$color-primary: var(--ds-primary-color);
+$color-success: var(--ds-success-color);
+$color-danger: var(--ds-danger-color);
+$color-warning: var(--ds-warning-color);
+$color-info: var(--ds-info-color);
+$color-text: var(--ds-text-color);
+$color-active: var(--ds-active-color);
+$color-background: var(--ds-background-color);
+$color-background-light: var(--ds-background-color-light);
+$color-text-link: var(--ds-text-link-color);
 
 // 边框
-$border-color: var(--as-border-color);
+$border-color: var(--ds-border-color);
 
 
-// as-view
-$view-nav-bar-background-color: var(--as-view-nav-bar-background-color);
-$view-nav-bar-text-color: var(--as-view-nav-bar-text-color);
+// ds-view
+$view-nav-bar-background-color: var(--ds-view-nav-bar-background-color);
+$view-nav-bar-text-color: var(--ds-view-nav-bar-text-color);

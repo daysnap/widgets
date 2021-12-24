@@ -9,9 +9,18 @@ export default {
   argTypes: {},
 } as Meta
 
-const Template: Story<ButtonProps> = args => <Button {...args} />
+const Template: Story<ButtonProps> = args => {
+  return (
+    <div>
+      <Button {...args}>默认按钮</Button>
+    </div>
+  )
+}
 
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
-Basic.args = {}
+Basic.args = {
+  loading: false,
+  icon: 'icon-follow',
+}
 
