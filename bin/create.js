@@ -47,11 +47,13 @@ const {{name}}: React.FC<{{name}}Props> = ({
   className,
   ...restProps
 }) => {
+
   const cls = createPrefixCls('{{tagName}}')
   const classes = classnames(
     \`\${cls}\`,
     className,
   )
+
   return (
     <div
       {...restProps}
