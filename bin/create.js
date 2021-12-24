@@ -47,7 +47,7 @@ const {{name}}: React.FC<{{name}}Props> = ({
   className,
   ...restProps
 }) => {
-  const cls = createPrefixCls('btn')
+  const cls = createPrefixCls('{{tagName}}')
   const classes = classnames(
     \`\${cls}\`,
     className,
@@ -107,6 +107,7 @@ const TEMPLATE_SCSS = `
     fileSave(`${output}/${name}.tsx`)
         .write(render(TEMPLATE_COMPONENT, {
             name,
+            tagName,
         }))
         .end('\n')
 
