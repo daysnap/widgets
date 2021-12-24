@@ -8,7 +8,7 @@ export type IconLoadingProps = IconProps
 
 const IconLoading: React.FC<IconLoadingProps> = ({
   className,
-  icon = 'icon-loading',
+  icon = 'icon-loading2',
   ...restProps
 }) => {
 
@@ -27,3 +27,5 @@ const IconLoading: React.FC<IconLoadingProps> = ({
   )
 
 }
+
+export default IconLoading
