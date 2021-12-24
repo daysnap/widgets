@@ -1,0 +1,30 @@
+{
+  "name": "daysnap-widgets",
+  "version": "0.0.1",
+  "description": "daysnap react ui",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daysnap/daysnap-widgets.git"
+  },
+  "keywords": [
+    "daysnap",
+    "react",
+    "ui"
+  ],
+  "author": "Ajuan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daysnap/daysnap-widgets/issues"
+  },
+  "homepage": "https://github.com/daysnap/daysnap-widgets#readme",
+  "devDependencies": {
+    "react": "^17.0.2"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1"
+  }
+}

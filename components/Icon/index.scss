@@ -1,0 +1,19 @@
+
+@import "../../assets/scss/define.scss";
+
+@include n(icon){
+
+}
+
+@include n(icon-loading){
+  animation: rotating 2s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+}
