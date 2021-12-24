@@ -1,7 +1,7 @@
 
 import React, { ReactNode, ReactElement } from 'react'
 import classnames from 'classnames'
-import { createPrefixCls } from '../../utils/create'
+import { createPrefixCls } from '../utils/create'
 
 export interface DropdownItemProps {
   className?: string,

@@ -2,7 +2,7 @@
 import React, { useState, ReactNode } from 'react'
 import classnames from 'classnames'
 import Icon from '../../components/Icon'
-import { createPrefixCls } from '../../utils/create'
+import { createPrefixCls } from '../utils/create'
 
 // 基础
 export interface BaseButtonProps {

@@ -1,7 +1,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { createPrefixCls } from '../../utils/create'
+import { createPrefixCls } from '../utils/create'
 import Icon, { IconProps } from './Icon'
 
 export type IconLoadingProps = IconProps

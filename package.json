@@ -4,7 +4,14 @@
   "description": "daysnap react ui",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "entry": "node bin/entry",
+    "create": "node bin/create",
+    "remove": "node bin/remove",
+    "dev": "start-storybook -p 6006",
+    "build": "build-storybook",
+    "tsc": "tsc ",
+    "pub": "node bin/pub"
   },
   "repository": {
     "type": "git",
@@ -22,9 +29,26 @@
   },
   "homepage": "https://github.com/daysnap/daysnap-widgets#readme",
   "devDependencies": {
-    "react": "^17.0.2"
+    "@babel/core": "^7.16.5",
+    "@storybook/addon-actions": "^6.4.9",
+    "@storybook/addon-essentials": "^6.4.9",
+    "@storybook/addon-links": "^6.4.9",
+    "@storybook/react": "^6.4.9",
+    "babel-loader": "^8.2.3",
+    "file-save": "^0.2.0",
+    "humps": "^2.0.1",
+    "inquirer": "^8.2.0",
+    "json-templater": "^1.2.0",
+    "node-sass": "^4.14.1",
+    "ora": "^6.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass-loader": "^8.0.2"
   },
   "dependencies": {
     "classnames": "^2.3.1"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
