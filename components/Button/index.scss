@@ -1,7 +1,0 @@
-
-@import "../assets/scss/define.scss";
-
-@include n(btn) {
-  @extend %cp;
-  background-color: red;
-}

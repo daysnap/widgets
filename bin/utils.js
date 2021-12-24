@@ -19,12 +19,12 @@ function requireFilePath (directory = '', recursive, regExp) {
             recursive: recursive || false
         })
         .filter((file) =>  {
-            return file.replace(/\\/g, '/').match(regExp || /\.(json|js)$/)
+            return file.replace(/\\/g, '/').match(regExp || /\.(json|js|tsx)$/)
         })
 }
 
 function requireDirname (data) {
-    const reg = /packages\/(.+)\/index\.js$/
+    const reg = /components\/(.+)\/index\.tsx$/
     return data.map(p => p.replace(/\\/g, '/').match(reg)[1])
 }
 

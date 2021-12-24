@@ -6,7 +6,7 @@ const humps = require('humps')
 
 
 let componentName = process.argv[2]
-let isY = process.argv.includes('yes')
+const isY = process.argv.includes('yes') || process.argv.includes('y')
 
 ;(componentName
     ? Promise.resolve({ componentName })
@@ -18,11 +18,7 @@ let isY = process.argv.includes('yes')
         },
     ])
 ).then(res => {
-    componentName = res.componentName
-    if (!componentName.toLocaleLowerCase().startsWith('as')) {
-        componentName = `as-${componentName}`
-    }
-    componentName = humps.decamelize(componentName)
+    componentName = humps.pascalize(res.componentName)
     return inquirer.prompt([
         {
             type: 'confirm',
@@ -35,7 +31,7 @@ let isY = process.argv.includes('yes')
     if (!res.ok && !isY) throw '取消删除'
 
     // 开始删除
-    const dirPath = resolve(`ui/packages/${componentName}`)
+    const dirPath = resolve(`components/${componentName}`)
     rmDir(dirPath)
 
     console.log('[remove] DONE：', dirPath)
