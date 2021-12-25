@@ -47,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
     `${cls}-${type}`,
     {
       [`is-icon-only`]: !children && children !== 0,
-      [`${cls}-loading`]: loading,
+      [`is-loading`]: loading,
     },
     className,
   )
@@ -66,6 +66,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       {...restProps}
       className={classes}
+      disabled={disabled}
       onClick={handleClick}
     >
       {iconNode}

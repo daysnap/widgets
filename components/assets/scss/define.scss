@@ -141,6 +141,10 @@
 	position:relative;
 }
 
+%pen{
+  pointer-events: none;
+}
+
 %pa{
 	position:absolute;
 }

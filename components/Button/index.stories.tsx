@@ -10,6 +10,8 @@ export default {
 } as Meta
 
 const Template: Story<ButtonProps> = args => {
+  const { disabled } = args
+  console.log('disabled => ', disabled)
   return (
     <dl>
       <dt>动态展示</dt>
@@ -18,11 +20,11 @@ const Template: Story<ButtonProps> = args => {
       </dd>
       <dt>基础用法</dt>
       <dd>
-        <Button>默认按钮</Button>
-        <Button type="primary">主要按钮</Button>
-        <Button type="success">成功按钮</Button>
-        <Button type="warning">警告按钮</Button>
-        <Button type="danger">危险按钮</Button>
+        <Button disabled={disabled}>默认按钮</Button>
+        <Button disabled={disabled} type="primary">主要按钮</Button>
+        <Button disabled={disabled} type="success">成功按钮</Button>
+        <Button disabled={disabled} type="warning">警告按钮</Button>
+        <Button disabled={disabled} type="danger">危险按钮</Button>
       </dd>
     </dl>
   )
@@ -34,5 +36,6 @@ Basic.args = {
   loading: false,
   icon: 'icon-follow',
   type: 'primary',
+  disabled: true,
 }
 

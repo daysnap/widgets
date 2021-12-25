@@ -1,77 +1,5 @@
 
-@import "../assets/scss/define.scss";
-
-@mixin button-variant($color, $background-color, $border-color) {
-  color: $color;
-  background-color: $background-color;
-  border-color: $border-color;
-
-  &:hover,
-  &:focus {
-    background: mix($color-white, $background-color, $hover-tint-percent);
-    border-color: mix($color-white, $border-color, $hover-tint-percent);
-    color: $color;
-  }
-
-  &:active {
-    background: mix($color-black, $background-color, $active-shade-percent);
-    border-color: mix($color-black, $border-color, $active-shade-percent);
-    color: $color;
-    outline: none;
-  }
-
-  &.is-active {
-    background: mix($color-black, $background-color, $active-shade-percent);
-    border-color: mix($color-black, $border-color, $active-shade-percent);
-    color: $color;
-  }
-
-  &.is-disabled {
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: $color-white;
-      background-color: mix($background-color, $color-white);
-      border-color: mix($border-color, $color-white);
-    }
-  }
-
-  &.is-plain {
-    @include button-plain($background-color);
-  }
-}
-
-@mixin button-plain($color) {
-  color: $color;
-  background: mix($color-white, $color, 90%);
-  border-color: mix($color-white, $color, 60%);
-
-  &:hover,
-  &:focus {
-    background: $color;
-    border-color: $color;
-    color: $color-white;
-  }
-
-  &:active {
-    background: mix($color-black, $color, $active-shade-percent);
-    border-color: mix($color-black, $color, $active-shade-percent);
-    color: $color-white;
-    outline: none;
-  }
-
-  &.is-disabled {
-    &,
-    &:hover,
-    &:focus,
-    &:active {
-      color: mix($color-white, $color, 40%);
-      background-color: mix($color-white, $color, 90%);
-      border-color: mix($color-white, $color, 80%);
-    }
-  }
-}
+@import "./mixins";
 
 @include b(button){
   @extend %dib;
@@ -95,6 +23,32 @@
     background-color: mix($color-white, $color-primary, 90%);
   }
 
+  &:disabled{
+    &,
+    &:hover,
+    &:focus {
+      color: $color-text-placeholder;
+      cursor: not-allowed;
+      background-image: none;
+      background-color: $color-white;
+      border-color: $color-lighter;
+    }
+
+    //&.el-button--text {
+    //  background-color: transparent;
+    //}
+
+    &.is-plain {
+      &,
+      &:hover,
+      &:focus {
+        background-color: $color-white;
+        border-color: $color-lighter;
+        color: $color-text-placeholder;
+      }
+    }
+  }
+
   @include b(icon){
     &:first-child{
       margin-right: 5px;
@@ -106,6 +60,22 @@
       &:first-child{
         margin-right: 0;
       }
+    }
+  }
+
+  @include when(loading) {
+    @extend %pr;
+    @extend %pen;
+    &:before {
+      @extend %pen;
+      @extend %pa;
+      content: '';
+      left: -1px;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      border-radius: inherit;
+      background-color: rgba(255,255,255, .35);
     }
   }
 
