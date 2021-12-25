@@ -14,12 +14,15 @@ const Template: Story<ButtonProps> = args => {
     <dl>
       <dt>动态展示</dt>
       <dd>
-        <Button {...args}>默认按钮</Button>
+        <Button {...args}>按钮</Button>
       </dd>
-      <dt>默认按钮</dt>
+      <dt>基础用法</dt>
       <dd>
-        <Button {...args}>默认按钮</Button>
-        <Button {...args}>默认按钮</Button>
+        <Button>默认按钮</Button>
+        <Button type="primary">主要按钮</Button>
+        <Button type="success">成功按钮</Button>
+        <Button type="warning">警告按钮</Button>
+        <Button type="danger">危险按钮</Button>
       </dd>
     </dl>
   )

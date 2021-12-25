@@ -1,9 +1,9 @@
 
 @import "../assets/scss/define.scss";
 
-@include n(icon){
+@include b(icon){
   @extend %dib;
-  line-height: 1;
+  @extend %lh1;
   speak: none;
   font-style: normal;
   font-weight: 400;
@@ -12,10 +12,11 @@
   vertical-align: baseline;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
 
-@include n(icon-loading){
-  animation: rotating 2s linear infinite;
+  @include m(loading){
+    animation: rotating 2s linear infinite;
+  }
+
 }
 
 @keyframes rotating {

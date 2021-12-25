@@ -1,7 +1,7 @@
 
 @import "../assets/scss/define.scss";
 
-@include n(button){
+@include b(button){
   @extend %dib;
   @extend %lh1;
   @extend %cp;
@@ -17,39 +17,43 @@
   font-size: 14px;
   border-radius: 6px;
 
-  @include n(icon){
+  @include b(icon){
     &:first-child{
       margin-right: 5px;
     }
   }
 
-  @include s('button-icon-only') {
-    @include n(icon){
+  @include when('is-icon-only') {
+    @include b(icon){
       &:first-child{
         margin-right: 0;
       }
     }
   }
 
-  @include s('button-primary') {
-    @extend %cfff;
+  @include m('primary') {
+    color: #fff;
     background-color: $color-primary;
     border-color: $color-primary;
   }
 
-  @include s('button-danger') {
-
+  @include m('danger') {
+    color: #fff;
+    background-color: $color-danger;
+    border-color: $color-danger;
   }
 
-  @include s('button-warning') {
-
+  @include m('warning') {
+    color: #fff;
+    background-color: $color-warning;
+    border-color: $color-warning;
   }
 
-  @include s('button-success') {
-
+  @include m('success') {
+    color: #fff;
+    background-color: $color-success;
+    border-color: $color-success;
   }
-
-
 
 }
 

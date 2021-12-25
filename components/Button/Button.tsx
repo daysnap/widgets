@@ -33,7 +33,7 @@ const Button: React.FC<ButtonProps> = ({
   type = 'default',
   dashed = false,
   disabled= false,
-  loading: initialLoading = false,
+  loading = false,
   children,
   className,
   icon,
@@ -41,13 +41,12 @@ const Button: React.FC<ButtonProps> = ({
   ...restProps
 }) => {
 
-  const [loading] = React.useState(initialLoading)
   const cls = createPrefixCls('button')
   const classes = classnames(
     `${cls}`,
     `${cls}-${type}`,
     {
-      [`${cls}-icon-only`]: !children && children !== 0,
+      [`is-icon-only`]: !children && children !== 0,
       [`${cls}-loading`]: loading,
     },
     className,
@@ -61,10 +60,9 @@ const Button: React.FC<ButtonProps> = ({
     onClick?.(e)
   }
 
-  const iconNode = icon && !loading ? <Icon icon={icon}/> : <Icon.Loading/>
+  const iconNode = icon && !loading ? <Icon icon={icon}/> : loading ? <Icon.Loading/> : null
 
   console.log('icon => ', icon)
-  console.log('initialLoading => ', initialLoading)
   console.log('loading => ', loading)
 
   return (

@@ -1,8 +1,6 @@
 
 @import "var";
-
-$element-separator: '__';
-$modifier-separator: '--';
+@import "mixins";
 
 $n: 'ds-';
 
@@ -19,31 +17,6 @@ $n: 'ds-';
     @content
   }
 }
-
-@mixin b($block) {
-    .#{$block} {
-        @content;
-    }
-}
-
-@mixin e($element) {
-    $selector: &;
-    @at-root {
-        #{$selector + $element-separator + $element} {
-            @content;
-        }
-    }
-}
-
-@mixin m($modifier) {
-    $selector: &;
-    @at-root {
-        #{$selector + $modifier-separator + $modifier} {
-            @content;
-        }
-    }
-}
-
 
 %ps{
     position: sticky;
