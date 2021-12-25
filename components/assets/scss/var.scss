@@ -40,10 +40,21 @@ $color-text-link: var(--ds-text-link-color);
 // 边框
 $border-color: var(--ds-border-color);
 
-
 // ds-view
 $view-nav-bar-background-color: var(--ds-view-nav-bar-background-color);
 $view-nav-bar-text-color: var(--ds-view-nav-bar-text-color);
+
+
+$color-primary: #409EFF;
+$color-success: #67C23A;
+$color-danger: #F56C6C;
+$color-warning: #E6A23C;
+$color-info: #969799;
+$color-text: #323233;
+$color-active: #f2f3f5;
+$color-background: #f2f3f4;
+$color-background-light: #fff;
+$color-text-link: #576b95;
 
 
 /* Break-point
@@ -65,4 +76,6 @@ $--breakpoints: (
 $hover-tint-percent: 20% !default;
 $active-shade-percent: 10% !default;
 
-$color-white: #fff;
+
+$color-black: #000000 !default;
+$color-white: #fff !default;

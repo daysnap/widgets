@@ -1,6 +1,78 @@
 
 @import "../assets/scss/define.scss";
 
+@mixin button-variant($color, $background-color, $border-color) {
+  color: $color;
+  background-color: $background-color;
+  border-color: $border-color;
+
+  &:hover,
+  &:focus {
+    background: mix($color-white, $background-color, $hover-tint-percent);
+    border-color: mix($color-white, $border-color, $hover-tint-percent);
+    color: $color;
+  }
+
+  &:active {
+    background: mix($color-black, $background-color, $active-shade-percent);
+    border-color: mix($color-black, $border-color, $active-shade-percent);
+    color: $color;
+    outline: none;
+  }
+
+  &.is-active {
+    background: mix($color-black, $background-color, $active-shade-percent);
+    border-color: mix($color-black, $border-color, $active-shade-percent);
+    color: $color;
+  }
+
+  &.is-disabled {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: $color-white;
+      background-color: mix($background-color, $color-white);
+      border-color: mix($border-color, $color-white);
+    }
+  }
+
+  &.is-plain {
+    @include button-plain($background-color);
+  }
+}
+
+@mixin button-plain($color) {
+  color: $color;
+  background: mix($color-white, $color, 90%);
+  border-color: mix($color-white, $color, 60%);
+
+  &:hover,
+  &:focus {
+    background: $color;
+    border-color: $color;
+    color: $color-white;
+  }
+
+  &:active {
+    background: mix($color-black, $color, $active-shade-percent);
+    border-color: mix($color-black, $color, $active-shade-percent);
+    color: $color-white;
+    outline: none;
+  }
+
+  &.is-disabled {
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      color: mix($color-white, $color, 40%);
+      background-color: mix($color-white, $color, 90%);
+      border-color: mix($color-white, $color, 80%);
+    }
+  }
+}
+
 @include b(button){
   @extend %dib;
   @extend %lh1;
@@ -12,18 +84,15 @@
   @extend %usn;
   color: $color-text;
   border: 1px solid #dcdfe6;
-  transition: .1s;
+  transition: .3s;
   padding: 12px 16px;
   font-size: 14px;
   border-radius: 6px;
-  //background-color: v-mix($color-primary, $color-primary, 1);
-  background-color: alpha($color-primary, 0.2);
   &:hover,
   &:focus {
     color: $color-primary;
     border-color: $color-primary;
-    //background-color: alpha(var(--color-primary), 0.2);
-    //background-color: mix($color-white, $color-primary, 90%);
+    background-color: mix($color-white, $color-primary, 90%);
   }
 
   @include b(icon){
@@ -41,28 +110,19 @@
   }
 
   @include m('primary') {
-    color: #fff;
-    background-color: $color-primary;
-    border-color: $color-primary;
+    @include button-variant($color-white, $color-primary, $color-primary);
   }
 
   @include m('danger') {
-    color: #fff;
-    background-color: $color-danger;
-    border-color: $color-danger;
+    @include button-variant($color-white, $color-danger, $color-danger);
   }
 
   @include m('warning') {
-    color: #fff;
-    background-color: $color-warning;
-    border-color: $color-warning;
+    @include button-variant($color-white, $color-warning, $color-warning);
   }
 
   @include m('success') {
-    color: #fff;
-    background-color: $color-success;
-    border-color: $color-success;
+    @include button-variant($color-white, $color-success, $color-success);
   }
 
 }
-
