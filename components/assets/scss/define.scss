@@ -1,22 +1,4 @@
-
-@import "var";
 @import "mixins";
-
-$n: 'ds-';
-
-// name
-@mixin n($name) {
-  .#{$n}#{$name}{
-    @content
-  }
-}
-
-// self
-@mixin s($name) {
-  &.#{$n}#{$name}{
-    @content
-  }
-}
 
 %ps{
     position: sticky;

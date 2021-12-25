@@ -16,6 +16,15 @@
   padding: 12px 16px;
   font-size: 14px;
   border-radius: 6px;
+  //background-color: v-mix($color-primary, $color-primary, 1);
+  background-color: alpha($color-primary, 0.2);
+  &:hover,
+  &:focus {
+    color: $color-primary;
+    border-color: $color-primary;
+    //background-color: alpha(var(--color-primary), 0.2);
+    //background-color: mix($color-white, $color-primary, 90%);
+  }
 
   @include b(icon){
     &:first-child{

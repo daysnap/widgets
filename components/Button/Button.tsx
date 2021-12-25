@@ -62,9 +62,6 @@ const Button: React.FC<ButtonProps> = ({
 
   const iconNode = icon && !loading ? <Icon icon={icon}/> : loading ? <Icon.Loading/> : null
 
-  console.log('icon => ', icon)
-  console.log('loading => ', loading)
-
   return (
     <button
       {...restProps}

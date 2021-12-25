@@ -44,3 +44,25 @@ $border-color: var(--ds-border-color);
 // ds-view
 $view-nav-bar-background-color: var(--ds-view-nav-bar-background-color);
 $view-nav-bar-text-color: var(--ds-view-nav-bar-text-color);
+
+
+/* Break-point
+--------------------------*/
+$--sm: 768px !default;
+$--md: 992px !default;
+$--lg: 1200px !default;
+$--xl: 1920px !default;
+
+
+$--breakpoints: (
+  'xs' : (max-width: $--sm - 1),
+  'sm' : (min-width: $--sm),
+  'md' : (min-width: $--md),
+  'lg' : (min-width: $--lg),
+  'xl' : (min-width: $--xl)
+);
+
+$hover-tint-percent: 20% !default;
+$active-shade-percent: 10% !default;
+
+$color-white: #fff;
