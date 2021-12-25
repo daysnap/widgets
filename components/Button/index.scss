@@ -10,6 +10,7 @@
   @extend %bsb;
   @extend %m0;
   @extend %usn;
+  text-decoration: none;
   color: $color-text;
   border: 1px solid #dcdfe6;
   transition: .3s;
@@ -23,7 +24,7 @@
     background-color: mix($color-white, $color-primary, 90%);
   }
 
-  &:disabled{
+  @include when(disabled) {
     &,
     &:hover,
     &:focus {
@@ -33,10 +34,6 @@
       background-color: $color-white;
       border-color: $color-lighter;
     }
-
-    //&.el-button--text {
-    //  background-color: transparent;
-    //}
 
     &.is-plain {
       &,
@@ -55,11 +52,26 @@
     }
   }
 
-  @include when('is-icon-only') {
+  @include when('icon-only') {
     @include b(icon){
       &:first-child{
         margin-right: 0;
       }
+    }
+  }
+
+  @include when(plain) {
+    &:hover,
+    &:focus {
+      background: $color-white;
+      border-color: $color-primary;
+      color: $color-primary;
+    }
+    &:active {
+      background: $color-white;
+      border-color: mix($color-black, $color-primary, $active-shade-percent);
+      color: mix($color-black, $color-primary, $active-shade-percent);
+      outline: none;
     }
   }
 
@@ -93,6 +105,26 @@
 
   @include m('success') {
     @include button-variant($color-white, $color-success, $color-success);
+  }
+
+  @include m('text') {
+    color: $color-text;
+    background: 0 0;
+    box-shadow: none;
+    border-color: transparent;
+    &:hover,
+    &:focus {
+      border-color: $color-background;
+      background-color: $color-background;
+    }
+
+    @include when(disabled) {
+      border-color: transparent;
+      &:hover,
+      &:focus{
+        border-color: transparent;
+      }
+    }
   }
 
 }

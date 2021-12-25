@@ -5,8 +5,8 @@ import { createPrefixCls } from '../utils/create'
 import { Icon } from '../Icon'
 // 基础
 export interface BaseButtonProps {
-  type?: 'default' | 'primary' | 'danger' | 'warning' | 'success'
-  dashed?: boolean
+  type?: 'default' | 'primary' | 'danger' | 'warning' | 'success' | 'text'
+  plain?: boolean
   disabled?: boolean
   loading?: boolean
   children?: React.ReactNode | React.ReactNode []
@@ -31,12 +31,13 @@ export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>
 
 const Button: React.FC<ButtonProps> = ({
   type = 'default',
-  dashed = false,
+  plain= false,
   disabled= false,
   loading = false,
   children,
   className,
   icon,
+  href,
   onClick,
   ...restProps
 }) => {
@@ -47,7 +48,9 @@ const Button: React.FC<ButtonProps> = ({
     `${cls}-${type}`,
     {
       [`is-icon-only`]: !children && children !== 0,
+      [`is-plain`]: plain,
       [`is-loading`]: loading,
+      [`is-disabled`]: disabled,
     },
     className,
   )
@@ -61,6 +64,20 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   const iconNode = icon && !loading ? <Icon icon={icon}/> : loading ? <Icon.Loading/> : null
+
+  if (href) {
+    return (
+      <a
+        {...restProps}
+        className={classes}
+        onClick={handleClick}
+        href={href}
+      >
+        {iconNode}
+        {children}
+      </a>
+    )
+  }
 
   return (
     <button
