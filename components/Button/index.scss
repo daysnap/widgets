@@ -21,10 +21,35 @@
     &:first-child{
       margin-right: 5px;
     }
-    &:last-child{
-      margin-right: 0;
+  }
+
+  @include s('button-icon-only') {
+    @include n(icon){
+      &:first-child{
+        margin-right: 0;
+      }
     }
   }
+
+  @include s('button-primary') {
+    @extend %cfff;
+    background-color: $color-primary;
+    border-color: $color-primary;
+  }
+
+  @include s('button-danger') {
+
+  }
+
+  @include s('button-warning') {
+
+  }
+
+  @include s('button-success') {
+
+  }
+
+
 
 }
 

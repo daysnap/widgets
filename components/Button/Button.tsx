@@ -47,6 +47,7 @@ const Button: React.FC<ButtonProps> = ({
     `${cls}`,
     `${cls}-${type}`,
     {
+      [`${cls}-icon-only`]: !children && children !== 0,
       [`${cls}-loading`]: loading,
     },
     className,
@@ -61,6 +62,10 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   const iconNode = icon && !loading ? <Icon icon={icon}/> : <Icon.Loading/>
+
+  console.log('icon => ', icon)
+  console.log('initialLoading => ', initialLoading)
+  console.log('loading => ', loading)
 
   return (
     <button

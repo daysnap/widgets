@@ -11,9 +11,17 @@ export default {
 
 const Template: Story<ButtonProps> = args => {
   return (
-    <div>
-      <Button {...args}>默认按钮</Button>
-    </div>
+    <dl>
+      <dt>动态展示</dt>
+      <dd>
+        <Button {...args}>默认按钮</Button>
+      </dd>
+      <dt>默认按钮</dt>
+      <dd>
+        <Button {...args}>默认按钮</Button>
+        <Button {...args}>默认按钮</Button>
+      </dd>
+    </dl>
   )
 }
 
@@ -22,5 +30,6 @@ Basic.storyName = '基础用法'
 Basic.args = {
   loading: false,
   icon: 'icon-follow',
+  type: 'primary',
 }
 
