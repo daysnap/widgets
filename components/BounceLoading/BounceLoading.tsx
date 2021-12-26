@@ -4,11 +4,13 @@ import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 
 export interface BounceLoadingProps {
-  className?: string
+  className?: string,
+  count?: number
 }
 
 const BounceLoading: React.FC<BounceLoadingProps> = ({
   className,
+  count= 4,
   ...restProps
 }) => {
 
@@ -17,12 +19,20 @@ const BounceLoading: React.FC<BounceLoadingProps> = ({
     `${cls}`,
     className,
   )
+  const children = React.useMemo(() =>
+    new Array(count).fill('.').map((item, index) =>
+      <span className={`${cls}-dot`} key={index}/>
+    ),
+    [count]
+  )
 
   return (
     <div
       {...restProps}
       className={classes}
-    />
+    >
+      {children}
+    </div>
   )
 }
 
