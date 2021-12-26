@@ -12,8 +12,8 @@ import {{name}} from './{{name}}'
 
 import './index.scss'
 
-export { default as {{name}} } from './{{name}}'
 export type { {{name}}Props } from './{{name}}'
+export { default as {{name}} } from './{{name}}'
 
 export default {{name}}
 `
