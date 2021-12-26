@@ -3,13 +3,20 @@ import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import { Icon } from '../Icon'
+
+interface ChildrenProps extends Pick<ButtonProps, 'className' | 'onClick'>{
+  icon?: React.ReactNode
+}
+
+type Children = (props: ChildrenProps) => React.ReactElement
+
 // 基础
 export interface BaseButtonProps {
   type?: 'default' | 'primary' | 'danger' | 'warning' | 'success' | 'text'
   plain?: boolean
   disabled?: boolean
   loading?: boolean
-  children?: React.ReactNode | React.ReactNode []
+  children?: React.ReactNode | React.ReactNode [] | Children
   className?: string
   icon?: string
 }
@@ -38,7 +45,6 @@ const Button: React.FC<ButtonProps> = ({
   className,
   icon,
   href,
-  to,
   onClick,
   ...restProps
 }) => {
@@ -66,11 +72,8 @@ const Button: React.FC<ButtonProps> = ({
 
   const iconNode = icon && !loading ? <Icon icon={icon}/> : loading ? <Icon.Loading/> : null
 
-
-  if (to) {
-    if (React.Children.count(children) !== 1) {
-      throw 'to isB'
-    }
+  if (typeof children === 'function') {
+    return (children as Children)({ className: classes, onClick: handleClick, icon: iconNode })
   }
 
   if (href) {
