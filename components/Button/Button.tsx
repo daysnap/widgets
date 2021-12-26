@@ -19,7 +19,7 @@ export type AnchorButtonProps = {
   href: string
   target?: string
   onClick?: React.MouseEventHandler<HTMLElement>
-} & BaseButtonProps & Omit<React.ButtonHTMLAttributes<any>, 'type' | 'onClick'>
+} & BaseButtonProps & Omit<React.AnchorHTMLAttributes<any>, 'type' | 'onClick'>
 
 // 原生按钮
 export type NativeButtonProps = {
@@ -38,6 +38,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   icon,
   href,
+  to,
   onClick,
   ...restProps
 }) => {
@@ -64,6 +65,13 @@ const Button: React.FC<ButtonProps> = ({
   }
 
   const iconNode = icon && !loading ? <Icon icon={icon}/> : loading ? <Icon.Loading/> : null
+
+
+  if (to) {
+    if (React.Children.count(children) !== 1) {
+      throw 'to isB'
+    }
+  }
 
   if (href) {
     return (
