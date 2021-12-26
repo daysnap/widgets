@@ -67,7 +67,7 @@ export default {{name}}
 const TEMPLATE_SCSS = `
 @import "../assets/scss/define.scss";
 
-@include n({{tagName}}){
+@include b({{tagName}}){
 
 }
 `
@@ -85,7 +85,7 @@ const TEMPLATE_SCSS = `
 
     const { componentName } = res
     const name = humps.pascalize(componentName)
-    const tagName = humps.depascalize(componentName, '-')
+  const tagName = humps.decamelize(componentName, { separator: '-' })
     const arrDirNames = requireDirname(requireFilePath(resolve('components'), true, /\/index\.tsx$/))
     if (arrDirNames.includes(name)) {
         console.error(`${name} 已存在.`)
