@@ -1,6 +1,5 @@
 
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import Button, { ButtonProps } from './index'
 
@@ -16,7 +15,7 @@ const Template: Story<ButtonProps> = args => {
     <dl>
       <dt>动态展示</dt>
       <dd>
-        <Button {...args}>按钮</Button>
+        <Button {...args}></Button>
       </dd>
       <dt>基础用法</dt>
       <dd>
@@ -48,6 +47,10 @@ const Template: Story<ButtonProps> = args => {
       <dd>
         <Button target="_blank" href="https://www.baidu.com" {...args}>跳转百度</Button>
       </dd>
+      <dt>children 函数支持</dt>
+      <dd>
+        <Button {...args}>{ ({ icon, ...restProps }) => <a {...restProps} href="/">{ icon }导航按钮</a> }</Button>
+      </dd>
     </dl>
   )
 }
@@ -55,9 +58,10 @@ const Template: Story<ButtonProps> = args => {
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
 Basic.args = {
+  children: '按钮',
   loading: false,
   icon: 'icon-dianzan',
   type: 'primary',
-  disabled: true,
+  disabled: false,
 }
 
