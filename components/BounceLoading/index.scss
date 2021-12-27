@@ -5,13 +5,16 @@
   @extend %df;
   @extend %aic;
   @extend %jcs;
-  width: 60px;
-  height: 18px;
-  span{
+  @extend %dib;
+  @extend %tac;
+  font-size: 0;
+  @include m('dot'){
+    @extend %dib;
     @extend %br50;
-    width: j(6);
-    height: j(6);
-    top: j(6);
+    @extend %vam;
+    width: 6px;
+    height: 6px;
+    margin: 0 4px;
     background-color: $color-primary;
     animation-duration: 0.8s;
     transform-origin: center;
@@ -19,18 +22,6 @@
     animation-name: bounce-loading;
     animation-timing-function: ease-in-out;
     animation-fill-mode: both;
-  }
-  span:nth-child(1) {
-    animation-delay: 0s;
-  }
-  span:nth-child(2) {
-    animation-delay: -.1s;
-  }
-  span:nth-child(3) {
-    animation-delay: -.2s;
-  }
-  span:nth-child(4) {
-    animation-delay: -.3s;
   }
 }
 

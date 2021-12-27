@@ -13,5 +13,7 @@ const Template: Story<BounceLoadingProps> = args => <BounceLoading {...args} />
 
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
-Basic.args = {}
+Basic.args = {
+  count: 4
+}
 

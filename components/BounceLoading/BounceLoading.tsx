@@ -21,18 +21,18 @@ const BounceLoading: React.FC<BounceLoadingProps> = ({
   )
   const children = React.useMemo(() =>
     new Array(count).fill('.').map((item, index) =>
-      <span className={`${cls}-dot`} key={index}/>
+      <li className={`${cls}-dot`} key={index} style={{ animationDelay: `-${0.1 * index}s` }}/>
     ),
     [count]
   )
 
   return (
-    <div
+    <ul
       {...restProps}
       className={classes}
     >
       {children}
-    </div>
+    </ul>
   )
 }
 
