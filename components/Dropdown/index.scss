@@ -3,5 +3,12 @@
 
 @include b(dropdown){
 
+  @include m(divider) {
+    @extend %oh;
+    height: 0;
+    margin: 10px 0;
+    border-top: 1px solid $dropdown-divider-border-color;
+  }
+
 }
 

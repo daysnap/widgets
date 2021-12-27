@@ -3,7 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 
-export interface DropdownDividerProps {
+export interface DropdownDividerProps extends React.HTMLAttributes<HTMLDivElement>{
   className?: string
 }
 
