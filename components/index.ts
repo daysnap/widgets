@@ -7,5 +7,8 @@ export { default as BounceLoading } from './BounceLoading'
 export type { ButtonProps } from './Button'
 export { default as Button } from './Button'
 
+export type { CanvasXORProps } from './CanvasXOR'
+export { default as CanvasXOR } from './CanvasXOR'
+
 export type { IconProps } from './Icon'
 export { default as Icon } from './Icon'
