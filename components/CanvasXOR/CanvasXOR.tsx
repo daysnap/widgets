@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import useCanvasXOR from './useCanvasXOR'
 
-export interface CanvasXORProps {
+export interface CanvasXORProps extends React.CanvasHTMLAttributes<HTMLCanvasElement>{
   bgSrc: string,
   maskSrc: string,
   className?: string

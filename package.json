@@ -8,7 +8,7 @@
     "entry": "node bin/entry",
     "create": "node bin/create",
     "remove": "node bin/remove",
-    "dev": "start-storybook -p 6006",
+    "dev": "start-storybook -p 6006 -s ./.storybook/public",
     "build": "build-storybook",
     "tsc": "tsc ",
     "pub": "node bin/pub"

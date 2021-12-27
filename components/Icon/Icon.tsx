@@ -3,7 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 
-export interface IconProps {
+export interface IconProps extends React.HTMLAttributes<HTMLElement>{
   className?: string,
   icon?: string,
 }

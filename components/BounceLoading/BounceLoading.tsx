@@ -3,7 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 
-export interface BounceLoadingProps {
+export interface BounceLoadingProps extends React.HTMLAttributes<HTMLUListElement>{
   className?: string,
   count?: number
 }

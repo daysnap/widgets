@@ -13,5 +13,9 @@ const Template: Story<CanvasXORProps> = args => <CanvasXOR {...args} />
 
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
-Basic.args = {}
+Basic.args = {
+  bgSrc: './logo-bg.png',
+  maskSrc: './logo-mask.png',
+  style: { width: '300px', height: 'auto' }
+}
 

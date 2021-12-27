@@ -26,13 +26,13 @@ export type AnchorButtonProps = {
   href: string
   target?: string
   onClick?: React.MouseEventHandler<HTMLElement>
-} & BaseButtonProps & Omit<React.AnchorHTMLAttributes<any>, 'type' | 'onClick'>
+} & BaseButtonProps & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'type' | 'onClick'>
 
 // 原生按钮
 export type NativeButtonProps = {
   htmlType?: 'submit' | 'button' | 'reset'
   onClick?: React.MouseEventHandler<HTMLElement>
-} & BaseButtonProps & Omit<React.ButtonHTMLAttributes<any>, 'type' | 'onClick'>
+} & BaseButtonProps & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'type' | 'onClick'>
 
 export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>
 
