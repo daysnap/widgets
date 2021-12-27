@@ -10,5 +10,8 @@ export { default as Button } from './Button'
 export type { CanvasXORProps } from './CanvasXOR'
 export { default as CanvasXOR } from './CanvasXOR'
 
+export type { DropdownProps } from './Dropdown'
+export { default as Dropdown } from './Dropdown'
+
 export type { IconProps } from './Icon'
 export { default as Icon } from './Icon'

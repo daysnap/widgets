@@ -1,5 +1,4 @@
 
-import React from 'react'
 import Internal from './Icon'
 import IconLoading from './IconLoading'
 
