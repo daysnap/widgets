@@ -5,10 +5,16 @@ import { createPrefixCls } from '../utils/create'
 
 export interface DropdownProps {
   className?: string
+  placement?: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
+  trigger?: 'hover' | 'click'
+  disabled?: boolean,
+  children?: React.ReactNode
 }
 
 const Dropdown: React.FC<DropdownProps> = ({
   className,
+  placement= 'bottom-end',
+  trigger = 'hover',
   ...restProps
 }) => {
 
