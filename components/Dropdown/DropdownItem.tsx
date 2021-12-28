@@ -6,12 +6,14 @@ import { createPrefixCls } from '../utils/create'
 export interface DropdownItemProps extends React.HTMLAttributes<HTMLDivElement>{
   className?: string
   disabled?: boolean
+  onClick?: React.MouseEventHandler<HTMLElement>
 }
 
 const Dropdown: React.FC<DropdownItemProps> = ({
   className,
   disabled= false,
   children,
+  onClick,
   ...restProps
 }) => {
 
@@ -24,9 +26,18 @@ const Dropdown: React.FC<DropdownItemProps> = ({
     className,
   )
 
-  if (children && React.Children.count(children) === 1 && typeof children === 'object') {
-    return React.cloneElement(children!, {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (disabled) {
+      e.preventDefault()
+      return
+    }
+    onClick?.(e)
+  }
+
+  if (children && React.Children.count(children) === 1 && React.isValidElement(children)) {
+    return React.cloneElement(children, {
       className: classes,
+      onClick: handleClick,
       ...restProps,
     })
   }
@@ -35,6 +46,7 @@ const Dropdown: React.FC<DropdownItemProps> = ({
     <div
       {...restProps}
       className={classes}
+      onClick={handleClick}
     />
   )
 }
