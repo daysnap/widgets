@@ -15,3 +15,9 @@ export { default as Dropdown } from './Dropdown'
 
 export type { IconProps } from './Icon'
 export { default as Icon } from './Icon'
+
+export type { PortalProps } from './Portal'
+export { default as Portal } from './Portal'
+
+export type { TriggerProps } from './Trigger'
+export { default as Trigger } from './Trigger'
