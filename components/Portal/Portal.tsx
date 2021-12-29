@@ -1,29 +1,32 @@
 
 import React from 'react'
-import classnames from 'classnames'
-import { createPrefixCls } from '../utils/create'
+import { createPortal } from 'react-dom'
 
 export interface PortalProps {
-  className?: string
+  children?: React.ReactNode
 }
 
 const Portal: React.FC<PortalProps> = ({
-  className,
-  ...restProps
+  children,
 }) => {
 
-  const cls = createPrefixCls('portal')
-  const classes = classnames(
-    `${cls}`,
-    className,
-  )
+  const refContainer = React.useRef<HTMLDivElement | null>(null)
 
-  return (
-    <div
-      {...restProps}
-      className={classes}
-    />
-  )
+  if (!refContainer.current) {
+    refContainer.current = document.createElement('div')
+    document.body.appendChild(refContainer.current)
+  }
+
+  React.useLayoutEffect(() => {
+    return () => {
+      const node = refContainer.current
+      if (node) {
+        document.body.removeChild(node)
+      }
+    }
+  }, [refContainer])
+
+  return createPortal(children, refContainer.current)
 }
 
 export default Portal
