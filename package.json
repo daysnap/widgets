@@ -50,7 +50,7 @@
   },
   "dependencies": {
     "classnames": "^2.3.1",
-    "rc-motion": "^2.4.4"
+    "dom-align": "^1.12.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
