@@ -21,6 +21,8 @@ const Template: Story<TriggerProps> = args => {
 
   const alignProp = { visible, targetNode, childRef }
 
+  console.log('alignProp => ', alignProp)
+
   return (
     <div ref={targetNode}>
       <input

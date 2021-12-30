@@ -60,7 +60,7 @@ const Trigger: React.FC<TriggerProps> = ({
 
   return (
     <Portal>
-      <div ref={sourceNode} style={{ padding: '0' }}>{children}</div>
+      <div ref={sourceNode} style={{ position: 'absolute', width: 100, height: 200, border: '1px solid red' }}>{children}</div>
     </Portal>
   )
 }
