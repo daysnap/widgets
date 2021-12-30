@@ -1,6 +1,9 @@
 
 /* 本文件自动生成 './bin/entry.js' */
 
+export type { AlignProps } from './Align'
+export { default as Align } from './Align'
+
 export type { BounceLoadingProps } from './BounceLoading'
 export { default as BounceLoading } from './BounceLoading'
 

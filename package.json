@@ -50,7 +50,8 @@
   },
   "dependencies": {
     "classnames": "^2.3.1",
-    "dom-align": "^1.12.2"
+    "dom-align": "^1.12.2",
+    "rc-align": "^4.0.11"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
