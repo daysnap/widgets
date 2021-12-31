@@ -12,10 +12,15 @@ export default {
 
 const Template: Story<AlignProps> = args => {
 
+  const refTarget = React.useRef<HTMLDivElement>(null)
+
   return (
-    <RcAlign align={{}} target={function(){}}>
-      <div>123</div>
-    </RcAlign>
+    <div ref={refTarget}>
+      1111
+      <RcAlign align={{}} target={() => refTarget.current!}>
+        <div>123</div>
+      </RcAlign>
+    </div>
   )
 }
 
