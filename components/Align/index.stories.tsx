@@ -15,9 +15,8 @@ const Template: Story<AlignProps> = args => {
   const refTarget = React.useRef<HTMLDivElement>(null)
 
   return (
-    <div ref={refTarget}>
-      1111
-      <RcAlign align={{}} target={() => refTarget.current!}>
+    <div ref={refTarget} id="container">
+      <RcAlign align={{}} target={() => document.getElementById('content')!}>
         <div>123</div>
       </RcAlign>
     </div>
