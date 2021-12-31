@@ -14,6 +14,7 @@ const Template: Story<PortalProps> = args => <Portal {...args} />
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
 Basic.args = {
-  children: '挂载元素'
+  children: '挂载元素',
+  getContainer: () => document.body
 }
 

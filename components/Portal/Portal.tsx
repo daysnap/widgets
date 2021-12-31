@@ -1,5 +1,5 @@
 
-import React, {forwardRef} from 'react'
+import React, { forwardRef } from 'react'
 import { createPortal } from 'react-dom'
 
 export type PortalRef = {}
@@ -10,31 +10,31 @@ export interface PortalProps {
   didUpdate?: (prevProps: PortalProps) => void
 }
 
-const Portal: React.FC<PortalProps> = forwardRef<PortalRef, PortalProps>(({
-  children,
-  getContainer,
-  didUpdate
-}, ref) => {
+const Portal: React.FC<PortalProps> = forwardRef<PortalRef, PortalProps>((props, ref) => {
 
-  const refContainer = React.useRef<HTMLDivElement | null>(null)
+  const { children, getContainer, didUpdate } = props
+  const refContainer = React.useRef<HTMLElement | null>(null)
 
-  // React.useImperativeHandle(ref, )
+  React.useImperativeHandle(ref, () => ({}))
 
+  // 挂载的容器
   if (!refContainer.current) {
-    refContainer.current = document.createElement('div')
-    document.body.appendChild(refContainer.current)
+    refContainer.current = getContainer()
   }
 
-  React.useLayoutEffect(() => {
-    return () => {
-      const node = refContainer.current
-      if (node) {
-        document.body.removeChild(node)
-      }
-    }
-  }, [refContainer])
+  React.useEffect(() => {
+    didUpdate?.(props)
+  })
 
-  return createPortal(children, refContainer.current)
+  React.useEffect(() => {
+    return () => {
+      // 销毁
+      refContainer.current?.parentNode?.removeChild(refContainer.current)
+    }
+  }, [])
+
+  // 挂载
+  return refContainer.current ? createPortal(children, refContainer.current) : null
 })
 
 export default Portal
