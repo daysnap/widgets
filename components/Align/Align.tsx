@@ -1,8 +1,6 @@
 
 import React from 'react'
-import classnames from 'classnames'
 import { alignElement, alignPoint } from 'dom-align'
-import { createPrefixCls } from '../utils/create'
 import type { AlignType, AlignResult, TargetType, TargetPoint } from './interface'
 
 type OnAlign = (source: HTMLElement, result: AlignResult) => void
@@ -28,15 +26,9 @@ const Align: React.FC<AlignProps> = ({
   ...restProps
 }) => {
 
+  const refSource = React.useRef<any>()
   // 只允许一个元素
   children = React.Children.only(children)
-  const refSource = React.useRef<any>()
-
-  const cls = createPrefixCls('align')
-  const classes = classnames(
-    `${cls}`,
-    className,
-  )
 
   React.useEffect(() => {
     const element = getElement(target)
@@ -57,7 +49,10 @@ const Align: React.FC<AlignProps> = ({
   }, [])
 
   if (React.isValidElement(children)) {
-    children = React.cloneElement(children, { ref: refSource })
+    children = React.cloneElement(children, {
+      ...restProps,
+      ref: refSource
+    })
   }
 
   return children

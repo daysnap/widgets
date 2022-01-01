@@ -2,7 +2,7 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import Align, { AlignProps } from './index'
-import RcAlign from 'rc-align'
+import Portal from '../Portal'
 
 export default {
   title: 'Align',
@@ -13,12 +13,20 @@ export default {
 const Template: Story<AlignProps> = args => {
 
   const refTarget = React.useRef<HTMLDivElement>(null)
+  const align = {
+    points: ['tl', 'bl'],
+    offset: [0, 0],
+  }
 
   return (
-    <div ref={refTarget} id="container">
-      <RcAlign align={{}} target={() => document.getElementById('content')!}>
-        <div>123</div>
-      </RcAlign>
+    <div>
+      <div ref={refTarget}>AAAAAAAAAAAA</div>
+      <p>ddd</p>
+      <Portal getContainer={() => document.body}>
+        <Align align={align} target={() => refTarget.current!}>
+          <div style={{ position: 'absolute' }}>1111</div>
+        </Align>
+      </Portal>
     </div>
   )
 }
