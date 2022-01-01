@@ -1,8 +1,8 @@
 
-import React, { forwardRef } from 'react'
+import React from 'react'
 import { createPortal } from 'react-dom'
 
-export type PortalRef = {}
+export type RefPortal = {}
 
 export interface PortalProps {
   children?: React.ReactNode
@@ -10,7 +10,7 @@ export interface PortalProps {
   didUpdate?: (prevProps: PortalProps) => void
 }
 
-const Portal: React.FC<PortalProps> = forwardRef<PortalRef, PortalProps>((props, ref) => {
+const Portal: React.ForwardRefRenderFunction<RefPortal, PortalProps> = React.forwardRef<PortalRef, PortalProps>((props, ref) => {
 
   const { children, getContainer, didUpdate } = props
   const refContainer = React.useRef<HTMLElement | null>(null)
