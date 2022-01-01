@@ -3,11 +3,14 @@ import React from 'react'
 import classnames from 'classnames'
 import { } from 'dom-align'
 import { createPrefixCls } from '../utils/create'
+import type { AlignType, AlignResult, TargetType, TargetPoint } from './interface'
 
 export interface AlignProps {
   className?: string
+  align: AlignType
+  target: TargetType
+
 }
-const d: React.ForwardRefRenderFunction<any>
 
 const Align: React.FC<AlignProps> = ({
   className,
