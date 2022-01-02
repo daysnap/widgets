@@ -2,6 +2,7 @@
 import React from 'react'
 import { alignElement, alignPoint } from 'dom-align'
 import type { AlignType, AlignResult, TargetType, TargetPoint } from './interface'
+import { composeRef } from '../utils/ref'
 
 export type OnAlign = (source: HTMLElement, result: AlignResult) => void
 
@@ -18,7 +19,9 @@ const getElement = (func: TargetType) => typeof func !== 'function' ? null : fun
 
 const getPoint = (point: TargetType) => typeof point !== 'object' || !point ? null : point
 
-export interface RefAlign {}
+export interface RefAlign {
+  forceAlign: () => void
+}
 
 const Align = React.forwardRef<RefAlign, AlignProps>(({
   className,
@@ -34,10 +37,8 @@ const Align = React.forwardRef<RefAlign, AlignProps>(({
   // 只允许一个元素
   children = React.Children.only(children)
 
-  React.useImperativeHandle(ref, () => ({}))
-
-  React.useLayoutEffect(() => {
-
+  const forceAlign = React.useCallback(() => {
+    console.log('挂载中')
     const element = getElement(target)
     const point = getPoint(target)
     const source = refSource.current
@@ -52,13 +53,27 @@ const Align = React.forwardRef<RefAlign, AlignProps>(({
     if (result!) {
       onAlign?.(source, result)
     }
+  }, [target])
 
+  React.useImperativeHandle(ref, () => ({ forceAlign }))
+  React.useLayoutEffect(() => {
+    forceAlign()
   }, [])
+
+  // 监听 window 变化
+  React.useEffect(() => {
+    if (monitorWindowResize) {
+      window.addEventListener('resize', forceAlign)
+    }
+    return () => {
+      if (monitorWindowResize) window.removeEventListener('resize', forceAlign)
+    }
+  }, [monitorWindowResize, forceAlign])
 
   if (React.isValidElement(children)) {
     children = React.cloneElement(children, {
       ...restProps,
-      ref: refSource
+      ref: composeRef((children as any).ref, refSource)
     })
   }
 

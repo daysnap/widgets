@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Portal from '../Portal'
 import Align, { AlignType, OnAlign } from '../Align'
-import RcAlign from "rc-align";
 
 type ActionType = 'click' | 'hover' | 'focus' | 'blur'
 
@@ -77,12 +76,12 @@ const Trigger: React.FC<TriggerProps> = ({
         key="portal"
         getContainer={getContainer}
       >
-        <RcAlign
-          monitorBufferTime={1000}
+        <Align
           ref={refAlign}
           align={align}
           target={() => refTrigger.current!}
           onAlign={handleAlign}
+          monitorWindowResize
         >
           <div
             className={classes}
@@ -90,7 +89,7 @@ const Trigger: React.FC<TriggerProps> = ({
           >
             {restChildren}
           </div>
-        </RcAlign>
+        </Align>
       </Portal>
     )
 

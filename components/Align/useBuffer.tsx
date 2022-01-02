@@ -3,7 +3,7 @@ import React from 'react'
 
 export default (callback: () => boolean, buffer: number) => {
   const calledRef = React.useRef<boolean>(false)
-  const timeoutRef = React.useRef<number>(null)
+  const timeoutRef = React.useRef<number>()
 
   function cancelTrigger() {
     window.clearTimeout(timeoutRef.current)
