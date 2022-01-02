@@ -1,6 +1,7 @@
 
 import Align from './Align'
 
+export type { AlignType, AlignResult, TargetType, TargetPoint } from './interface'
 export type { AlignProps } from './Align'
 export { default as Align } from './Align'
 
