@@ -12,10 +12,10 @@ export default {
 const Template: Story<TriggerProps> = args => {
 
   return (
-    <div>
+    <div style={{ paddingLeft: `32px` }}>
       <Trigger>
         <input/>
-        <p>12312312321313123</p>
+        <p  className="ddd">hahahhahahahh</p>
       </Trigger>
     </div>
   )

@@ -1,10 +1,10 @@
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Portal from '../Portal'
 import Align, { AlignType } from '../Align'
+import RcAlign from "rc-align";
 
 type ActionType = 'click' | 'hover' | 'focus' | 'blur'
 
@@ -24,11 +24,7 @@ const Trigger: React.FC<TriggerProps> = ({
   ...restProps
 }) => {
 
-  if (React.Children.count(children) <= 0) {
-    return null
-  }
-
-  let [trigger, ...alignChildren] = React.Children.toArray(children)
+  let [trigger, alignChildren] = React.Children.toArray(children)
   const refTrigger = React.useRef()
   const [visible, setVisible] = React.useState<boolean>(false)
 
@@ -46,32 +42,34 @@ const Trigger: React.FC<TriggerProps> = ({
       let: '0',
       width: `100%`,
     })
+    window.document.body.appendChild(container)
     return container
   }
 
   const handleClick = () => {
     setVisible(v => !v)
-    console.log('11')
   }
   const cloneProps = {
     ref: refTrigger,
     onClick: handleClick
   }
-  trigger = React.cloneElement(trigger as React.ReactElement, cloneProps)
+  if (React.isValidElement(trigger)) {
+    trigger = React.cloneElement(trigger, cloneProps)
+  }
 
   let portal: React.ReactElement | null = null
-  if (visible) {
+  if (visible && React.isValidElement(alignChildren)) {
     portal = (
       <Portal
         key="portal"
         getContainer={getContainer}
       >
-        <Align
+        <RcAlign
           align={align}
           target={() => refTrigger.current!}
         >
-          {alignChildren[0] as React.ReactElement}
-        </Align>
+          {alignChildren}
+        </RcAlign>
       </Portal>
     )
   }

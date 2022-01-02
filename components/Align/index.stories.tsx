@@ -21,7 +21,6 @@ const Template: Story<AlignProps> = args => {
   return (
     <div>
       <div ref={refTarget}>AAAAAAAAAAAA</div>
-      <p>ddd</p>
       <Portal getContainer={() => document.body}>
         <Align align={align} target={() => refTarget.current!}>
           <div style={{ position: 'absolute' }}>1111</div>
