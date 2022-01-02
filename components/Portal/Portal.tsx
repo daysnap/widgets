@@ -10,7 +10,7 @@ export interface PortalProps {
   didUpdate?: (prevProps: PortalProps) => void
 }
 
-const Portal: React.FC<PortalProps> = React.forwardRef<RefPortal, PortalProps>((props, ref) => {
+const Portal = React.forwardRef<RefPortal, PortalProps>((props, ref) => {
 
   const { children, getContainer, didUpdate } = props
   const refContainer = React.useRef<HTMLElement | null>(null)

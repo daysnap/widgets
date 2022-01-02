@@ -3,7 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Portal from '../Portal'
-import Align, { AlignType } from '../Align'
+import Align, { AlignType, OnAlign } from '../Align'
 import RcAlign from "rc-align";
 
 type ActionType = 'click' | 'hover' | 'focus' | 'blur'
@@ -15,23 +15,28 @@ export interface TriggerProps {
   showAction?: ActionType[]
   hideAction?: ActionType[]
   align?: AlignType
+  onAlign?: OnAlign
+  autoDestroy?: boolean
 }
 
 const Trigger: React.FC<TriggerProps> = ({
   className,
   children,
   align = { points: ['tl', 'bl'], offset: [0, 0] },
+  autoDestroy= true,
   ...restProps
 }) => {
 
-  let [trigger, alignChildren] = React.Children.toArray(children)
+  let [trigger, ...restChildren] = React.Children.toArray(children)
   const refTrigger = React.useRef()
   const [visible, setVisible] = React.useState<boolean>(false)
+  const [option, setOption] = React.useState<boolean>(false)
 
   const cls = createPrefixCls('trigger')
   const classes = classnames(
     `${cls}`,
     className,
+    ``
   )
 
   const getContainer = () => {
@@ -57,21 +62,41 @@ const Trigger: React.FC<TriggerProps> = ({
     trigger = React.cloneElement(trigger, cloneProps)
   }
 
+  const handleAlign: OnAlign = (source, result) => {
+    console.log('挂载成功')
+    setOption(v => !v)
+  }
+  const refAlign = React.useRef<any>()
+  const style: React.CSSProperties = {
+    opacity: visible ? undefined : 0
+  }
   let portal: React.ReactElement | null = null
-  if (visible && React.isValidElement(alignChildren)) {
+  if (visible || refAlign.current) {
     portal = (
       <Portal
         key="portal"
         getContainer={getContainer}
       >
         <RcAlign
+          monitorBufferTime={1000}
+          ref={refAlign}
           align={align}
           target={() => refTrigger.current!}
+          onAlign={handleAlign}
         >
-          {alignChildren}
+          <div
+            className={classes}
+            style={style}
+          >
+            {restChildren}
+          </div>
         </RcAlign>
       </Portal>
     )
+
+    if (!visible && autoDestroy) {
+      portal = null
+    }
   }
 
   return (
