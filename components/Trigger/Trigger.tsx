@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, {FocusEventHandler} from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Portal from '../Portal'
@@ -22,14 +22,18 @@ export interface TriggerProps {
 const Trigger: React.FC<TriggerProps> = ({
   className,
   children,
+  action,
+  showAction= [],
+  hideAction= [],
   align = { points: ['tl', 'bl'], offset: [0, 0] },
-  autoDestroy= true,
+  // align,
   onAlign,
+  autoDestroy= false,
   prefixCls,
   ...restProps
 }) => {
 
-  let [trigger, ...restChildren] = React.Children.toArray(children)
+  const [child, ...restChildren] = React.Children.toArray(children)
   const refTrigger = React.useRef()
   const [visible, setVisible] = React.useState<boolean>(false)
 
@@ -54,15 +58,69 @@ const Trigger: React.FC<TriggerProps> = ({
     return container
   }
 
-  const handleClick = () => {
-    setVisible(v => !v)
+  const isClickToShow = action?.includes('click') || showAction?.includes('click')
+  const isClickToHide = action?.includes('click') || hideAction?.includes('click')
+  const isMouseEnterToShow = action?.includes('hover') || showAction?.includes('hover')
+  const isMouseLeaveToHide = action?.includes('hover') || hideAction?.includes('hover')
+  const isFocusToShow = action?.includes('focus') || showAction?.includes('focus')
+  const isBlurToHide = action?.includes('blur') || hideAction?.includes('blur')
+
+  const trim: (type: string, e: any) => void = (type, e) => {
+    const childCallback = (child as React.ReactElement).props[type]
+    childCallback?.(e)
+    (restProps as any)[type]?.(e)
   }
-  const cloneProps = {
-    ref: refTrigger,
-    onClick: handleClick
+  const handleClick: React.MouseEventHandler<HTMLElement> = (e) => {
+    trim('onClick', e)
+    console.log('1')
+    if (isClickToShow && !visible) {
+      console.log('2')
+      setVisible(true)
+    } else if (isClickToHide && visible) {
+      console.log('3')
+      setVisible(false)
+    }
   }
-  if (React.isValidElement(trigger)) {
-    trigger = React.cloneElement(trigger, cloneProps)
+  const handleMouseEnter: React.MouseEventHandler<HTMLElement> = (e) => {
+    trim('onMouseEnter', e)
+    if (isMouseEnterToShow) {
+      setVisible(true)
+    }
+  }
+  const handleMouseLeave: React.MouseEventHandler<HTMLElement> = (e) => {
+    trim('onMouseLeave', e)
+    if (isMouseLeaveToHide) {
+      setVisible(false)
+    }
+  }
+  const handleFocus: React.FocusEventHandler = (e) => {
+    trim('onFocus', e)
+    if (isFocusToShow) {
+      setVisible(true)
+    }
+  }
+  const handleBlur: React.FocusEventHandler = (e) => {
+    trim('onBlur', e)
+    if (isBlurToHide) {
+      setVisible(false)
+    }
+  }
+
+  const cloneProps: React.HTMLAttributes<HTMLElement> = {
+    onClick: handleClick,
+    onMouseEnter: handleMouseEnter,
+    onMouseLeave: handleMouseLeave,
+    onFocus: handleFocus,
+    onBlur: handleBlur,
+  }
+
+  let trigger: React.ReactElement
+  if (React.isValidElement(child)) {
+    trigger = React.cloneElement(child, {
+      ref: refTrigger,
+      ...cloneProps,
+      onClick: handleClick
+    })
   }
 
   const refAlign = React.useRef<any>()
@@ -96,7 +154,7 @@ const Trigger: React.FC<TriggerProps> = ({
 
   return (
     <>
-      {trigger}
+      {trigger!}
       {portal}
     </>
   )

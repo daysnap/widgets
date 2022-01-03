@@ -13,7 +13,7 @@ const Template: Story<TriggerProps> = args => {
 
   return (
     <div style={{ paddingLeft: `32px` }}>
-      <Trigger>
+      <Trigger action="click">
         <input/>
         <p  className="ddd">弹出的内容</p>
       </Trigger>
