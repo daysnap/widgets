@@ -3,5 +3,9 @@
 
 @include b(trigger){
 
+  @include m(hidden){
+    @extend %dn;
+  }
+
 }
 

@@ -11,8 +11,8 @@ export interface TriggerProps {
   className?: string
   children: React.ReactElement []
   action?: ActionType | ActionType []
-  showAction?: ActionType[]
-  hideAction?: ActionType[]
+  showAction?: ActionType | ActionType[]
+  hideAction?: ActionType | ActionType[]
   align?: AlignType
   onAlign?: OnAlign
   autoDestroy?: boolean
@@ -139,6 +139,8 @@ const Trigger: React.FC<TriggerProps> = ({
           monitorWindowResize
         >
           <div
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
             className={classes}
           >
             {restChildren}
