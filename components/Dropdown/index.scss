@@ -11,18 +11,18 @@
 
   @include m(content){
     @extend %pr;
-    min-width: j(160);
+    min-width: 160px;
     background-color: #202931;
-    border-radius: j(6);
-    padding: j(10) 0;
-    box-shadow: j(1) j(10) j(20) rgba(32, 41, 49, .5);
+    border-radius: 6px;
+    padding: 10px 0;
+    box-shadow: 1px 10px 20px rgba(32, 41, 49, .5);
     &:before{
       @extend %pa;
       content: '';
-      top: j(-18);
+      top: -18px;
       width: 0;
       height: 0;
-      border-width: j(9);
+      border-width: 9px;
       border-style: solid;
       border-color: transparent transparent #202931 transparent;
     }
