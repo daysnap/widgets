@@ -19,6 +19,7 @@ export interface BaseButtonProps {
   children?: React.ReactNode | React.ReactNode [] | Children
   className?: string
   icon?: string
+  prefixCls?: string
 }
 
 // 链接按钮
@@ -44,12 +45,13 @@ const Button: React.FC<ButtonProps> = ({
   children,
   className,
   icon,
+  prefixCls,
   href,
   onClick,
   ...restProps
 }) => {
 
-  const cls = createPrefixCls('button')
+  const cls = createPrefixCls('button', prefixCls)
   const classes = classnames(
     `${cls}`,
     `${cls}-${type}`,

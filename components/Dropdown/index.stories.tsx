@@ -2,6 +2,7 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import Dropdown, { DropdownProps } from './index'
+import Button from '../Button'
 
 export default {
   title: 'Dropdown',
@@ -12,8 +13,11 @@ export default {
 const Template: Story<DropdownProps> = args => {
   return (
     <Dropdown>
-      <input/>
-      <p  className="ddd">弹出的内容</p>
+      <button>菜单</button>
+      <Dropdown.Item>帮助中心</Dropdown.Item>
+      <Dropdown.Item>关于我们</Dropdown.Item>
+      <Dropdown.Divider/>
+      <Dropdown.Item>用户反馈</Dropdown.Item>
     </Dropdown>
   )
 }
