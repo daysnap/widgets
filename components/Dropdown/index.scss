@@ -4,25 +4,30 @@
 @include b(dropdown){
   @extend %pa;
   @extend %bsb;
-  animation-name: cFadeInDown;
-  animation-duration: .3s;
+  //animation-name: cFadeInDown;
+  //animation-duration: .3s;
   padding-top: 12px;
   top: 100%;
-  min-width: j(160);
-  background-color: #202931;
-  border-radius: j(6);
-  //padding: j(10) 0;
-  box-shadow: j(1) j(10) j(20) rgba(32, 41, 49, .5);
-  &:before{
-    @extend %pa;
-    content: '';
-    top: j(-18);
-    width: 0;
-    height: 0;
-    border-width: j(9);
-    border-style: solid;
-    border-color: transparent transparent #202931 transparent;
+
+  @include m(content){
+    @extend %pr;
+    min-width: j(160);
+    background-color: #202931;
+    border-radius: j(6);
+    padding: j(10) 0;
+    box-shadow: j(1) j(10) j(20) rgba(32, 41, 49, .5);
+    &:before{
+      @extend %pa;
+      content: '';
+      top: j(-18);
+      width: 0;
+      height: 0;
+      border-width: j(9);
+      border-style: solid;
+      border-color: transparent transparent #202931 transparent;
+    }
   }
+
   @include m(hidden) {
     @extend %dn;
   }

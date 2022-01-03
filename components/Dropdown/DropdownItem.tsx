@@ -2,12 +2,9 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
+import { Button, ButtonProps } from '../Button'
 
-export interface DropdownItemProps extends React.HTMLAttributes<HTMLDivElement>{
-  className?: string
-  disabled?: boolean
-  onClick?: React.MouseEventHandler<HTMLElement>
-}
+export interface DropdownItemProps extends ButtonProps {}
 
 const Dropdown: React.FC<DropdownItemProps> = ({
   className,
@@ -43,11 +40,14 @@ const Dropdown: React.FC<DropdownItemProps> = ({
   }
 
   return (
-    <div
+    <Button
       {...restProps}
+      prefixCls={cls}
       className={classes}
       onClick={handleClick}
-    >{children}</div>
+    >
+      {children}
+    </Button>
   )
 }
 

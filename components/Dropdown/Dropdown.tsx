@@ -26,6 +26,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     `${cls}`,
     className,
   )
+  const [button, ...restChildren] = React.Children.toArray(children)
 
   return (
     <Trigger
@@ -34,7 +35,8 @@ const Dropdown: React.FC<DropdownProps> = ({
       align={Placements[placement]}
       action={trigger}
     >
-      {children}
+      {button}
+      <div className={`${cls}-content`}>{restChildren}</div>
     </Trigger>
   )
 }
