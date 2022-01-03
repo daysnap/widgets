@@ -29,7 +29,9 @@ const Portal = React.forwardRef<RefPortal, PortalProps>((props, ref) => {
   React.useEffect(() => {
     return () => {
       // 销毁
-      refContainer.current?.parentNode?.removeChild(refContainer.current)
+      if (refContainer.current !== document.body) {
+        refContainer.current?.parentNode?.removeChild(refContainer.current)
+      }
     }
   }, [])
 
