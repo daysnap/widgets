@@ -47,7 +47,7 @@ const Dropdown: React.FC<DropdownItemProps> = ({
       {...restProps}
       className={classes}
       onClick={handleClick}
-    />
+    >{children}</div>
   )
 }
 
