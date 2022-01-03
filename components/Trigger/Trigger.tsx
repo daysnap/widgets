@@ -1,5 +1,5 @@
 
-import React, {FocusEventHandler} from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Portal from '../Portal'
@@ -34,7 +34,7 @@ const Trigger: React.FC<TriggerProps> = ({
 }) => {
 
   const [child, ...restChildren] = React.Children.toArray(children)
-  const refTrigger = React.useRef()
+  const refTrigger = React.useRef<HTMLElement>()
   const [visible, setVisible] = React.useState<boolean>(false)
 
   const cls = createPrefixCls(prefixCls || 'trigger')
@@ -72,12 +72,9 @@ const Trigger: React.FC<TriggerProps> = ({
   }
   const handleClick: React.MouseEventHandler<HTMLElement> = (e) => {
     trim('onClick', e)
-    console.log('1')
     if (isClickToShow && !visible) {
-      console.log('2')
       setVisible(true)
     } else if (isClickToHide && visible) {
-      console.log('3')
       setVisible(false)
     }
   }
@@ -124,6 +121,7 @@ const Trigger: React.FC<TriggerProps> = ({
   }
 
   const refAlign = React.useRef<any>()
+  const refPopup = React.useRef<HTMLDivElement>(null)
   let portal: React.ReactElement | null = null
   if (visible || refAlign.current) {
     portal = (
@@ -139,6 +137,7 @@ const Trigger: React.FC<TriggerProps> = ({
           monitorWindowResize
         >
           <div
+            ref={refPopup}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className={classes}
@@ -153,6 +152,22 @@ const Trigger: React.FC<TriggerProps> = ({
       portal = null
     }
   }
+
+  React.useEffect(() => {
+    const handleMouseDown = (e: MouseEvent) => {
+      const { target } = e
+      if (
+        !refTrigger.current?.contains(target as Node)
+        && !refPopup.current?.contains(target as Node)
+      ) {
+        setVisible(false)
+      }
+    }
+    document.addEventListener('mousedown', handleMouseDown)
+    return () => {
+      document.removeEventListener('mousedown', handleMouseDown)
+    }
+  }, [])
 
   return (
     <>
