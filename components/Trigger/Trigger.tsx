@@ -9,7 +9,7 @@ type ActionType = 'click' | 'hover' | 'focus' | 'blur'
 
 export interface TriggerProps {
   className?: string
-  children: React.ReactElement []
+  children: React.ReactNode | React.ReactNode []
   action?: ActionType | ActionType []
   showAction?: ActionType | ActionType[]
   hideAction?: ActionType | ActionType[]
@@ -37,7 +37,7 @@ const Trigger: React.FC<TriggerProps> = ({
   const refTrigger = React.useRef<HTMLElement>()
   const [visible, setVisible] = React.useState<boolean>(false)
 
-  const cls = createPrefixCls(prefixCls || 'trigger')
+  const cls = prefixCls || createPrefixCls('trigger')
   const classes = classnames(
     `${cls}`,
     {

@@ -3,6 +3,10 @@
 
 @include b(dropdown){
 
+  @include m(hidden) {
+    @extend %dn;
+  }
+
   @include m(divider) {
     @extend %oh;
     height: 0;

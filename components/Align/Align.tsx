@@ -1,14 +1,14 @@
 
 import React from 'react'
 import { alignElement, alignPoint } from 'dom-align'
-import type { AlignType, AlignResult, TargetType, TargetPoint } from './interface'
+import type { AlignType, AlignResult, TargetType } from './interface'
 import { composeRef } from '../utils/ref'
 
 export type OnAlign = (source: HTMLElement, result: AlignResult) => void
 
 export interface AlignProps {
   className?: string
-  align: AlignType
+  align?: AlignType
   target: TargetType
   children: React.ReactElement
   onAlign?: OnAlign
@@ -38,7 +38,6 @@ const Align = React.forwardRef<RefAlign, AlignProps>(({
   children = React.Children.only(children)
 
   const forceAlign = React.useCallback(() => {
-    console.log('挂载中')
     const element = getElement(target)
     const point = getPoint(target)
     const source = refSource.current

@@ -2,10 +2,12 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
+import Trigger from '../Trigger'
+import Placements from './placements'
 
 export interface DropdownProps {
   className?: string
-  placement?: 'top' | 'top-start' | 'top-end' | 'bottom' | 'bottom-start' | 'bottom-end'
+  placement?: 'bottomLeft' | 'bottomCenter' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight'
   trigger?: 'hover' | 'click'
   disabled?: boolean,
   children?: React.ReactNode
@@ -13,8 +15,9 @@ export interface DropdownProps {
 
 const Dropdown: React.FC<DropdownProps> = ({
   className,
-  placement= 'bottom-end',
+  placement= 'bottomLeft',
   trigger = 'hover',
+  children,
   ...restProps
 }) => {
 
@@ -25,10 +28,14 @@ const Dropdown: React.FC<DropdownProps> = ({
   )
 
   return (
-    <div
-      {...restProps}
+    <Trigger
+      prefixCls={cls}
       className={classes}
-    />
+      align={Placements[placement]}
+      action={trigger}
+    >
+      {children}
+    </Trigger>
   )
 }
 

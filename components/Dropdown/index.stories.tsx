@@ -9,7 +9,14 @@ export default {
   argTypes: {},
 } as Meta
 
-const Template: Story<DropdownProps> = args => <Dropdown {...args} />
+const Template: Story<DropdownProps> = args => {
+  return (
+    <Dropdown>
+      <input/>
+      <p  className="ddd">弹出的内容</p>
+    </Dropdown>
+  )
+}
 
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'

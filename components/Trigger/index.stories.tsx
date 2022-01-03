@@ -15,7 +15,7 @@ const Template: Story<TriggerProps> = args => {
   return (
     <div style={{ paddingLeft: `32px` }}>
       <Trigger
-        action="click"
+        action="hover"
       >
         <input/>
         <p  className="ddd">弹出的内容</p>
