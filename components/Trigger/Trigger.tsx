@@ -16,6 +16,7 @@ export interface TriggerProps {
   align?: AlignType
   onAlign?: OnAlign
   autoDestroy?: boolean
+  prefixCls?: string
 }
 
 const Trigger: React.FC<TriggerProps> = ({
@@ -23,19 +24,22 @@ const Trigger: React.FC<TriggerProps> = ({
   children,
   align = { points: ['tl', 'bl'], offset: [0, 0] },
   autoDestroy= true,
+  onAlign,
+  prefixCls,
   ...restProps
 }) => {
 
   let [trigger, ...restChildren] = React.Children.toArray(children)
   const refTrigger = React.useRef()
   const [visible, setVisible] = React.useState<boolean>(false)
-  const [option, setOption] = React.useState<boolean>(false)
 
-  const cls = createPrefixCls('trigger')
+  const cls = createPrefixCls(prefixCls || 'trigger')
   const classes = classnames(
     `${cls}`,
+    {
+      [`${cls}-hidden`]: !visible,
+    },
     className,
-    ``
   )
 
   const getContainer = () => {
@@ -61,14 +65,7 @@ const Trigger: React.FC<TriggerProps> = ({
     trigger = React.cloneElement(trigger, cloneProps)
   }
 
-  const handleAlign: OnAlign = (source, result) => {
-    console.log('挂载成功')
-    setOption(v => !v)
-  }
   const refAlign = React.useRef<any>()
-  const style: React.CSSProperties = {
-    opacity: visible ? undefined : 0
-  }
   let portal: React.ReactElement | null = null
   if (visible || refAlign.current) {
     portal = (
@@ -80,12 +77,11 @@ const Trigger: React.FC<TriggerProps> = ({
           ref={refAlign}
           align={align}
           target={() => refTrigger.current!}
-          onAlign={handleAlign}
+          onAlign={onAlign}
           monitorWindowResize
         >
           <div
             className={classes}
-            style={style}
           >
             {restChildren}
           </div>

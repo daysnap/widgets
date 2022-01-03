@@ -15,7 +15,7 @@ const Template: Story<TriggerProps> = args => {
     <div style={{ paddingLeft: `32px` }}>
       <Trigger>
         <input/>
-        <p  className="ddd">hahahhahahahh</p>
+        <p  className="ddd">弹出的内容</p>
       </Trigger>
     </div>
   )
