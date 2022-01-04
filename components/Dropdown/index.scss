@@ -28,6 +28,10 @@
     }
   }
 
+  @include m(bottomLeft){
+    
+  }
+
   @include m(hidden) {
     @extend %dn;
   }

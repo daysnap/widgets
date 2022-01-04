@@ -91,23 +91,23 @@
     }
   }
 
-  @include m('primary') {
+  @include m(primary) {
     @include button-variant($color-white, $color-primary, $color-primary);
   }
 
-  @include m('danger') {
+  @include m(danger) {
     @include button-variant($color-white, $color-danger, $color-danger);
   }
 
-  @include m('warning') {
+  @include m(warning) {
     @include button-variant($color-white, $color-warning, $color-warning);
   }
 
-  @include m('success') {
+  @include m(success) {
     @include button-variant($color-white, $color-success, $color-success);
   }
 
-  @include m('text') {
+  @include m(text) {
     color: $color-text;
     background: 0 0;
     box-shadow: none;
