@@ -16,7 +16,7 @@ const Template: Story<DropdownProps> = args => {
       <p>123123123123123</p>
       <Dropdown trigger="click">
         <button>菜单</button>
-        <Dropdown.Item disabled loading>帮助中心</Dropdown.Item>
+        <Dropdown.Item disabled>帮助中心</Dropdown.Item>
         <Dropdown.Item>关于我们</Dropdown.Item>
         <Dropdown.Divider/>
         <Dropdown.Item>用户反馈</Dropdown.Item>

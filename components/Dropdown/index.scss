@@ -29,7 +29,7 @@
   }
 
   @include m(bottomLeft){
-    
+
   }
 
   @include m(hidden) {
@@ -60,6 +60,48 @@
       @extend %cfff;
       background-color: #000;
     }
+
+    @include b(icon){
+      &:first-child{
+        margin-right: 5px;
+      }
+    }
+
+    @include when('icon-only') {
+      @include b(icon){
+        &:first-child{
+          margin-right: 0;
+        }
+      }
+    }
+
+    @include when(loading) {
+      @extend %pr;
+      @extend %pen;
+      &:before {
+        @extend %pen;
+        @extend %pa;
+        content: '';
+        left: -1px;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        border-radius: inherit;
+        background-color: rgba(255,255,255, .05);
+      }
+    }
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        color: $color-text-placeholder;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: rgba(255,255,255, .1);
+      }
+    }
+
   }
 
 }
