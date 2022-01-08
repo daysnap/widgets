@@ -27,7 +27,7 @@
 
   @include m('placement') {
     @include m(topLeft){
-      @include placement-top(8px, -18px)
+      @include placement(auto, auto, -18px, 8px, 0, 12px);
     }
     @include m(topCenter){
       padding-bottom: 12px;
@@ -39,28 +39,16 @@
       }
     }
     @include m(topRight){
-      padding-bottom: 12px;
-      @include e(content) {
-        &:before{
-          right: 8px;
-          bottom: -18px;
-        }
-      }
+      @include placement(auto, 8px, -18px, auto, 0, 12px);
     }
     @include m(bottomLeft){
-      padding-top: 12px;
-      @include e(content) {
-        &:before{
-          top: -18px;
-          left: 8px;
-        }
-      }
+      @include placement(-18px, auto, auto, 8px, 12px, 0);
     }
     @include m(bottomCenter){
       padding-top: 12px;
     }
     @include m(bottomRight){
-
+      @include placement(-18px, 8px, auto, auto, 12px, 0);
     }
   }
 

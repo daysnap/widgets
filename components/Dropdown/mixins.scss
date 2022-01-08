@@ -1,13 +1,14 @@
 @import "../assets/scss/define.scss";
 
-@mixin placement ($left, $top, $right, $bottom) {
-  padding-bottom: 12px;
+@mixin placement ($top, $right, $bottom, $left, $pt, $pb) {
+  padding-top: $pt;
+  padding-bottom: $pb;
   @include e(content) {
     &:before{
-      left: $left;
       top: $top;
       right: $right;
       bottom: $bottom;
+      left: $left;
       border-color: #202931 transparent transparent transparent;
     }
   }
