@@ -22,7 +22,7 @@ const Template: Story<DropdownProps> = args => {
       <dt>基本使用</dt>
       <dd>
         <Dropdown trigger="click" {...args}>
-          <button>菜单topLeft</button>
+          <Button>菜单topLeft</Button>
           <Dropdown.Item disabled>帮助中心</Dropdown.Item>
           <Dropdown.Item>关于我们</Dropdown.Item>
           <Dropdown.Divider/>
@@ -32,11 +32,14 @@ const Template: Story<DropdownProps> = args => {
       <dt>弹出位置</dt>
       <dd>
         {
-          Object.keys(Placements).map((placement: any) => (
-            <Dropdown trigger="click" placement={placement} key={placement}>
-              <button>{placement}</button>
-              <Dropdown.Item>用户反馈</Dropdown.Item>
-            </Dropdown>
+          Object.keys(Placements).map((placement: any, index) => (
+            <>
+              <Dropdown trigger="click" placement={placement} key={placement}>
+                <Button>{placement}</Button>
+                <Dropdown.Item>用户反馈</Dropdown.Item>
+              </Dropdown>
+              {index % 2 === 0 && index !== 0 && <br/>}
+            </>
           ))
         }
       </dd>
