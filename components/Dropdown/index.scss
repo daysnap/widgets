@@ -6,7 +6,6 @@
   @extend %bsb;
   //animation-name: cFadeInDown;
   //animation-duration: .3s;
-  padding-top: 12px;
 
   @include m(content){
     @extend %pr;
@@ -18,7 +17,6 @@
     &:before{
       @extend %pa;
       content: '';
-      top: -18px;
       width: 0;
       height: 0;
       border-width: 9px;
@@ -27,15 +25,28 @@
     }
   }
 
-  @include m(bottomLeft){
+  @include m(topLeft){
+    padding-bottom: 12px;
     @include e(content) {
       &:before{
+        left: 8px;
+        bottom: -18px;
+      }
+    }
+  }
+
+  @include m(bottomLeft){
+    padding-top: 12px;
+    @include e(content) {
+      &:before{
+        top: -18px;
         left: 8px;
       }
     }
   }
 
   @include m(bottomCenter) {
+    padding-top: 12px;
 
   }
 

@@ -18,15 +18,29 @@ export default {
 
 const Template: Story<DropdownProps> = args => {
   return (
-    <div>
-      <Dropdown trigger="click" placement="topLeft">
-        <button>菜单topLeft</button>
-        <Dropdown.Item disabled>帮助中心</Dropdown.Item>
-        <Dropdown.Item>关于我们</Dropdown.Item>
-        <Dropdown.Divider/>
-        <Dropdown.Item>用户反馈</Dropdown.Item>
-      </Dropdown>
-    </div>
+    <dl>
+      <dt>基本使用</dt>
+      <dd>
+        <Dropdown trigger="click" {...args}>
+          <button>菜单topLeft</button>
+          <Dropdown.Item disabled>帮助中心</Dropdown.Item>
+          <Dropdown.Item>关于我们</Dropdown.Item>
+          <Dropdown.Divider/>
+          <Dropdown.Item>用户反馈</Dropdown.Item>
+        </Dropdown>
+      </dd>
+      <dt>弹出位置</dt>
+      <dd>
+        {
+          Object.keys(Placements).map((placement: any) => (
+            <Dropdown trigger="click" placement={placement} key={placement}>
+              <button>{placement}</button>
+              <Dropdown.Item>用户反馈</Dropdown.Item>
+            </Dropdown>
+          ))
+        }
+      </dd>
+    </dl>
   )
 }
 
