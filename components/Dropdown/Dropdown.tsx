@@ -24,7 +24,6 @@ const Dropdown: React.FC<DropdownProps> = ({
   const cls = createPrefixCls('dropdown')
   const classes = classnames(
     `${cls}`,
-    `${cls}-${placement}`,
     className,
   )
   const [button, ...restChildren] = React.Children.toArray(children)
