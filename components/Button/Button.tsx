@@ -37,7 +37,7 @@ export type NativeButtonProps = {
 
 export type ButtonProps = Partial<AnchorButtonProps & NativeButtonProps>
 
-const Button: React.FC<ButtonProps> = ({
+const Button = React.forwardRef<unknown, ButtonProps>(({
   type = 'default',
   plain= false,
   disabled= false,
@@ -49,7 +49,7 @@ const Button: React.FC<ButtonProps> = ({
   href,
   onClick,
   ...restProps
-}) => {
+}, ref) => {
 
   const cls = createPrefixCls('button', prefixCls)
   const classes = classnames(
@@ -85,6 +85,7 @@ const Button: React.FC<ButtonProps> = ({
         className={classes}
         onClick={handleClick}
         href={href}
+        ref={ref as any}
       >
         {iconNode}
         {children}
@@ -98,12 +99,13 @@ const Button: React.FC<ButtonProps> = ({
       className={classes}
       disabled={disabled}
       onClick={handleClick}
+      ref={ref as any}
     >
       {iconNode}
       {children}
     </button>
   )
-}
+})
 
 export default Button
 

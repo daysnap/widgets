@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import Dropdown, { DropdownProps } from './index'
 import Placements from './placements'
@@ -33,13 +33,13 @@ const Template: Story<DropdownProps> = args => {
       <dd>
         {
           Object.keys(Placements).map((placement: any, index) => (
-            <>
-              <Dropdown trigger="click" placement={placement} key={placement}>
+            <Fragment key={placement}>
+              <Dropdown trigger="click" placement={placement}>
                 <Button>{placement}</Button>
                 <Dropdown.Item>用户反馈</Dropdown.Item>
               </Dropdown>
-              {index % 2 === 0 && index !== 0 && <br/>}
-            </>
+              {index % 2 === 0 && index !== 0}
+            </Fragment>
           ))
         }
       </dd>
