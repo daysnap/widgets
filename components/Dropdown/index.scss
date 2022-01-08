@@ -7,7 +7,6 @@
   //animation-name: cFadeInDown;
   //animation-duration: .3s;
   padding-top: 12px;
-  top: 100%;
 
   @include m(content){
     @extend %pr;
@@ -29,6 +28,14 @@
   }
 
   @include m(bottomLeft){
+    @include e(content) {
+      &:before{
+        left: 8px;
+      }
+    }
+  }
+
+  @include m(bottomCenter) {
 
   }
 
