@@ -29,19 +29,13 @@ const Dropdown: React.FC<DropdownProps> = ({
   )
   const [button, ...restChildren] = React.Children.toArray(children)
 
-  // console.log('Placements[placement] => ', Placements[placement])
-
-  const handleAlign = (e: any, e2: any) => {
-    console.log(e, e2)
-  }
-
   return (
     <Trigger
       prefixCls={cls}
       className={classes}
       align={Placements[placement]}
       action={trigger}
-      onAlign={handleAlign}
+      placements={Placements}
     >
       {button}
       <div className={`${cls}-content`}>{restChildren}</div>

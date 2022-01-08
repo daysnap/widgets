@@ -18,8 +18,9 @@ const Template: Story<TriggerProps> = args => {
       <br/>
       <br/>
       <Trigger
+        autoDestroy
         action="click"
-        align={{ points: ['bl', 'tl'], offset: [0, 0], overflow: { adjustX: 1, adjustY: 1 } }}
+        align={{ points: ['tl', 'bl'], offset: [0, 0], overflow: { adjustX: 1, adjustY: 1 } }}
       >
         <input/>
         <p  className="ddd">弹出的内容</p>
@@ -30,7 +31,8 @@ const Template: Story<TriggerProps> = args => {
       <RcTrigger
         prefixCls="ds-trigger"
         action="click"
-        popupAlign={{ points: ['bl', 'tl'], offset: [0, 0], overflow: { adjustX: 1, adjustY: 1 } }}
+        autoDestroy
+        popupAlign={{ points: ['tl', 'bl'], offset: [0, 0], overflow: { adjustX: 1, adjustY: 1 } }}
         popup={() => (<p  className="ddd">弹出的内容</p>)}
       >
         <input/>

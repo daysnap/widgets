@@ -41,7 +41,7 @@ const Align = React.forwardRef<RefAlign, AlignProps>(({
     const element = getElement(target)
     const point = getPoint(target)
     const source = refSource.current
-    let result: AlignResult
+    let result: AlignResult | null = null
 
     if (element) {
       result = alignElement(source, element, align)
@@ -49,13 +49,19 @@ const Align = React.forwardRef<RefAlign, AlignProps>(({
       result = alignPoint(source, point, align)
     }
 
-    if (result!) {
+    if (result) {
       onAlign?.(source, result)
     }
   }, [target])
 
   React.useImperativeHandle(ref, () => ({ forceAlign }))
+
+  // 为了解决第一次挂载的时候闪动的问题
   React.useLayoutEffect(() => {
+    forceAlign()
+  }, [])
+
+  React.useEffect(() => {
     forceAlign()
   }, [])
 

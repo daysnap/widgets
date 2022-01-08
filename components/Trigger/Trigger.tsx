@@ -7,6 +7,8 @@ import Align, { AlignType, OnAlign } from '../Align'
 
 type ActionType = 'click' | 'hover' | 'focus' | 'blur'
 
+export type BuildInPlacements = Record<string, AlignType>
+
 export interface TriggerProps {
   className?: string
   children: React.ReactNode | React.ReactNode []
@@ -17,6 +19,8 @@ export interface TriggerProps {
   onAlign?: OnAlign
   autoDestroy?: boolean
   prefixCls?: string
+  placements?: BuildInPlacements
+  placement?: string
 }
 
 const Trigger: React.FC<TriggerProps> = ({
@@ -30,16 +34,20 @@ const Trigger: React.FC<TriggerProps> = ({
   onAlign,
   autoDestroy= false,
   prefixCls,
+  placements,
+  placement,
   ...restProps
 }) => {
 
   const [child, ...restChildren] = React.Children.toArray(children)
   const refTrigger = React.useRef<HTMLElement>()
   const [visible, setVisible] = React.useState<boolean>(false)
+  const [alignedClassName, setAlignedClassName] = React.useState<string>()
 
   const cls = prefixCls || createPrefixCls('trigger')
   const classes = classnames(
     `${cls}`,
+    alignedClassName,
     {
       [`${cls}-hidden`]: !visible,
     },
@@ -120,6 +128,19 @@ const Trigger: React.FC<TriggerProps> = ({
     })
   }
 
+  const handleAlign: OnAlign = (source, result) => {
+    if (placements) {
+      const key = Object.keys(placements).find(k => {
+        const { points } = placements[k]
+        return JSON.stringify(points) === JSON.stringify(result.points)
+      })
+      if (key) {
+        setAlignedClassName(`${prefixCls}-placement-${key}`)
+      }
+    }
+    onAlign?.(source, result)
+  }
+
   const refAlign = React.useRef<any>()
   const refPopup = React.useRef<HTMLDivElement>(null)
   let portal: React.ReactElement | null = null
@@ -133,7 +154,7 @@ const Trigger: React.FC<TriggerProps> = ({
           ref={refAlign}
           align={align}
           target={() => refTrigger.current!}
-          onAlign={onAlign}
+          onAlign={handleAlign}
           monitorWindowResize
         >
           <div
