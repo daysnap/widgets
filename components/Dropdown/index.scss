@@ -4,8 +4,6 @@
 @include b(dropdown){
   @extend %pa;
   @extend %bsb;
-  animation-name: cFadeInDown;
-  animation-duration: .3s;
   padding: 12px 0;
   @include m(content){
     @extend %pr;
@@ -28,6 +26,7 @@
   @include m('placement') {
     @include m(topLeft){
       @include placement(auto, auto, -14px, 16px);
+      animation-name: dropdownInDown;
       @include e(content) {
         &:before{
           border-top-color: #202931;
@@ -36,6 +35,7 @@
     }
     @include m(topCenter){
       @include placement(auto, auto, -14px, 50%);
+      animation-name: dropdownInDown;
       @include e(content) {
         &:before{
           @include tft(translate3d(-50%, 0, 0));
@@ -45,6 +45,7 @@
     }
     @include m(topRight){
       @include placement(auto, 16px, -14px, auto);
+      animation-name: dropdownInDown;
       @include e(content) {
         &:before{
           border-top-color: #202931;
@@ -53,6 +54,7 @@
     }
     @include m(bottomLeft){
       @include placement(-14px, auto, auto, 16px);
+      animation-name: dropdownInUp;
       @include e(content) {
         &:before{
           border-bottom-color: #202931;
@@ -61,6 +63,7 @@
     }
     @include m(bottomCenter){
       @include placement(-14px, auto, auto, 50%);
+      animation-name: dropdownInUp;
       @include e(content) {
         &:before{
           @include tft(translate3d(-50%, 0, 0));
@@ -70,6 +73,7 @@
     }
     @include m(bottomRight){
       @include placement(-14px, 16px, auto, auto);
+      animation-name: dropdownInUp;
       @include e(content) {
         &:before{
           border-bottom-color: #202931;
@@ -152,29 +156,25 @@
 
 }
 
-@-webkit-keyframes cFadeInDown {
+@keyframes dropdownInDown {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, -20px, 0);
     transform: translate3d(0, -20px, 0);
   }
 
   to {
     opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 }
-@keyframes cFadeInDown {
+@keyframes dropdownInUp {
   from {
     opacity: 0;
-    -webkit-transform: translate3d(0, -20px, 0);
-    transform: translate3d(0, -20px, 0);
+    transform: translate3d(0, 20px, 0);
   }
 
   to {
     opacity: 1;
-    -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 }

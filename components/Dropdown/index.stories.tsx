@@ -12,6 +12,10 @@ export default {
     placement: {
       control: { type: 'select' },
       options: Object.keys(Placements),
+    },
+    trigger: {
+      control: { type: 'select' },
+      options: [ 'click', 'hover' ],
     }
   },
 } as Meta
@@ -21,7 +25,7 @@ const Template: Story<DropdownProps> = args => {
     <dl>
       <dt>基本使用</dt>
       <dd>
-        <Dropdown trigger="click" {...args}>
+        <Dropdown {...args}>
           <Button>菜单topLeft</Button>
           <Dropdown.Item disabled>帮助中心</Dropdown.Item>
           <Dropdown.Item>关于我们</Dropdown.Item>
@@ -50,6 +54,7 @@ const Template: Story<DropdownProps> = args => {
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
 Basic.args = {
-  placement: 'topLeft'
+  placement: 'topLeft',
+  trigger: 'click',
 }
 

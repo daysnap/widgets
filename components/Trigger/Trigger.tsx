@@ -147,6 +147,8 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
 
   const refAlign = React.useRef<AlignRef>(null)
   const refPopup = React.useRef<HTMLDivElement>(null)
+  const forceAlign = () => refAlign.current?.forceAlign()
+
   let portal: React.ReactElement | null = null
   if (visible || refAlign.current) {
     portal = (
@@ -179,7 +181,7 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
   }
 
   React.useImperativeHandle(ref, () => ({
-    forceAlign: () => refAlign.current?.forceAlign()
+    forceAlign
   }))
 
   React.useEffect(() => {

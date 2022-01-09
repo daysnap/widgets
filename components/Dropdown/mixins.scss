@@ -1,6 +1,7 @@
 @import "../assets/scss/define.scss";
 
 @mixin placement ($top, $right, $bottom, $left) {
+  animation-duration: .3s;
   @include e(content) {
     &:before{
       top: $top;
@@ -10,3 +11,4 @@
     }
   }
 }
+
