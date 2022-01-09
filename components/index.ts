@@ -19,8 +19,14 @@ export { default as Dropdown } from './Dropdown'
 export type { IconProps } from './Icon'
 export { default as Icon } from './Icon'
 
+export type { InputProps } from './Input'
+export { default as Input } from './Input'
+
 export type { PortalProps } from './Portal'
 export { default as Portal } from './Portal'
+
+export type { TooltipProps } from './Tooltip'
+export { default as Tooltip } from './Tooltip'
 
 export type { TriggerProps } from './Trigger'
 export { default as Trigger } from './Trigger'
