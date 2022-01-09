@@ -6,7 +6,7 @@
   @extend %bsb;
   //animation-name: cFadeInDown;
   //animation-duration: .3s;
-
+  padding: 12px 0;
   @include m(content){
     @extend %pr;
     min-width: 160px;
@@ -19,36 +19,62 @@
       content: '';
       width: 0;
       height: 0;
-      border-width: 9px;
+      border-width: 7px;
       border-style: solid;
-      border-color: transparent transparent #202931 transparent;
+      border-color: transparent;
     }
   }
 
   @include m('placement') {
     @include m(topLeft){
-      @include placement(auto, auto, -18px, 8px, 0, 12px);
-    }
-    @include m(topCenter){
-      padding-bottom: 12px;
+      @include placement(auto, auto, -14px, 16px);
       @include e(content) {
         &:before{
-          left: 8px;
-          bottom: -18px;
+          border-top-color: #202931;
+        }
+      }
+    }
+    @include m(topCenter){
+      @include placement(auto, auto, -14px, 50%);
+      @include e(content) {
+        &:before{
+          @include tft(translate3d(-50%, 0, 0));
+          border-top-color: #202931;
         }
       }
     }
     @include m(topRight){
-      @include placement(auto, 8px, -18px, auto, 0, 12px);
+      @include placement(auto, 16px, -14px, auto);
+      @include e(content) {
+        &:before{
+          border-top-color: #202931;
+        }
+      }
     }
     @include m(bottomLeft){
-      @include placement(-18px, auto, auto, 8px, 12px, 0);
+      @include placement(-14px, auto, auto, 16px);
+      @include e(content) {
+        &:before{
+          border-bottom-color: #202931;
+        }
+      }
     }
     @include m(bottomCenter){
-      padding-top: 12px;
+      @include placement(-14px, auto, auto, 50%);
+      @include e(content) {
+        &:before{
+          @include tft(translate3d(-50%, 0, 0));
+          border-bottom-color: #202931;
+        }
+      }
     }
     @include m(bottomRight){
-      @include placement(-18px, 8px, auto, auto, 12px, 0);
+      @include placement(-14px, 16px, auto, auto);
+      @include e(content) {
+        &:before{
+          border-bottom-color: #202931;
+        }
+      }
     }
   }
 
