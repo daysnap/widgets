@@ -3,7 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Portal from '../Portal'
-import Align, { AlignType, OnAlign } from '../Align'
+import Align, { AlignType, OnAlign, AlignRef } from '../Align'
 
 type ActionType = 'click' | 'hover' | 'focus' | 'blur'
 
@@ -23,7 +23,11 @@ export interface TriggerProps {
   placement?: string
 }
 
-const Trigger: React.FC<TriggerProps> = ({
+export interface TriggerRef {
+  forceAlign: () => void
+}
+
+const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
   className,
   children,
   action,
@@ -37,7 +41,7 @@ const Trigger: React.FC<TriggerProps> = ({
   placements,
   placement,
   ...restProps
-}) => {
+}, ref) => {
 
   const [child, ...restChildren] = React.Children.toArray(children)
   const refTrigger = React.useRef<HTMLElement>()
@@ -141,7 +145,7 @@ const Trigger: React.FC<TriggerProps> = ({
     onAlign?.(source, result)
   }
 
-  const refAlign = React.useRef<any>()
+  const refAlign = React.useRef<AlignRef>(null)
   const refPopup = React.useRef<HTMLDivElement>(null)
   let portal: React.ReactElement | null = null
   if (visible || refAlign.current) {
@@ -174,6 +178,10 @@ const Trigger: React.FC<TriggerProps> = ({
     }
   }
 
+  React.useImperativeHandle(ref, () => ({
+    forceAlign: () => refAlign.current?.forceAlign()
+  }))
+
   React.useEffect(() => {
     const handleMouseDown = (e: MouseEvent) => {
       const { target } = e
@@ -196,7 +204,7 @@ const Trigger: React.FC<TriggerProps> = ({
       {portal}
     </>
   )
-}
+})
 
 export default Trigger
 

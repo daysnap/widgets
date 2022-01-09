@@ -4,8 +4,8 @@
 @include b(dropdown){
   @extend %pa;
   @extend %bsb;
-  //animation-name: cFadeInDown;
-  //animation-duration: .3s;
+  animation-name: cFadeInDown;
+  animation-duration: .3s;
   padding: 12px 0;
   @include m(content){
     @extend %pr;

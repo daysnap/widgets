@@ -19,11 +19,11 @@ const getElement = (func: TargetType) => typeof func !== 'function' ? null : fun
 
 const getPoint = (point: TargetType) => typeof point !== 'object' || !point ? null : point
 
-export interface RefAlign {
+export interface AlignRef {
   forceAlign: () => void
 }
 
-const Align = React.forwardRef<RefAlign, AlignProps>(({
+const Align = React.forwardRef<AlignRef, AlignProps>(({
   className,
   align,
   target,
