@@ -17,12 +17,15 @@ const Template: Story<InputProps> = args => {
       <dd>
         <Input
           {...args}
-          prefix={<Icon icon="icon-loading"/>}
-          suffix="搜索"
         />
       </dd>
       <dd>
-
+        <Input
+          {...args}
+          prefix={<Icon icon="icon-loading"/>}
+          suffix="搜索"
+          clearable
+        />
       </dd>
     </dl>
   )

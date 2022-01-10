@@ -16,6 +16,7 @@ const Input: React.FC<InputProps> = ({
   clearable= false,
   prefix,
   suffix,
+  value,
   ...restProps
 }) => {
 
@@ -28,6 +29,7 @@ const Input: React.FC<InputProps> = ({
   const element = (
     <input
       {...restProps}
+      value={value}
       className={classes}
       type="text"
     />
@@ -35,6 +37,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <BaseInput
+      value={value}
       clearable={clearable}
       prefix={prefix}
       suffix={suffix}

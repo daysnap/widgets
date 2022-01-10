@@ -1,13 +1,48 @@
 
 @import "../assets/scss/define.scss";
 
+@mixin input-wrapper () {
+  @extend %bsb;
+  @extend %w100;
+  padding: 11px 15px;
+  border-radius: 8px;
+  background-image: none;
+  border: 1px solid $border-color;
+  color: $color-text;
+  font-size: inherit;
+  line-height: 1.6;
+  transition: border-color .3s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow .3s cubic-bezier(0.645, 0.045, 0.355, 1), background-color .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  &:focus-within{
+    box-shadow:  0 0 0 j(3) rgba(64, 158, 255, .2);
+    border-color: $color-primary;
+  }
+}
+
 @include b(input){
   @extend %pr;
   @extend %dib;
-  @extend %w100;
+  @extend %on;
+  @include input-wrapper();
+
+  @include m(prefix) {
+    margin-right: 6px;
+  }
+
+  @include m(suffix) {
+    margin-left: 6px;
+  }
 }
 
-@include b(input-wrap) {
-  @extend %w100;
+@include b(input-wrapper) {
+  @include input-wrapper();
   display: inline-flex;
+  @include b(input) {
+    @extend %on;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    padding: 0;
+    flex: 1;
+  }
+
 }

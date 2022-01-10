@@ -29,7 +29,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
   }
   const suffixElement = () => {
     if (value && clearable) {
-      return <Icon onClick={handleReset} icon="icon-close"/>
+      suffix = <Icon onClick={handleReset} icon="icon-close"/>
     }
     if (suffix) {
       return <span className={`${prefixCls}-suffix`}>{suffix}</span>
@@ -39,7 +39,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
   if (suffix || prefix || clearable) {
     element = (
       <div
-        className={`${prefixCls}-wrap`}
+        className={`${prefixCls}-wrapper`}
       >
         {prefixElement()}
         {element}
