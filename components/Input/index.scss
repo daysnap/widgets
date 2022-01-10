@@ -2,6 +2,12 @@
 @import "../assets/scss/define.scss";
 
 @include b(input){
-
+  @extend %pr;
+  @extend %dib;
+  @extend %w100;
 }
 
+@include b(input-wrap) {
+  @extend %w100;
+  display: inline-flex;
+}
