@@ -17,6 +17,8 @@ const Input: React.FC<InputProps> = ({
   prefix,
   suffix,
   value,
+  onFocus,
+  onBlur,
   ...restProps
 }) => {
 
@@ -25,6 +27,21 @@ const Input: React.FC<InputProps> = ({
     `${cls}`,
     className,
   )
+  const [focused, setFocused] = React.useState<boolean>(false)
+
+  const handleClear: React.MouseEventHandler<HTMLElement> = e => {
+
+  }
+  const handleFocus: React.FocusEventHandler<HTMLInputElement> = e => {
+    console.log(222)
+    setFocused(true)
+  }
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
+    setFocused(false)
+  }
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+
+  }
 
   const element = (
     <input
@@ -32,17 +49,22 @@ const Input: React.FC<InputProps> = ({
       value={value}
       className={classes}
       type="text"
+      onFocus={handleFocus}
+      onChange={handleChange}
+      onBlur={handleBlur}
     />
   )
 
   return (
     <BaseInput
       value={value}
+      focused={focused}
       clearable={clearable}
       prefix={prefix}
       suffix={suffix}
       prefixCls={cls}
       element={element}
+      onClear={handleClear}
     />
   )
 }

@@ -1,5 +1,7 @@
 
 import React from 'react'
+import ReactDOM from 'react-dom'
+import classnames from 'classnames'
 import { Icon } from '../Icon'
 
 export interface BaseInputProps {
@@ -9,7 +11,8 @@ export interface BaseInputProps {
   prefix?: React.ReactNode
   suffix?: React.ReactNode
   value?: any
-  handleReset?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  onClear?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  triggerFocus?: () => void
 }
 
 const BaseInput: React.FC<BaseInputProps> = ({
@@ -19,7 +22,8 @@ const BaseInput: React.FC<BaseInputProps> = ({
   prefix,
   suffix,
   value,
-  handleReset,
+  onClear,
+  triggerFocus
 }) => {
 
   const prefixElement = () => {
@@ -29,26 +33,51 @@ const BaseInput: React.FC<BaseInputProps> = ({
   }
   const suffixElement = () => {
     if (value && clearable) {
-      suffix = <Icon onClick={handleReset} icon="icon-close"/>
+      suffix = <Icon onClick={onClear} icon="icon-close"/>
     }
     if (suffix) {
       return <span className={`${prefixCls}-suffix`}>{suffix}</span>
     }
   }
 
-  if (suffix || prefix || clearable) {
-    element = (
-      <div
-        className={`${prefixCls}-wrapper`}
-      >
-        {prefixElement()}
-        {element}
-        {suffixElement()}
-      </div>
-    )
+  if (!suffix && !prefix && !clearable) {
+    return element
   }
 
-  return element
+  const [focused, setFocused] = React.useState<boolean>(false)
+  const cls = `${prefixCls}-wrapper`
+  const classes = classnames(
+    cls,
+    {
+      [`is-focused`]: focused
+    }
+  )
+  const handleMouseUp: React.MouseEventHandler = e => {
+  }
+  const handleFocus: React.FocusEventHandler<HTMLInputElement> = e => {
+    console.log('e => ', e, element)
+    // setFocused(true)
+    // element.props.onFocus(e)
+    const d = ReactDOM.findDOMNode(element.props.ref)
+  }
+  const handleBlurs: React.FocusEventHandler<HTMLInputElement> = e => {
+    setFocused(false)
+  }
+
+  return (
+    <div
+      onMouseUp={handleMouseUp}
+      className={classes}
+    >
+      {prefixElement()}
+      {
+        React.cloneElement(element, {
+          onFocus: handleFocus
+        })
+      }
+      {suffixElement()}
+    </div>
+  )
 }
 
 export default BaseInput
