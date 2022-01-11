@@ -11,17 +11,25 @@ export default {
 } as Meta
 
 const Template: Story<InputProps> = args => {
+  const [value, setValue] = React.useState<string>('')
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+    setValue(e.target.value)
+  }
   return (
     <dl>
-      <dt>基础用法</dt>
+      <dt>基础用法 值：{value}</dt>
       <dd>
         <Input
           {...args}
+          value={value}
+          onChange={handleChange}
         />
       </dd>
       <dd>
         <Input
           {...args}
+          value={value}
+          onChange={handleChange}
           prefix={<Icon icon="icon-loading"/>}
           suffix="搜索"
           clearable
@@ -34,6 +42,7 @@ const Template: Story<InputProps> = args => {
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
 Basic.args = {
-  placeholder: '请输入'
+  placeholder: '请输入',
+  clearable: false,
 }
 

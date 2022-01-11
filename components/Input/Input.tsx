@@ -9,6 +9,14 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   clearable?: boolean
   prefix?: React.ReactNode
   suffix?: React.ReactNode
+  defaultValue?: string
+}
+
+export function fixControlledValue<T>(value: T) {
+  if (typeof value === 'undefined' || value === null) {
+    return ''
+  }
+  return value
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,9 +24,11 @@ const Input: React.FC<InputProps> = ({
   clearable= false,
   prefix,
   suffix,
-  value,
+  value: initialValue,
   onFocus,
   onBlur,
+  onChange,
+  defaultValue,
   ...restProps
 }) => {
 
@@ -27,44 +37,52 @@ const Input: React.FC<InputProps> = ({
     `${cls}`,
     className,
   )
-  const [focused, setFocused] = React.useState<boolean>(false)
+  const [value, setValue] = React.useState<any>(
+    fixControlledValue(typeof initialValue === 'undefined' ? defaultValue : initialValue)
+  )
+  const refInput = React.useRef<HTMLInputElement>(null)
 
   const handleClear: React.MouseEventHandler<HTMLElement> = e => {
-
-  }
-  const handleFocus: React.FocusEventHandler<HTMLInputElement> = e => {
-    console.log(222)
-    setFocused(true)
-  }
-  const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
-    setFocused(false)
+    const event = Object.create(e)
+    const currentTarget: HTMLInputElement = refInput.current?.cloneNode(true) as HTMLInputElement
+    event.target = currentTarget
+    event.currentTarget = currentTarget
+    currentTarget.value = ''
+    handleChange(event)
   }
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-
+    setValue(e.target.value)
+    onChange?.(e)
   }
+  const focus = (options?: FocusOptions) => {
+    refInput.current?.focus(options)
+  }
+
+  React.useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
 
   const element = (
     <input
       {...restProps}
+      ref={refInput}
       value={value}
       className={classes}
       type="text"
-      onFocus={handleFocus}
       onChange={handleChange}
-      onBlur={handleBlur}
     />
   )
 
   return (
     <BaseInput
       value={value}
-      focused={focused}
       clearable={clearable}
       prefix={prefix}
       suffix={suffix}
       prefixCls={cls}
       element={element}
       onClear={handleClear}
+      triggerFocus={focus}
     />
   )
 }

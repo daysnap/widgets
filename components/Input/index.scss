@@ -8,7 +8,6 @@
   border-radius: 8px;
   background-image: none;
   border: 1px solid $border-color;
-  color: $color-text;
   font-size: inherit;
   line-height: 1.6;
   transition: border-color .3s cubic-bezier(0.645, 0.045, 0.355, 1), box-shadow .3s cubic-bezier(0.645, 0.045, 0.355, 1), background-color .3s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -26,19 +25,35 @@
   @extend %dib;
   @extend %on;
   @include input-wrapper();
+  color: $color-text;
 
   @include m(prefix) {
-    margin-right: 6px;
+    margin-right: 8px;
   }
 
   @include m(suffix) {
-    margin-left: 6px;
+    margin-left: 8px;
+  }
+
+  @include m(clear) {
+    @extend %cp;
+    @extend %ao8;
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @include tst(color, .3s);
+    margin-left: 8px;
+    &:hover{
+      color: $color-text-link;
+    }
   }
 }
 
 @include b(input-wrapper) {
   @include input-wrapper();
   display: inline-flex;
+  color: $color-text-placeholder;
+
   @include b(input) {
     @extend %on;
     border-radius: 0;

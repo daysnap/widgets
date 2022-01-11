@@ -1,6 +1,5 @@
 
 import React from 'react'
-import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import { Icon } from '../Icon'
 
@@ -26,18 +25,29 @@ const BaseInput: React.FC<BaseInputProps> = ({
   triggerFocus
 }) => {
 
-  const prefixElement = () => {
+  const beforeElement = () => {
     if (prefix) {
       return <span className={`${prefixCls}-prefix`}>{prefix}</span>
     }
   }
-  const suffixElement = () => {
-    if (value && clearable) {
-      suffix = <Icon onClick={onClear} icon="icon-close"/>
-    }
+  const afterElement = () => {
     if (suffix) {
-      return <span className={`${prefixCls}-suffix`}>{suffix}</span>
+      suffix = <span className={`${prefixCls}-suffix`}>{suffix}</span>
     }
+    if (value && clearable) {
+      suffix = (
+        <>
+          <Icon
+            className={`${prefixCls}-clear`}
+            onClick={onClear}
+            onMouseDown={e => e.preventDefault()}
+            icon="icon-close"
+          />
+          {suffix}
+        </>
+      )
+    }
+    return suffix
   }
 
   if (!suffix && !prefix && !clearable) {
@@ -53,15 +63,16 @@ const BaseInput: React.FC<BaseInputProps> = ({
     }
   )
   const handleMouseUp: React.MouseEventHandler = e => {
+    setFocused(true)
+    triggerFocus?.()
   }
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = e => {
-    console.log('e => ', e, element)
-    // setFocused(true)
-    // element.props.onFocus(e)
-    const d = ReactDOM.findDOMNode(element.props.ref)
+    setFocused(true)
+    element.props.onFocus?.(e)
   }
-  const handleBlurs: React.FocusEventHandler<HTMLInputElement> = e => {
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
     setFocused(false)
+    element.props.onBlur?.(e)
   }
 
   return (
@@ -69,13 +80,14 @@ const BaseInput: React.FC<BaseInputProps> = ({
       onMouseUp={handleMouseUp}
       className={classes}
     >
-      {prefixElement()}
+      {beforeElement()}
       {
         React.cloneElement(element, {
-          onFocus: handleFocus
+          onFocus: handleFocus,
+          onBlur: handleBlur,
         })
       }
-      {suffixElement()}
+      {afterElement()}
     </div>
   )
 }
