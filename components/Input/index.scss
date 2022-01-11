@@ -28,11 +28,11 @@
   color: $color-text;
 
   @include m(prefix) {
-    margin-right: 8px;
+    margin-right: 12px;
   }
 
   @include m(suffix) {
-    margin-left: 8px;
+    margin-left: 12px;
   }
 
   @include m(clear) {
@@ -42,7 +42,7 @@
     @extend %aic;
     @extend %jcc;
     @include tst(color, .3s);
-    margin-left: 8px;
+    margin-left: 12px;
     &:hover{
       color: $color-text-link;
     }

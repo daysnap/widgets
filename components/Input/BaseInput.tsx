@@ -12,6 +12,8 @@ export interface BaseInputProps {
   value?: any
   onClear?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
   triggerFocus?: () => void
+  showWordLimit?: boolean
+  maxLength?: number
 }
 
 const BaseInput: React.FC<BaseInputProps> = ({
@@ -22,7 +24,8 @@ const BaseInput: React.FC<BaseInputProps> = ({
   suffix,
   value,
   onClear,
-  triggerFocus
+  triggerFocus,
+  showWordLimit,
 }) => {
 
   const beforeElement = () => {
@@ -33,6 +36,9 @@ const BaseInput: React.FC<BaseInputProps> = ({
   const afterElement = () => {
     if (suffix) {
       suffix = <span className={`${prefixCls}-suffix`}>{suffix}</span>
+    }
+    if (showWordLimit) {
+
     }
     if (value && clearable) {
       suffix = (

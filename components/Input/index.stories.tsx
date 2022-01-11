@@ -31,7 +31,7 @@ const Template: Story<InputProps> = args => {
           value={value}
           onChange={handleChange}
           prefix={<Icon icon="icon-loading"/>}
-          suffix="搜索"
+          suffix={<Icon icon="icon-sousuo"/>}
           clearable
         />
       </dd>

@@ -10,6 +10,8 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   prefix?: React.ReactNode
   suffix?: React.ReactNode
   defaultValue?: string
+  showWordLimit?: boolean
+  maxLength?: number
 }
 
 export function fixControlledValue<T>(value: T) {
@@ -29,6 +31,8 @@ const Input: React.FC<InputProps> = ({
   onBlur,
   onChange,
   defaultValue,
+  showWordLimit,
+  maxLength,
   ...restProps
 }) => {
 
@@ -65,6 +69,7 @@ const Input: React.FC<InputProps> = ({
   const element = (
     <input
       {...restProps}
+      maxLength={maxLength}
       ref={refInput}
       value={value}
       className={classes}
@@ -83,6 +88,8 @@ const Input: React.FC<InputProps> = ({
       element={element}
       onClear={handleClear}
       triggerFocus={focus}
+      showWordLimit={showWordLimit}
+      maxLength={maxLength}
     />
   )
 }
