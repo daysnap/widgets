@@ -48,10 +48,11 @@ const Template: Story<InputProps> = args => {
         <Input.Textarea
           value={value}
           onChange={handleChange}
-          placeholder="请输入"
           autosize
           showCount
-          maxLength={100}
+          placeholder={args.placeholder}
+          maxLength={args.maxLength}
+          disabled={args.disabled}
         />
       </dd>
     </dl>
@@ -65,5 +66,6 @@ Basic.args = {
   clearable: false,
   showCount: false,
   maxLength: 11,
+  disabled: false,
 }
 

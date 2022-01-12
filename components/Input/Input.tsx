@@ -27,6 +27,7 @@ const Input: React.FC<InputProps> = ({
   showCount,
   maxLength,
   type = 'text',
+  disabled,
   ...restProps
 }) => {
 
@@ -63,6 +64,7 @@ const Input: React.FC<InputProps> = ({
   const element = (
     <input
       {...restProps}
+      disabled={disabled}
       maxLength={maxLength}
       ref={refInput}
       value={value}
@@ -75,6 +77,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <BaseInput
       value={value}
+      disabled={disabled}
       clearable={clearable}
       prefix={prefix}
       suffix={suffix}

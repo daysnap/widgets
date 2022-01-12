@@ -13,6 +13,7 @@ export interface BaseInputProps {
   onClear?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
   triggerFocus?: () => void
   showCount?: boolean
+  disabled?: boolean
   maxLength?: number
 }
 
@@ -26,6 +27,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
   onClear,
   triggerFocus,
   showCount,
+  disabled,
   maxLength
 }) => {
 
@@ -46,7 +48,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
         </>
       )
     }
-    if (value && clearable) {
+    if (value && clearable && !disabled) {
       suffix = (
         <>
           <Icon
@@ -71,10 +73,12 @@ const BaseInput: React.FC<BaseInputProps> = ({
   const classes = classnames(
     cls,
     {
-      [`is-focused`]: focused
+      [`is-focused`]: focused,
+      [`is-disabled`]: disabled,
     }
   )
   const handleMouseUp: React.MouseEventHandler = e => {
+    if (disabled) return
     setFocused(true)
     triggerFocus?.()
   }

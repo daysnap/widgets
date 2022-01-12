@@ -18,6 +18,13 @@
     box-shadow:  0 0 0 j(3) rgba(64, 158, 255, .2);
     border-color: $color-primary;
   }
+
+  &:disabled,
+  &.is-disabled{
+    background-color: $color-background;
+    color: $color-text-placeholder;
+    cursor: not-allowed;
+  }
 }
 
 textarea::-webkit-input-placeholder,
