@@ -12,7 +12,7 @@ export default {
 
 const Template: Story<InputProps> = args => {
   const [value, setValue] = React.useState<string>('')
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement> = e => {
     setValue(e.target.value)
   }
   return (
@@ -39,8 +39,19 @@ const Template: Story<InputProps> = args => {
         <Input.Password
           {...args}
           value={value}
+          showCount
           showPassword
           onChange={handleChange}
+        />
+      </dd>
+      <dd>
+        <Input.Textarea
+          value={value}
+          onChange={handleChange}
+          placeholder="请输入"
+          autosize
+          showCount
+          maxLength={100}
         />
       </dd>
     </dl>
@@ -52,7 +63,7 @@ Basic.storyName = '基础用法'
 Basic.args = {
   placeholder: '请输入',
   clearable: false,
-  showWordLimit: false,
+  showCount: false,
   maxLength: 11,
 }
 

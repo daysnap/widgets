@@ -20,6 +20,23 @@
   }
 }
 
+textarea::-webkit-input-placeholder,
+input::-webkit-input-placeholder{
+  color: $color-text-placeholder;
+}
+textarea::-moz-placeholder,
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+  color: $color-text-placeholder;
+}
+textarea:-moz-placeholder,
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+  color: $color-text-placeholder;
+}
+textarea:-ms-input-placeholder,
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: $color-text-placeholder;
+}
+
 @include b(input){
   @extend %pr;
   @extend %dib;
@@ -76,4 +93,25 @@
   @include m(eye-on) {
     color: $color-primary;
   }
+}
+
+@include b(textarea) {
+  @extend %pr;
+  font-size: 15px;
+  @include b(input) {
+    resize: none;
+    height: 48px;
+  }
+
+  &:after{
+    @extend %pa;
+    @extend %wsn;
+    @extend %pen;
+    right: 15px;
+    bottom: 15px;
+    color: $color-text-placeholder;
+    font-size: 12px;
+    content: attr(data-count);
+  }
+
 }

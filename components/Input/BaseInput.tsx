@@ -12,7 +12,7 @@ export interface BaseInputProps {
   value?: any
   onClear?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void
   triggerFocus?: () => void
-  showWordLimit?: boolean
+  showCount?: boolean
   maxLength?: number
 }
 
@@ -25,7 +25,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
   value,
   onClear,
   triggerFocus,
-  showWordLimit,
+  showCount,
   maxLength
 }) => {
 
@@ -38,7 +38,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
     if (suffix) {
       suffix = <span className={`${prefixCls}-suffix`}>{suffix}</span>
     }
-    if (showWordLimit && ![null, undefined].includes(maxLength as any)) {
+    if (showCount && ![null, undefined].includes(maxLength as any)) {
       suffix = (
         <>
           <span className={`${prefixCls}-count`}>{value ? value.length : 0}/{maxLength}</span>
