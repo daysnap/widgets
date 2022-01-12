@@ -36,6 +36,7 @@
     "@storybook/react": "^6.4.9",
     "@types/autosize": "^4.0.1",
     "@types/react-dom": "^17.0.11",
+    "@types/react-is": "^17.0.3",
     "babel-loader": "^8.2.3",
     "file-save": "^0.2.0",
     "humps": "^2.0.1",
@@ -54,7 +55,8 @@
     "autosize": "^5.0.1",
     "classnames": "^2.3.1",
     "dom-align": "^1.12.2",
-    "rc-align": "^4.0.11"
+    "rc-align": "^4.0.11",
+    "react-is": "^17.0.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

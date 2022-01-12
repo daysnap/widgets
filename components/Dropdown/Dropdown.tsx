@@ -18,6 +18,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   placement= 'bottomLeft',
   trigger = 'hover',
   children,
+  disabled,
   ...restProps
 }) => {
 
@@ -27,6 +28,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     className,
   )
   const [button, ...restChildren] = React.Children.toArray(children)
+  const overlay = disabled ? null : <div className={`${cls}-content`}>{restChildren}</div>
 
   return (
     <Trigger
@@ -37,7 +39,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       placements={Placements}
     >
       {button}
-      <div className={`${cls}-content`}>{restChildren}</div>
+      {overlay}
     </Trigger>
   )
 }

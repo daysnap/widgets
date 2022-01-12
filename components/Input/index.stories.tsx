@@ -4,6 +4,10 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 import Input, { InputProps } from './index'
 import Icon from '../Icon'
 
+const Text = () => {
+  return <div>124</div>
+}
+
 export default {
   title: 'Input',
   component: Input,

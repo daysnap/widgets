@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Portal from '../Portal'
 import Align, { AlignType, OnAlign, AlignRef } from '../Align'
+import { supportRef, composeRef } from '../utils/ref'
 
 type ActionType = 'click' | 'hover' | 'focus' | 'blur'
 
@@ -33,8 +34,8 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
   action,
   showAction= [],
   hideAction= [],
-  align = { points: ['tl', 'bl'], offset: [0, 0] },
-  // align,
+  // align = { points: ['tl', 'bl'], offset: [0, 0] },
+  align,
   onAlign,
   autoDestroy= false,
   prefixCls,
@@ -44,7 +45,7 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
 }, ref) => {
 
   const [child, ...restChildren] = React.Children.toArray(children)
-  const refTrigger = React.useRef<HTMLElement>()
+  const refTrigger = React.useRef<HTMLElement>(null)
   const [visible, setVisible] = React.useState<boolean>(false)
   const [alignedClassName, setAlignedClassName] = React.useState<string>()
 
@@ -78,8 +79,10 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
   const isBlurToHide = action?.includes('blur') || hideAction?.includes('blur')
 
   const trim: (type: string, e: any) => void = (type, e) => {
-    const childCallback = (child as React.ReactElement).props[type]
-    childCallback?.(e)
+    if (React.isValidElement(child)) {
+      const childCallback = (child as React.ReactElement).props[type]
+      childCallback?.(e)
+    }
     (restProps as any)[type]?.(e)
   }
   const handleClick: React.MouseEventHandler<HTMLElement> = (e) => {
@@ -121,16 +124,16 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
     onMouseLeave: handleMouseLeave,
     onFocus: handleFocus,
     onBlur: handleBlur,
+    className: `${cls}-${visible ? 'on' : 'off'}`
   }
-
-  let trigger: React.ReactElement
-  if (React.isValidElement(child)) {
-    trigger = React.cloneElement(child, {
-      ref: refTrigger,
-      ...cloneProps,
-      onClick: handleClick
-    })
+  let element: React.ReactElement
+  if (React.isValidElement(child) && supportRef(child)) {
+    (cloneProps as any).ref = composeRef(refTrigger, (child as any).ref)
+    element = child
+  } else {
+    element = <span ref={refTrigger}>{child}</span>
   }
+  const trigger = React.cloneElement(element, cloneProps)
 
   const handleAlign: OnAlign = (source, result) => {
     if (placements) {
@@ -150,7 +153,7 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
   const forceAlign = () => refAlign.current?.forceAlign()
 
   let portal: React.ReactElement | null = null
-  if (visible || refAlign.current) {
+  if (React.Children.count(restChildren) > 0 && (visible || refAlign.current)) {
     portal = (
       <Portal
         key="portal"
@@ -202,7 +205,7 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
 
   return (
     <>
-      {trigger!}
+      {trigger}
       {portal}
     </>
   )

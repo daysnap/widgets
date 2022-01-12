@@ -1,5 +1,6 @@
 
 import React, { Fragment } from 'react'
+import ReactDOM from 'react-dom'
 import { Story, Meta } from '@storybook/react/types-6-0'
 import Dropdown, { DropdownProps } from './index'
 import Placements from './placements'
@@ -20,9 +21,22 @@ export default {
   },
 } as Meta
 
+
 const Template: Story<DropdownProps> = args => {
+  const Text = (props: any) => {
+    return <div {...props}>123456</div>
+  }
   return (
     <dl>
+      <dd>
+        <Dropdown {...args}>
+          <Text/>
+          <Dropdown.Item disabled>帮助中心</Dropdown.Item>
+          <Dropdown.Item>关于我们</Dropdown.Item>
+          <Dropdown.Divider/>
+          <Dropdown.Item>用户反馈</Dropdown.Item>
+        </Dropdown>
+      </dd>
       <dt>基本使用</dt>
       <dd>
         <Dropdown {...args}>
