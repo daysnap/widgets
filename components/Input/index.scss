@@ -71,3 +71,9 @@
   }
 
 }
+
+@include b(input-password){
+  @include m(eye-on) {
+    color: $color-primary;
+  }
+}

@@ -35,6 +35,14 @@ const Template: Story<InputProps> = args => {
           clearable
         />
       </dd>
+      <dd>
+        <Input.Password
+          {...args}
+          value={value}
+          showPassword
+          onChange={handleChange}
+        />
+      </dd>
     </dl>
   )
 }

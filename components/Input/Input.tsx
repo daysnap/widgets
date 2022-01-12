@@ -4,6 +4,13 @@ import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import BaseInput from './BaseInput'
 
+export function fixControlledValue<T>(value: T) {
+  if (typeof value === 'undefined' || value === null) {
+    return ''
+  }
+  return value
+}
+
 export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'>{
   className?: string
   clearable?: boolean
@@ -12,13 +19,6 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   defaultValue?: string
   showWordLimit?: boolean
   maxLength?: number
-}
-
-export function fixControlledValue<T>(value: T) {
-  if (typeof value === 'undefined' || value === null) {
-    return ''
-  }
-  return value
 }
 
 const Input: React.FC<InputProps> = ({
@@ -64,7 +64,7 @@ const Input: React.FC<InputProps> = ({
   }
 
   React.useEffect(() => {
-    setValue(initialValue)
+    setValue(fixControlledValue(initialValue))
   }, [initialValue])
 
   const element = (

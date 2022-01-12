@@ -41,7 +41,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
     if (showWordLimit && ![null, undefined].includes(maxLength as any)) {
       suffix = (
         <>
-          <span className={`${prefixCls}-count`}>{value.length}/{maxLength}</span>
+          <span className={`${prefixCls}-count`}>{value ? value.length : 0}/{maxLength}</span>
           {suffix}
         </>
       )
