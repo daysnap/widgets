@@ -26,6 +26,7 @@ const BaseInput: React.FC<BaseInputProps> = ({
   onClear,
   triggerFocus,
   showWordLimit,
+  maxLength
 }) => {
 
   const beforeElement = () => {
@@ -37,8 +38,13 @@ const BaseInput: React.FC<BaseInputProps> = ({
     if (suffix) {
       suffix = <span className={`${prefixCls}-suffix`}>{suffix}</span>
     }
-    if (showWordLimit) {
-
+    if (showWordLimit && ![null, undefined].includes(maxLength as any)) {
+      suffix = (
+        <>
+          <span className={`${prefixCls}-count`}>{value.length}/{maxLength}</span>
+          {suffix}
+        </>
+      )
     }
     if (value && clearable) {
       suffix = (

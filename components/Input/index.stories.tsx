@@ -44,5 +44,7 @@ Basic.storyName = '基础用法'
 Basic.args = {
   placeholder: '请输入',
   clearable: false,
+  showWordLimit: false,
+  maxLength: 11,
 }
 

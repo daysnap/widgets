@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import BaseInput from './BaseInput'
 
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'type'>{
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'prefix'>{
   className?: string
   clearable?: boolean
   prefix?: React.ReactNode
@@ -33,6 +33,7 @@ const Input: React.FC<InputProps> = ({
   defaultValue,
   showWordLimit,
   maxLength,
+  type = 'text',
   ...restProps
 }) => {
 
@@ -73,7 +74,7 @@ const Input: React.FC<InputProps> = ({
       ref={refInput}
       value={value}
       className={classes}
-      type="text"
+      type={type}
       onChange={handleChange}
     />
   )

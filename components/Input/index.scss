@@ -31,10 +31,6 @@
     margin-right: 12px;
   }
 
-  @include m(suffix) {
-    margin-left: 12px;
-  }
-
   @include m(clear) {
     @extend %cp;
     @extend %ao8;
@@ -47,9 +43,20 @@
       color: $color-text-link;
     }
   }
+
+  @include m(count) {
+    margin-left: 12px;
+    font-size: 12px;
+  }
+
+  @include m(suffix) {
+    margin-left: 12px;
+  }
+
 }
 
 @include b(input-wrapper) {
+  @extend %aic;
   @include input-wrapper();
   display: inline-flex;
   color: $color-text-placeholder;
