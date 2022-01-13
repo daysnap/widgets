@@ -14,6 +14,7 @@ const Template: Story<TooltipProps> = args => {
   return (
     <dl>
       <dt>基础用法</dt>
+      <dt>基础用法</dt>
       <dd>
         <Tooltip {...args}>
           <Button>按钮</Button>

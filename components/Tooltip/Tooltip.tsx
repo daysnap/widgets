@@ -14,7 +14,7 @@ export interface TooltipProps {
 
 const Tooltip: React.FC<TooltipProps> = ({
   className,
-  placement= 'bottomLeft',
+  placement= 'topCenter',
   children,
   title,
   ...restProps
@@ -25,12 +25,14 @@ const Tooltip: React.FC<TooltipProps> = ({
     `${cls}`,
     className,
   )
-  const overlay = (
-    <span
-      className={classes}>
+  const overlay = [
+    <div className={`${cls}-content`} key="content">
+      <div className={`${cls}-arrow`} key="arrow">
+        <i className={`${cls}-arrow-content`}/>
+      </div>
       {title}
-    </span>
-  )
+    </div>
+  ]
 
   return (
     <Trigger

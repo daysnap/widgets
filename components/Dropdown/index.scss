@@ -23,7 +23,7 @@
     }
   }
 
-  @include m('placement') {
+  @include m(placement) {
     @include m(topLeft){
       @include placement(auto, auto, -14px, 16px);
       animation-name: dropdownInDown;
@@ -117,7 +117,7 @@
       }
     }
 
-    @include when('icon-only') {
+    @include when(icon-only) {
       @include b(icon){
         &:first-child{
           margin-right: 0;

@@ -2,6 +2,67 @@
 @import "../assets/scss/define.scss";
 
 @include b(tooltip){
+  @extend %pa;
+  width: max-content;
+  padding: 10px 0;
+  @include m(hidden) {
+    //@extend %dn;
+  }
+
+  @include m(content){
+    @extend %pr;
+    @extend %bsb;
+    @extend %cfff;
+    @extend %tdn;
+    font-size: 12px;
+    padding: 6px 8px;
+    word-wrap: break-word;
+    background-color: rgba(0, 0, 0, .75);
+    border-radius: 2px;
+    box-shadow: 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
+  }
+
+  @include m(arrow) {
+    @extend %pa;
+    @extend %oh;
+    @extend %pen;
+    width: 14px;
+    height: 14px;
+
+    @include m(content) {
+      @extend %pa;
+      content: "";
+      width: 5px;
+      height: 5px;
+      background-color: rgba(0, 0, 0, .75);
+      box-shadow: 3px 3px 7px #00000012;
+      transform: translateY((5 / 0.7) * -1px) rotate(45deg);
+      margin: auto;
+      inset: 0;
+    }
+  }
+
+  @include m(placement) {
+    @include m(topCenter){
+      @include e(arrow) {
+        top: 100%;
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+
+        @include m(content) {
+          @extend %pa;
+          content: "";
+          width: 5px;
+          height: 5px;
+          background-color: rgba(0, 0, 0, .75);
+          box-shadow: 3px 3px 7px #00000012;
+          transform: translateY((5 / 0.7) * -1px) rotate(45deg);
+          margin: auto;
+          inset: 0;
+        }
+      }
+    }
+  }
 
 }
 
