@@ -96,26 +96,36 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
   const handleMouseEnter: React.MouseEventHandler<HTMLElement> = (e) => {
     trim('onMouseEnter', e)
     if (isMouseEnterToShow) {
-      setVisible(true)
+      delaySetVisible(true)
     }
   }
   const handleMouseLeave: React.MouseEventHandler<HTMLElement> = (e) => {
     trim('onMouseLeave', e)
     if (isMouseLeaveToHide) {
-      setVisible(false)
+      delaySetVisible(false)
     }
   }
   const handleFocus: React.FocusEventHandler = (e) => {
     trim('onFocus', e)
     if (isFocusToShow) {
-      setVisible(true)
+      delaySetVisible(true)
     }
   }
   const handleBlur: React.FocusEventHandler = (e) => {
     trim('onBlur', e)
     if (isBlurToHide) {
-      setVisible(false)
+      delaySetVisible(false)
     }
+  }
+  const refDelayTimer = React.useRef<number>()
+  const delaySetVisible = (visible: boolean) => {
+    if (refDelayTimer.current) {
+      clearTimeout(refDelayTimer.current)
+    }
+    refDelayTimer.current = setTimeout(() => {
+      setVisible(visible)
+      clearTimeout(refDelayTimer.current)
+    }, 0.15 * 1000)
   }
 
   const cloneProps: React.HTMLAttributes<HTMLElement> = {

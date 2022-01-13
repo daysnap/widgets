@@ -6,17 +6,6 @@
   width: max-content;
   background-color: red;
 
-  //&:before{
-  //  position: absolute;
-  //  top: -4px;
-  //  right: 0;
-  //  bottom: -4px;
-  //  left: -7px;
-  //  z-index: -9999;
-  //  //opacity: 0.0001;
-  //  content: ' ';
-  //}
-
   @include m(hidden) {
     @extend %dn;
   }
@@ -55,7 +44,6 @@
   @include m(placement) {
 
     @include m(topLeft){
-      padding-bottom: 5px;
       @include e(arrow) {
         top: 100%;
         left: 5px;
@@ -68,7 +56,6 @@
     }
 
     @include m(top){
-      padding-bottom: 5px;
       @include e(arrow) {
         top: 100%;
         left: 50%;
@@ -82,7 +69,6 @@
     }
 
     @include m(topRight){
-      padding-bottom: 5px;
       @include e(arrow) {
         top: 100%;
         right: 5px;
@@ -95,7 +81,6 @@
     }
 
     @include m(rightTop) {
-      padding-left: 100px;
       @include e(arrow) {
         top: 5px;
         right: 100%;
