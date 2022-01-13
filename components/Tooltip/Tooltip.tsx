@@ -7,14 +7,14 @@ import Placements from './placements'
 
 export interface TooltipProps {
   className?: string
-  placement?: 'bottomLeft' | 'bottomCenter' | 'bottomRight' | 'topLeft' | 'topCenter' | 'topRight'
+  placement?: 'left' | 'right' | 'top' | 'bottom' | 'topLeft' | 'leftTop' | 'topRight' | 'rightTop' | 'bottomRight' | 'rightBottom' | 'bottomLeft' | 'leftBottom'
   children?: React.ReactNode
   title?: string
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
   className,
-  placement= 'topCenter',
+  placement= 'top',
   children,
   title,
   ...restProps

@@ -25,7 +25,6 @@ dl{
 }
 
 .sb-show-main{
-
   .ds-button{
     margin-left: 10px;
     &:first-child{
@@ -34,3 +33,15 @@ dl{
   }
 }
 
+.tooltip{
+  .tooltip-demo{
+    padding-top: 50px;
+    padding-left: 100px;
+    .ds-button{
+      margin-left: 10px !important;
+      + .ds-button{
+        margin-top: 10px;
+      }
+    }
+  }
+}

@@ -4,9 +4,21 @@
 @include b(tooltip){
   @extend %pa;
   width: max-content;
-  padding: 10px 0;
+  background-color: red;
+
+  //&:before{
+  //  position: absolute;
+  //  top: -4px;
+  //  right: 0;
+  //  bottom: -4px;
+  //  left: -7px;
+  //  z-index: -9999;
+  //  //opacity: 0.0001;
+  //  content: ' ';
+  //}
+
   @include m(hidden) {
-    //@extend %dn;
+    @extend %dn;
   }
 
   @include m(content){
@@ -28,10 +40,8 @@
     @extend %pen;
     width: 14px;
     height: 14px;
-
     @include m(content) {
       @extend %pa;
-      content: "";
       width: 5px;
       height: 5px;
       background-color: rgba(0, 0, 0, .75);
@@ -43,25 +53,159 @@
   }
 
   @include m(placement) {
-    @include m(topCenter){
+
+    @include m(topLeft){
+      padding-bottom: 5px;
       @include e(arrow) {
         top: 100%;
-        left: 50%;
-        transform: translate3d(-50%, 0, 0);
+        left: 5px;
 
         @include m(content) {
-          @extend %pa;
-          content: "";
-          width: 5px;
-          height: 5px;
-          background-color: rgba(0, 0, 0, .75);
           box-shadow: 3px 3px 7px #00000012;
           transform: translateY((5 / 0.7) * -1px) rotate(45deg);
-          margin: auto;
-          inset: 0;
         }
       }
     }
+
+    @include m(top){
+      padding-bottom: 5px;
+      @include e(arrow) {
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include m(content) {
+          box-shadow: 3px 3px 7px #00000012;
+          transform: translateY((5 / 0.7) * -1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(topRight){
+      padding-bottom: 5px;
+      @include e(arrow) {
+        top: 100%;
+        right: 5px;
+
+        @include m(content) {
+          box-shadow: 3px 3px 7px #00000012;
+          transform: translateY((5 / 0.7) * -1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(rightTop) {
+      padding-left: 100px;
+      @include e(arrow) {
+        top: 5px;
+        right: 100%;
+
+        @include m(content) {
+          box-shadow: -3px 3px 7px #00000012;
+          transform: translate((5 / 0.7) * 1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(right) {
+      @include e(arrow) {
+        top: 50%;
+        right: 100%;
+        transform: translateY(-50%);
+
+        @include m(content) {
+          box-shadow: -3px 3px 7px #00000012;
+          transform: translate((5 / 0.7) * 1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(rightBottom) {
+      @include e(arrow) {
+        bottom: 5px;
+        right: 100%;
+
+        @include m(content) {
+          box-shadow: -3px 3px 7px #00000012;
+          transform: translate((5 / 0.7) * 1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(bottomLeft){
+      @include e(arrow) {
+        bottom: 100%;
+        left: 5px;
+
+        @include m(content) {
+          box-shadow: -3px -3px 7px #00000012;
+          transform: translateY((5 / 0.7) * 1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(bottom){
+      @include e(arrow) {
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @include m(content) {
+          box-shadow: -3px -3px 7px #00000012;
+          transform: translateY((5 / 0.7) * 1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(bottomRight){
+      @include e(arrow) {
+        bottom: 100%;
+        right: 5px;
+
+        @include m(content) {
+          box-shadow: -3px -3px 7px #00000012;
+          transform: translateY((5 / 0.7) * 1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(leftTop) {
+      @include e(arrow) {
+        top: 5px;
+        left: 100%;
+
+        @include m(content) {
+          box-shadow: 3px -3px 7px #00000012;
+          transform: translate((5 / 0.7) * -1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(left) {
+      @include e(arrow) {
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+
+        @include m(content) {
+          box-shadow: 3px -3px 7px #00000012;
+          transform: translate((5 / 0.7) * -1px) rotate(45deg);
+        }
+      }
+    }
+
+    @include m(leftBottom) {
+      @include e(arrow) {
+        bottom: 5px;
+        left: 100%;
+
+        @include m(content) {
+          box-shadow: 3px -3px 7px #00000012;
+          transform: translate((5 / 0.7) * -1px) rotate(45deg);
+        }
+      }
+    }
+
   }
 
 }
