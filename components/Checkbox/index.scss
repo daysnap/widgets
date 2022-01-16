@@ -2,6 +2,56 @@
 @import "../assets/scss/define.scss";
 
 @include b(checkbox){
+  @extend %dif;
+  @extend %aic;
+  @extend %cp;
+  @extend %usn;
+
+  @include when(is-checked) {
+
+    @include m(value){
+
+    }
+  }
+
+  @include m(value) {
+    @extend %pr;
+    @extend %bsb;
+    @extend %dif;
+    @extend %aic;
+    @extend %jcc;
+    @extend %cp;
+    @include tst(background-color, .3s);
+    border-radius: 2px;
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+    border: 1px solid $border-color;
+    input{
+      @extend %pa;
+      @extend %t0;
+      @extend %l0;
+      @extend %w100;
+      @extend %h100;
+      @extend %cp;
+      opacity: 0;
+    }
+    &:after{
+      @include tst(all, .5s);
+      border-radius: j(1);
+      transform: scale(0);
+      content: '';
+      width: j(4);
+      height: j(4);
+      background-color: #fff;
+    }
+  }
+
+  @include m(text){
+    padding-left: 10px;
+    font-size: 14px;
+    color: $color-text-placeholder;
+  }
 
 }
 

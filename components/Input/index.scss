@@ -81,8 +81,8 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 
 @include b(input-wrapper) {
   @extend %aic;
+  @extend %dif;
   @include input-wrapper();
-  display: inline-flex;
   color: $color-text-placeholder;
 
   @include b(input) {

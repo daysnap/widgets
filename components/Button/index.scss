@@ -52,7 +52,7 @@
     }
   }
 
-  @include when('icon-only') {
+  @include when(icon-only) {
     @include b(icon){
       &:first-child{
         margin-right: 0;

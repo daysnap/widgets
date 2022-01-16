@@ -9,7 +9,16 @@ export default {
   argTypes: {},
 } as Meta
 
-const Template: Story<CheckboxProps> = args => <Checkbox {...args} />
+const Template: Story<CheckboxProps> = args => {
+  return (
+    <dl>
+      <dt>基本信息</dt>
+      <dd>
+        <Checkbox {...args}>复选框</Checkbox>
+      </dd>
+    </dl>
+  )
+}
 
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
