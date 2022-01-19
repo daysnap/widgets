@@ -22,5 +22,7 @@ const Template: Story<CheckboxProps> = args => {
 
 export const Basic = Template.bind({})
 Basic.storyName = '基础用法'
-Basic.args = {}
+Basic.args = {
+  disabled: false,
+}
 

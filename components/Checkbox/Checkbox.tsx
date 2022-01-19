@@ -23,6 +23,10 @@ const Checkbox: React.FC<CheckboxProps> = ({
   const cls = createPrefixCls('checkbox')
   const classes = classnames(
     `${cls}`,
+    {
+      [`is-checked`]: false,
+      [`is-disabled`]: disabled,
+    },
     className,
   )
 
