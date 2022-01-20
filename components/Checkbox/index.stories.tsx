@@ -10,11 +10,17 @@ export default {
 } as Meta
 
 const Template: Story<CheckboxProps> = args => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
+    console.log('e => ', e, e.target.value, e.target.checked)
+  }
   return (
     <dl>
       <dt>基本信息</dt>
       <dd>
-        <Checkbox {...args}>复选框</Checkbox>
+        <Checkbox onChange={handleChange} {...args}>复选框</Checkbox>
+      </dd>
+      <dd>
+        <input onChange={handleChange} type="checkbox" value="111"/>
       </dd>
     </dl>
   )

@@ -31,7 +31,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
     className,
   )
 
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     if (disabled) {
       return
     }
