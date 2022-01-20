@@ -2,6 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
+import { CheckboxGroupContext } from './CheckboxGroup'
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement>{
   className?: string
@@ -20,6 +21,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
 
   const [checked, setChecked] = React.useState<Boolean>(defaultChecked)
+  const checkboxGroup = React.useContext(CheckboxGroupContext)
 
   const cls = createPrefixCls('checkbox')
   const classes = classnames(
@@ -39,11 +41,24 @@ const Checkbox: React.FC<CheckboxProps> = ({
     restProps.onChange?.(e)
   }
 
+  // 通知 CheckboxGroup 更新数据
+  const prevValue = React.useRef<any>(value)
+  React.useEffect(() => {
+    if (value !== prevValue.current) {
+      checkboxGroup?.cancelValue(prevValue.current)
+      checkboxGroup?.registerValue(value)
+    }
+    return () => checkboxGroup?.cancelValue(value)
+  }, [value])
+
+  const props = { ...restProps, disabled,  }
+
   return (
     <label
       className={classes}>
       <span className={`${cls}-value`}>
         <input
+          {...restProps}
           type="checkbox"
           disabled={disabled}
           checked={!!checked}

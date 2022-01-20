@@ -7,6 +7,12 @@
   @extend %cp;
   @extend %usn;
 
+  margin-left: 8px;
+
+  &:first-child{
+    margin-left: 0;
+  }
+
   &:hover{
     @include e(value) {
       border-color: $color-primary;
@@ -31,6 +37,10 @@
 
   @include when(disabled) {
     cursor: not-allowed;
+
+    input{
+      cursor: not-allowed;
+    }
 
     &:hover {
       @include e(value) {
@@ -71,6 +81,7 @@
       @extend %l0;
       @extend %w100;
       @extend %h100;
+      @extend %cp;
       opacity: 0;
     }
     &:after{

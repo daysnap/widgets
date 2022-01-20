@@ -22,7 +22,7 @@ export interface CheckboxGroupContext {
   cancelValue: (val: string) => void
 }
 
-export const GroupContext = React.createContext<CheckboxGroupContext | null>(null)
+export const CheckboxGroupContext = React.createContext<CheckboxGroupContext | null>(null)
 
 const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
   className,
@@ -30,6 +30,7 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
   children,
   defaultValue,
   name,
+  onChange,
   ...restProps
 }, ref) => {
 
@@ -43,7 +44,7 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
     }
   }, [restProps.value])
 
-  const cls = createPrefixCls('checkbox')
+  const cls = createPrefixCls('checkbox-group')
   const classes = classnames(
     `${cls}`,
     {
@@ -52,18 +53,36 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
     className,
   )
 
+  // 当子元素 checkbox value 值改变的时候 需要更新下元数据
+  const [registeredValues, setRegisteredValues] = React.useState<CheckboxValueType[]>([])
+  const cancelValue = (val: string) => {
+    setRegisteredValues(prevValues => prevValues.filter(v => v !== val))
+  }
+  const registerValue = (val: string) => {
+    setRegisteredValues(prevValues => [...prevValues, val])
+  }
+
   const toggleOption = (option: { value: CheckboxValueType }) => {
     const index = value.indexOf(option.value)
-    if (!('value' in restProps)) {
-      setValue(newValue);
+    let newValue = [...value]
+    if (index > -1) {
+      newValue.splice(index, 1)
+    } else {
+      newValue.push(option.value)
     }
+
+    if (!('value' in restProps)) {
+      setValue(newValue)
+    }
+    onChange?.(newValue.filter(v => registeredValues.includes(v)))
   }
   const context = {
     value,
     disabled,
     name,
-
     toggleOption,
+    cancelValue,
+    registerValue,
   }
 
   return (
@@ -72,11 +91,11 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
       ref={ref}
       className={classes}
     >
-      <GroupContext.Provider
+      <CheckboxGroupContext.Provider
         value={context}
       >
         {children}
-      </GroupContext.Provider>
+      </CheckboxGroupContext.Provider>
     </div>
   )
 })
