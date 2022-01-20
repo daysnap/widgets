@@ -33,12 +33,12 @@
     cursor: not-allowed;
 
     &:hover {
-      @include e(input) {
+      @include e(value) {
         border-color: $border-color;
       }
     }
 
-    @include e(input) {
+    @include e(value) {
       border-color: $border-color;
       background-color: $background-color-base;
       &:after{
@@ -58,7 +58,6 @@
     @extend %dif;
     @extend %aic;
     @extend %jcc;
-    @extend %cp;
     @include tst(background-color, .3s);
     @include tst(all, .3s);
     border-radius: 2px;
@@ -72,12 +71,11 @@
       @extend %l0;
       @extend %w100;
       @extend %h100;
-      @extend %cp;
       opacity: 0;
     }
     &:after{
       @include tst(all, .3s);
-      border-radius: 2px;
+      border-radius: 1px;
       transform: scale(0);
       content: '';
       width: 4px;

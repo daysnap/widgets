@@ -6,29 +6,38 @@ import { createPrefixCls } from '../utils/create'
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement>{
   className?: string
   disabled?: boolean
-  label?: any
   children?: React.ReactNode
-  value?: undefined
+  value?: any
 }
 
 const Checkbox: React.FC<CheckboxProps> = ({
   className,
   disabled,
-  label = true,
   children,
   value,
+  defaultChecked= false,
   ...restProps
 }) => {
+
+  const [checked, setChecked] = React.useState<Boolean>(defaultChecked)
 
   const cls = createPrefixCls('checkbox')
   const classes = classnames(
     `${cls}`,
     {
-      [`is-checked`]: false,
+      [`is-checked`]: checked,
       [`is-disabled`]: disabled,
     },
     className,
   )
+
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    if (disabled) {
+      return
+    }
+    setChecked(e.target.checked)
+    restProps.onChange?.(e)
+  }
 
   return (
     <label
@@ -37,9 +46,12 @@ const Checkbox: React.FC<CheckboxProps> = ({
         <input
           type="checkbox"
           disabled={disabled}
+          checked={!!checked}
+          onChange={handleChange}
+          value={value}
         />
       </span>
-      <span className={`${cls}-text`}>{children || label}</span>
+      {children !== undefined && <span className={`${cls}-text`}>{children}</span>}
     </label>
   )
 }
