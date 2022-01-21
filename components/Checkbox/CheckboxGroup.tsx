@@ -64,7 +64,6 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
     setRegisteredValues(prevValues => prevValues.filter(v => v !== val))
   }
   const registerValue = (val: string) => {
-    console.log(11)
     setRegisteredValues(prevValues => [...prevValues, val])
   }
 
@@ -76,9 +75,6 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
     } else {
       newValue.push(option.value)
     }
-
-    console.log('newValue =》 ', newValue, registeredValues)
-
     if (!('value' in restProps)) {
       setValue(newValue)
     }

@@ -44,7 +44,9 @@ const Checkbox: React.FC<CheckboxProps> = ({
   // 通知 CheckboxGroup 更新数据
   const prevValue = React.useRef<any>(value)
   React.useEffect(() => {
-    console.log(11, 'prevValue => ', prevValue)
+    checkboxGroup?.registerValue(value)
+  }, [])
+  React.useEffect(() => {
     if (value !== prevValue.current) {
       checkboxGroup?.cancelValue(prevValue.current)
       checkboxGroup?.registerValue(value)
