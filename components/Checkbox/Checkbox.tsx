@@ -44,6 +44,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
   // 通知 CheckboxGroup 更新数据
   const prevValue = React.useRef<any>(value)
   React.useEffect(() => {
+    console.log(11, 'prevValue => ', prevValue)
     if (value !== prevValue.current) {
       checkboxGroup?.cancelValue(prevValue.current)
       checkboxGroup?.registerValue(value)
@@ -51,19 +52,31 @@ const Checkbox: React.FC<CheckboxProps> = ({
     return () => checkboxGroup?.cancelValue(value)
   }, [value])
 
-  const props = { ...restProps, disabled,  }
+  const checkboxProps: CheckboxProps = {
+    ...restProps,
+    value,
+    onChange: handleChange,
+  }
+  if (checkboxGroup) {
+    Object.assign(checkboxProps, {
+      name: checkboxGroup.name,
+      disabled: disabled || checkboxGroup.disabled,
+      checked: checkboxGroup.value.includes(value),
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        handleChange(e)
+        console.log('value => ', value)
+        checkboxGroup.toggleOption({ value })
+      }
+    })
+  }
 
   return (
     <label
       className={classes}>
       <span className={`${cls}-value`}>
         <input
-          {...restProps}
+          {...checkboxProps}
           type="checkbox"
-          disabled={disabled}
-          checked={!!checked}
-          onChange={handleChange}
-          value={value}
         />
       </span>
       {children !== undefined && <span className={`${cls}-text`}>{children}</span>}

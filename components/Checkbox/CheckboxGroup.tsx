@@ -14,10 +14,15 @@ export interface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivEle
   onChange?: (checkedValue: Array<CheckboxValueType>) => void
 }
 
+export interface CheckboxOptionType {
+  value: CheckboxValueType
+}
+
 export interface CheckboxGroupContext {
   name?: string
   value?: any
   disabled?: boolean
+  toggleOption: (option: CheckboxOptionType) => void
   registerValue: (val: string) => void
   cancelValue: (val: string) => void
 }
@@ -59,10 +64,11 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
     setRegisteredValues(prevValues => prevValues.filter(v => v !== val))
   }
   const registerValue = (val: string) => {
+    console.log(11)
     setRegisteredValues(prevValues => [...prevValues, val])
   }
 
-  const toggleOption = (option: { value: CheckboxValueType }) => {
+  const toggleOption = (option: CheckboxOptionType) => {
     const index = value.indexOf(option.value)
     let newValue = [...value]
     if (index > -1) {
@@ -70,6 +76,8 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
     } else {
       newValue.push(option.value)
     }
+
+    console.log('newValue =》 ', newValue, registeredValues)
 
     if (!('value' in restProps)) {
       setValue(newValue)
