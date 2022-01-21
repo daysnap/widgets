@@ -28,6 +28,9 @@ export { default as Input } from './Input'
 export type { PortalProps } from './Portal'
 export { default as Portal } from './Portal'
 
+export type { RadioProps } from './Radio'
+export { default as Radio } from './Radio'
+
 export type { TooltipProps } from './Tooltip'
 export { default as Tooltip } from './Tooltip'
 
