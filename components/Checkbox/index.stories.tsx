@@ -23,7 +23,9 @@ const Template: Story<CheckboxProps> = args => {
         <Checkbox onChange={handleChange} {...args}>复选框</Checkbox>
       </dd>
       <dd>
-        <Checkbox.Group onChange={handleGroupChange}>
+        <Checkbox.Group
+          disabled={args.disabled}
+          onChange={handleGroupChange}>
           {
             ['A', 'B', 'C', 'D'].map(key => <Checkbox value={key} key={key}>{key}</Checkbox>)
           }

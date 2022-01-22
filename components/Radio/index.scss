@@ -68,9 +68,9 @@
     @extend %dif;
     @extend %aic;
     @extend %jcc;
+    @extend %br50;
     @include tst(background-color, .3s);
     @include tst(all, .3s);
-    border-radius: 2px;
     width: 14px;
     height: 14px;
     background-color: #fff;
@@ -86,7 +86,7 @@
     }
     &:after{
       @include tst(all, .3s);
-      border-radius: 1px;
+      @extend %br50;
       transform: scale(0);
       content: '';
       width: 4px;

@@ -23,7 +23,9 @@ const Template: Story<RadioProps> = args => {
         <Radio onChange={handleChange} {...args}>单选框</Radio>
       </dd>
       <dd>
-        <Radio.Group onChange={handleGroupChange}>
+        <Radio.Group
+          disabled={args.disabled}
+          onChange={handleGroupChange}>
           {
             ['A', 'B', 'C', 'D'].map(key => <Radio value={key} key={key}>{key}</Radio>)
           }

@@ -21,16 +21,6 @@ const Radio: React.FC<RadioProps> = ({
   const [checked, setChecked] = React.useState<Boolean>(defaultChecked)
   const radioGroupContext = React.useContext(RadioGroupContext)
 
-  const cls = createPrefixCls('radio')
-  const classes = classnames(
-    `${cls}`,
-    {
-      [`is-checked`]: checked,
-      [`is-disabled`]: disabled,
-    },
-    className,
-  )
-
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     if (disabled) {
       return
@@ -41,20 +31,32 @@ const Radio: React.FC<RadioProps> = ({
 
   const radioProps: RadioProps = {
     ...restProps,
+    checked: !!checked,
     value,
+    disabled,
     onChange: handleChange,
   }
   if (radioGroupContext) {
     Object.assign(radioProps, {
       name: radioGroupContext.name,
       disabled: disabled || radioGroupContext.disabled,
-      checked: radioGroupContext.value.includes(value),
+      checked: radioGroupContext.value === value,
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
         handleChange(e)
         radioGroupContext.toggleOption({ value })
       }
     })
   }
+
+  const cls = createPrefixCls('radio')
+  const classes = classnames(
+    `${cls}`,
+    {
+      [`is-checked`]: radioProps.checked,
+      [`is-disabled`]: radioProps.disabled,
+    },
+    className,
+  )
 
   return (
     <label

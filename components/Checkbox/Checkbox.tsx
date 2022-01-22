@@ -19,17 +19,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
 
   const [checked, setChecked] = React.useState<Boolean>(defaultChecked)
-  const checkboxGroup = React.useContext(CheckboxGroupContext)
-
-  const cls = createPrefixCls('checkbox')
-  const classes = classnames(
-    `${cls}`,
-    {
-      [`is-checked`]: checked,
-      [`is-disabled`]: disabled,
-    },
-    className,
-  )
+  const checkboxGroupContext = React.useContext(CheckboxGroupContext)
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
     if (disabled) {
@@ -42,32 +32,44 @@ const Checkbox: React.FC<CheckboxProps> = ({
   // 通知 CheckboxGroup 更新数据
   const prevValue = React.useRef<any>(value)
   React.useEffect(() => {
-    checkboxGroup?.registerValue(value)
+    checkboxGroupContext?.registerValue(value)
   }, [])
   React.useEffect(() => {
     if (value !== prevValue.current) {
-      checkboxGroup?.cancelValue(prevValue.current)
-      checkboxGroup?.registerValue(value)
+      checkboxGroupContext?.cancelValue(prevValue.current)
+      checkboxGroupContext?.registerValue(value)
     }
-    return () => checkboxGroup?.cancelValue(value)
+    return () => checkboxGroupContext?.cancelValue(value)
   }, [value])
 
   const checkboxProps: CheckboxProps = {
     ...restProps,
+    checked: !!checked,
     value,
+    disabled,
     onChange: handleChange,
   }
-  if (checkboxGroup) {
+  if (checkboxGroupContext) {
     Object.assign(checkboxProps, {
-      name: checkboxGroup.name,
-      disabled: disabled || checkboxGroup.disabled,
-      checked: checkboxGroup.value.includes(value),
+      name: checkboxGroupContext.name,
+      disabled: disabled || checkboxGroupContext.disabled,
+      checked: checkboxGroupContext.value.includes(value),
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
         handleChange(e)
-        checkboxGroup.toggleOption({ value })
+        checkboxGroupContext.toggleOption({ value })
       }
     })
   }
+
+  const cls = createPrefixCls('checkbox')
+  const classes = classnames(
+    `${cls}`,
+    {
+      [`is-checked`]: checkboxProps.checked,
+      [`is-disabled`]: checkboxProps.disabled,
+    },
+    className,
+  )
 
   return (
     <label
