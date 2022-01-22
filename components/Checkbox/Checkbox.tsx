@@ -5,8 +5,6 @@ import { createPrefixCls } from '../utils/create'
 import { CheckboxGroupContext } from './CheckboxGroup'
 
 export interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement>{
-  className?: string
-  disabled?: boolean
   children?: React.ReactNode
   value?: any
 }
@@ -66,7 +64,6 @@ const Checkbox: React.FC<CheckboxProps> = ({
       checked: checkboxGroup.value.includes(value),
       onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
         handleChange(e)
-        console.log('value => ', value)
         checkboxGroup.toggleOption({ value })
       }
     })

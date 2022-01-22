@@ -11,7 +11,7 @@ export interface CheckboxGroupProps extends Omit<React.HTMLAttributes<HTMLDivEle
   defaultValue?: Array<CheckboxValueType>
   children?: React.ReactNode
   name?: string
-  onChange?: (checkedValue: Array<CheckboxValueType>) => void
+  onChange?: (value: Array<CheckboxValueType>) => void
 }
 
 export interface CheckboxOptionType {
@@ -61,12 +61,11 @@ const CheckboxGroup = React.forwardRef<HTMLDivElement, CheckboxGroupProps>(({
   // 当子元素 checkbox value 值改变的时候 需要更新下元数据
   const [registeredValues, setRegisteredValues] = React.useState<CheckboxValueType[]>([])
   const cancelValue = (val: string) => {
-    setRegisteredValues(prevValues => prevValues.filter(v => v !== val))
+    setRegisteredValues(v => v.filter(v => v !== val))
   }
   const registerValue = (val: string) => {
-    setRegisteredValues(prevValues => [...prevValues, val])
+    setRegisteredValues(v => [...v, val])
   }
-
   const toggleOption = (option: CheckboxOptionType) => {
     const index = value.indexOf(option.value)
     let newValue = [...value]
