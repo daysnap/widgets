@@ -2,7 +2,6 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
-import {CheckboxOptionType} from "../Checkbox/CheckboxGroup";
 
 type RadioValueType = string | number | boolean
 
@@ -56,7 +55,7 @@ const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(({
     className,
   )
 
-  const toggleOption = (option: CheckboxOptionType) => {
+  const toggleOption = (option: RadioOptionType) => {
     const { value } = option
     if (!('value' in restProps)) {
       setValue(value)
