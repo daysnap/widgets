@@ -11,7 +11,7 @@ export interface MessageProps {
 
 export interface MessageType {
   id?: number
-  delayed?: number
+  duration?: number
   type?: string
   content?: string
   timer?: number
@@ -22,7 +22,7 @@ export interface MessageRef {
   remove: (id: number) => void
 }
 
-const Message: React.FC<MessageProps> = React.forwardRef<MessageRef, MessageProps>(({
+const Message = React.forwardRef<MessageRef, MessageProps>(({
   className,
 }, ref) => {
 
@@ -35,9 +35,9 @@ const Message: React.FC<MessageProps> = React.forwardRef<MessageRef, MessageProp
   )
 
   const add = (message: MessageType) => {
-    message = Object.assign({ id: Date.now(), delayed: 3000 }, message)
-    if (message.delayed! > 0) {
-      message.timer = setTimeout(remove, message.delayed, message.id)
+    message = Object.assign({ id: Date.now(), duration: 3000 }, message)
+    if (message.duration! > 0) {
+      message.timer = setTimeout(remove, message.duration, message.id)
     }
     setMessages([...messages, message])
   }
@@ -65,15 +65,32 @@ const Message: React.FC<MessageProps> = React.forwardRef<MessageRef, MessageProp
   )
 })
 
-let instance: MessageRef | null
-function createInstance () {
-  if (!instance) {
-    const instance = React.useRef<any>()
+let instance: React.RefObject<MessageRef>
+export function getInstance () {
+  instance = React.useRef<MessageRef>(null)
+  if (!instance.current) {
     createPortal(<Message ref={instance}/>, document.body)
   }
-  return instance
+  return instance.current
 }
 
+const api: any = {}
 
-export default Message
+;['info', 'error', 'warn', 'success'].forEach(type => {
+  api[type] = (options: MessageType | string) => {
+    if (typeof options === 'string') {
+      options = { content: options }
+    }
+    getInstance()?.add({ ...options, type })
+  }
+})
+
+export interface Api {
+  info(options: MessageType | string) : void
+  error(options: MessageType | string) : void
+  warn(options: MessageType | string) : void
+  success(options: MessageType | string) : void
+}
+
+export default api as Api
 
