@@ -11,10 +11,15 @@ export default {
 } as Meta
 
 const Template: Story<DialogProps> = args => {
-  const handleDialog = () => {
-    Dialog.alert({
-      children: '1111'
-    }).then(res => {
+  const handleAlert = () => {
+    Dialog.alert(1111).then(res => {
+      console.log('成功')
+    }).catch(err => {
+      console.log('失败', err)
+    })
+  }
+  const handleConfirm = () => {
+    Dialog.confirm(`222`).then(res => {
       console.log('成功')
     }).catch(err => {
       console.log('失败', err)
@@ -24,8 +29,8 @@ const Template: Story<DialogProps> = args => {
     <dl>
       <dt>基本用法</dt>
       <dd>
-        <Button onClick={handleDialog}>Confirm</Button>
-        <Button onClick={handleDialog}>Alert</Button>
+        <Button onClick={handleConfirm}>Confirm</Button>
+        <Button onClick={handleAlert}>Alert</Button>
       </dd>
     </dl>
   )
