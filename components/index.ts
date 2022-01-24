@@ -22,6 +22,9 @@ export { default as Dialog } from './Dialog'
 export type { DropdownProps } from './Dropdown'
 export { default as Dropdown } from './Dropdown'
 
+export type { FormProps } from './Form'
+export { default as Form } from './Form'
+
 export type { IconProps } from './Icon'
 export { default as Icon } from './Icon'
 
