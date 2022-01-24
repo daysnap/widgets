@@ -5,12 +5,17 @@ import { createPrefixCls } from '../utils/create'
 
 export interface FormItemProps {
   className?: string
+  label?: string
 }
 
 const FormItem: React.FC<FormItemProps> = ({
   className,
+  label,
+  children,
   ...restProps
 }) => {
+
+  const [error, setError] = React.useState<string>()
 
   const cls = createPrefixCls('form-item')
   const classes = classnames(
@@ -22,7 +27,11 @@ const FormItem: React.FC<FormItemProps> = ({
     <div
       {...restProps}
       className={classes}
-    />
+    >
+      <label className={`${cls}-label`}>{label}</label>
+      {children}
+      {error && <span className={`${cls}-error`}>{error}</span>}
+    </div>
   )
 
 }
