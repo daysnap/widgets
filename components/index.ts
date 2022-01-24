@@ -16,6 +16,9 @@ export { default as CanvasXOR } from './CanvasXOR'
 export type { CheckboxProps } from './Checkbox'
 export { default as Checkbox } from './Checkbox'
 
+export type { DialogProps } from './Dialog'
+export { default as Dialog } from './Dialog'
+
 export type { DropdownProps } from './Dropdown'
 export { default as Dropdown } from './Dropdown'
 

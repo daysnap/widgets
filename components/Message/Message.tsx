@@ -11,7 +11,7 @@ export interface MessageType {
   id?: number
   duration?: number
   type?: string
-  content?: string
+  content?: React.ReactNode
   timer?: number
 }
 
@@ -76,11 +76,11 @@ export function getInstance () {
 const api: any = {}
 
 ;['info', 'error', 'warn', 'success'].forEach(type => {
-  api[type] = (options: MessageType | string) => {
-    if (typeof options === 'string') {
+  api[type] = (options: MessageType | React.ReactNode) => {
+    if (options && !(options as MessageType).content) {
       options = { content: options }
     }
-    return getInstance()!.add({ ...options, type })
+    return getInstance()!.add({ ...(options) as MessageType, type })
   }
 })
 
