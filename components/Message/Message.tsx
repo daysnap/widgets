@@ -1,13 +1,11 @@
 
 import React from 'react'
+import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
 import Icon from '../Icon'
-import { createPortal } from 'react-dom'
 
-export interface MessageProps {
-  className?: string
-}
+export interface MessageProps {}
 
 export interface MessageType {
   id?: number
@@ -22,54 +20,55 @@ export interface MessageRef {
   remove: (id: number) => void
 }
 
-const Message = React.forwardRef<MessageRef, MessageProps>(({
-  className,
-}, ref) => {
+const Message = React.forwardRef<MessageRef, MessageProps>((props, ref) => {
 
   const [messages, setMessages] = React.useState<MessageType[]>([])
-
-  const cls = createPrefixCls('message')
-  const classes = classnames(
-    `${cls}`,
-    className,
-  )
 
   const add = (message: MessageType) => {
     message = Object.assign({ id: Date.now(), duration: 3000 }, message)
     if (message.duration! > 0) {
       message.timer = setTimeout(remove, message.duration, message.id)
     }
-    setMessages([...messages, message])
+    setMessages(v => [...v, message])
+    return () => remove(message.id!)
   }
   const remove = (id: number) => {
-    const item = messages.find(item => item.id === id)
-    clearTimeout(item?.timer)
-    setMessages(messages.filter(item => item.id === id))
+    setMessages(v => v.filter(item => item.id !== id))
   }
   React.useImperativeHandle(ref, () => ({ add, remove }))
 
-  const children = messages.map((item, index) => {
-    const { content, type } = item
+  const cls = createPrefixCls('message')
+  const children = messages.map(item => {
+    const { content, type, id } = item
+    const classes = classnames(
+      `${cls}`,
+      `${cls}-${type}`,
+      `is-in`
+    )
     return (
-      <li style={{top: `${20 * (index + 1)}px`}}>
-        <Icon icon={`icon-${type}`}/>
+      <li
+        className={classes}
+        key={id}
+      >
+        <Icon className={`${cls}-icon`} icon={`icon-${type}`}/>
         <span>{content}</span>
       </li>
     )
   })
 
   return (
-    <ul className={classes}>
+    <ul className={`${cls}-warp`}>
       {children}
     </ul>
   )
 })
 
-let instance: React.RefObject<MessageRef>
+let instance: { current: MessageRef | null } = { current: null }
 export function getInstance () {
-  instance = React.useRef<MessageRef>(null)
   if (!instance.current) {
-    createPortal(<Message ref={instance}/>, document.body)
+    const div = document.createElement('div')
+    document.body.append(div)
+    ReactDOM.render(<Message ref={instance}/>, div)
   }
   return instance.current
 }
@@ -81,7 +80,7 @@ const api: any = {}
     if (typeof options === 'string') {
       options = { content: options }
     }
-    getInstance()?.add({ ...options, type })
+    return getInstance()!.add({ ...options, type })
   }
 })
 

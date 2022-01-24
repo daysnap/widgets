@@ -1,7 +1,87 @@
 
 @import "../assets/scss/define.scss";
 
-@include b(message){
+@include b(message-warp){
+  @extend %pf;
+  @extend %t0;
+  @extend %l0;
+  @extend %r0;
+  @extend %df;
+  @extend %fdc;
+  @extend %aic;
+  @extend %oh;
+  @extend %usn;
+  @extend %pen;
+  z-index: 999;
+}
 
+@include b(message){
+  @extend %bsb;
+  @extend %df;
+  @extend %aic;
+  @extend %oh;
+  @extend %ma;
+  pointer-events: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  min-width: 380px;
+  border: 1px solid $border-color-lighter;
+  padding: 8px 12px 8px 12px;
+  font-size: 14px;
+  box-shadow: 0 5px 5px 3px rgba(0, 0, 0, .01);
+  background-color: #fff;
+
+  @include m(icon) {
+    font-size: j(18);
+    margin-right: j(6);
+  }
+
+  @include m(info) {
+    color: $color-primary;
+  }
+
+  @include m(error) {
+    color: $color-danger;
+  }
+
+  @include m(warn) {
+    color: $color-warning;
+  }
+
+  @include m(success) {
+    color: $color-success;
+  }
+
+  @include when(in) {
+    animation: message-move-in .3s;
+  }
+
+  @include when(out) {
+    animation: message-move-out .3s;
+  }
+
+}
+
+
+@keyframes message-move-in {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes message-move-out {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 

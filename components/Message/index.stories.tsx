@@ -10,11 +10,19 @@ export default {
 } as Meta
 
 const Template: Story = args => {
-  const handleToast = () => {
-    message.info('哈哈哈')
+  const handleToast = (type: 'error' | 'success' | 'warn' | 'info') => () => {
+    message[type]('哈哈哈')
   }
   return (
-    <Button onClick={handleToast}>点我提示</Button>
+    <dl>
+      <dt>基本用法</dt>
+      <dd>
+        <Button onClick={handleToast('info')}>提示</Button>
+        <Button onClick={handleToast('error')}>错误</Button>
+        <Button onClick={handleToast('warn')}>警告</Button>
+        <Button onClick={handleToast('success')}>成功</Button>
+      </dd>
+    </dl>
   )
 }
 
