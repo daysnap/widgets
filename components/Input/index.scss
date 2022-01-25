@@ -87,10 +87,10 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 
   @include b(input) {
     @extend %on;
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-    padding: 0;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
     flex: 1;
   }
 

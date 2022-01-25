@@ -52,6 +52,7 @@
     "sass-loader": "^8.0.2"
   },
   "dependencies": {
+    "async-validator": "^4.0.7",
     "autosize": "^5.0.1",
     "classnames": "^2.3.1",
     "dom-align": "^1.12.2",

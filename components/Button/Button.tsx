@@ -48,6 +48,7 @@ const Button = React.forwardRef<unknown, ButtonProps>(({
   prefixCls,
   href,
   onClick,
+  htmlType= 'button',
   ...restProps
 }, ref) => {
 
@@ -96,6 +97,7 @@ const Button = React.forwardRef<unknown, ButtonProps>(({
   return (
     <button
       {...restProps}
+      type={htmlType}
       className={classes}
       disabled={disabled}
       onClick={handleClick}
