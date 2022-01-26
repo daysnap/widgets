@@ -2,7 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
-import { FormContext } from './context'
+import { FormContext, FormContextInterface, FieldInterface } from './context'
 
 export interface FormProps {
   className?: string
@@ -15,6 +15,7 @@ const Form: React.FC<FormProps> = ({
   children,
   ...restProps
 }) => {
+
 
   const cls = createPrefixCls('form')
   const classes = classnames(
@@ -30,6 +31,19 @@ const Form: React.FC<FormProps> = ({
 
   }
 
+  const [fields, setFields] = React.useState<FieldInterface[]>([])
+  const bind = (field: FieldInterface) => {
+    setFields(v => [...v, field])
+  }
+  const unbind = (field: FieldInterface) => {
+    setFields(fields.filter(item => item.name !== field.name))
+  }
+
+  const context: FormContextInterface = {
+    bind,
+    unbind
+  }
+
   return (
     <form
       {...restProps}
@@ -37,7 +51,10 @@ const Form: React.FC<FormProps> = ({
       onSubmit={handleSubmit}
       className={classes}
     >
-      {children}
+      <FormContext.Provider
+        value={context}>
+        {children}
+      </FormContext.Provider>
     </form>
   )
 }

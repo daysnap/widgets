@@ -3,6 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import AsyncValidator from 'async-validator'
 import { createPrefixCls } from '../utils/create'
+import { FormContext } from './context'
 
 export interface FormItemProps extends React.HTMLAttributes<HTMLDivElement>{
   label?: string
@@ -33,6 +34,15 @@ const FormItem: React.FC<FormItemProps> = ({
 
   const [required, setRequired] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string>()
+  const formContext = React.useContext(FormContext)
+  const validator = () => {
+
+  }
+
+  React.useEffect(() => {
+    formContext?.bind({ name, value, validator })
+    return () => formContext?.unbind({ name, value, validator })
+  }, [name, value])
 
   React.useEffect(() => {
     const required = rules?.find((item: any) => !!item.required)
@@ -49,9 +59,7 @@ const FormItem: React.FC<FormItemProps> = ({
     className,
   )
 
-  const validate = () => {
 
-  }
   const handleChange = (...args: any[]) => {
     const newValue = getValueFromEvent(args)
   }
