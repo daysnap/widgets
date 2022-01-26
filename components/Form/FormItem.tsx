@@ -3,6 +3,7 @@ import React from 'react'
 import classnames from 'classnames'
 import AsyncValidator from 'async-validator'
 import { createPrefixCls } from '../utils/create'
+import usePrevious from '../utils/usePrevious'
 import { FormContext } from './context'
 
 export interface FormItemProps extends React.HTMLAttributes<HTMLDivElement>{
@@ -27,7 +28,6 @@ const FormItem: React.FC<FormItemProps> = ({
   children,
   rules,
   name,
-  value,
   getValueFromEvent= getDefaultValueFromEvent,
   ...restProps
 }) => {
@@ -35,14 +35,34 @@ const FormItem: React.FC<FormItemProps> = ({
   const [required, setRequired] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string>()
   const formContext = React.useContext(FormContext)
+  const value = formContext?.model?.[name]
+  const [value, setValue] = React.useState<any>(restProps.value)
+
+  React.useEffect(() => {
+    if (name) {
+      const value = formContext?.model?.[name]
+      setValue(value)
+    }
+  }, [formContext?.model, name])
+
   const validator = () => {
 
   }
 
+  const prevName = usePrevious(name)
   React.useEffect(() => {
-    formContext?.bind({ name, value, validator })
-    return () => formContext?.unbind({ name, value, validator })
-  }, [name, value])
+    if (prevName !== name) {
+      formContext?.unbind({ name: prevName, value, validator })
+    }
+    if (name) {
+      formContext?.bind({ name, value, validator })
+    }
+    return () => {
+      if (name) {
+        formContext?.unbind({ name, value, validator })
+      }
+    }
+  }, [name, prevName, value])
 
   React.useEffect(() => {
     const required = rules?.find((item: any) => !!item.required)
@@ -59,9 +79,9 @@ const FormItem: React.FC<FormItemProps> = ({
     className,
   )
 
-
   const handleChange = (...args: any[]) => {
     const newValue = getValueFromEvent(args)
+    setValue(newValue)
   }
 
   if (React.isValidElement(children)) {

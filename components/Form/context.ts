@@ -7,7 +7,12 @@ export interface FieldInterface {
   validator?: any
 }
 
+export interface ModelInterface {
+  [key: string]: any
+}
+
 export interface FormContextInterface {
+  model?: ModelInterface
   bind (field: FieldInterface): void
   unbind (field: FieldInterface): void
 }
