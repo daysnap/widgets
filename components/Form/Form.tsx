@@ -2,25 +2,27 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
-import { FormContext, FormContextInterface, FieldInterface } from './context'
+import {FormContext, FormContextInterface, FieldInterface, ModelInterface } from './context'
 
 export interface FormProps {
   className?: string
-  model?: { [key: string]: any }
+  initialValues?: { [key: string]: any }
   onFinish?(values: any): void
 }
 
-const Form: React.FC<FormProps> = ({
+export interface FormRef {
+  setModelValue (model: ModelInterface): void
+}
+
+const Form = React.forwardRef<FormRef, FormProps>(({
   className,
   onFinish,
   children,
+  initialValues= {},
   ...restProps
-}) => {
+}, ref) => {
 
-  const [model, setModel] = React.useState(restProps.model)
-  React.useEffect(() => {
-    setModel(restProps.model)
-  }, [restProps.model])
+  const [model, setModel] = React.useState(initialValues)
 
   const cls = createPrefixCls('form')
   const classes = classnames(
@@ -31,7 +33,8 @@ const Form: React.FC<FormProps> = ({
   const [fields, setFields] = React.useState<FieldInterface[]>([])
   const bind = (field: FieldInterface) => {
     const { name, value } = field
-    // setModel({ ...model, [name]: value })
+    console.log('bind => ', field)
+    setModel(v => ({ ...v, [name]: value }))
     setFields(v => [...v, field])
   }
   const unbind = (field: FieldInterface) => {
@@ -39,19 +42,25 @@ const Form: React.FC<FormProps> = ({
     delete model?.[name]
     setModel(model)
     console.log('unbind => ', field)
-    setFields(fields.filter(item => item.name !== field.name))
+    setFields(v => v.filter(item => item.name !== field.name))
   }
-
   const context: FormContextInterface = {
     model,
     bind,
     unbind
   }
 
+  const setModelValue = (model: ModelInterface) => {
+    setModel(v => ({...v, ...model}))
+  }
+  React.useImperativeHandle(ref, () => ({
+    setModelValue,
+  }))
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
     submit()
   }
+
   const submit = () => {
     console.log('submit => ', model, fields)
   }
@@ -69,7 +78,7 @@ const Form: React.FC<FormProps> = ({
       </FormContext.Provider>
     </form>
   )
-}
+})
 
 export default Form
 

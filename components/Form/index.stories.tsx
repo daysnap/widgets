@@ -23,7 +23,7 @@ const Template: Story<FormProps> = args => {
       <dd>
         <Form
           onFinish={handleSubmit}
-          model={{ account: 1 }}
+          initialValues={{ account: 1 }}
           {...args} >
           <Form.Item name="account" label="账号">
             <Input clearable placeholder="请输入账号"/>

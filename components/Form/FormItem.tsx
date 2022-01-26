@@ -35,8 +35,7 @@ const FormItem: React.FC<FormItemProps> = ({
   const [required, setRequired] = React.useState<boolean>(false)
   const [error, setError] = React.useState<string>()
   const formContext = React.useContext(FormContext)
-  const value = formContext?.model?.[name]
-  const [value, setValue] = React.useState<any>(restProps.value)
+  const [value, setValue] = React.useState<any>(name ? formContext?.model?.[name] : undefined)
 
   React.useEffect(() => {
     if (name) {
@@ -51,7 +50,7 @@ const FormItem: React.FC<FormItemProps> = ({
 
   const prevName = usePrevious(name)
   React.useEffect(() => {
-    if (prevName !== name) {
+    if (prevName !== name && prevName) {
       formContext?.unbind({ name: prevName, value, validator })
     }
     if (name) {
@@ -62,7 +61,7 @@ const FormItem: React.FC<FormItemProps> = ({
         formContext?.unbind({ name, value, validator })
       }
     }
-  }, [name, prevName, value])
+  }, [name, value])
 
   React.useEffect(() => {
     const required = rules?.find((item: any) => !!item.required)
