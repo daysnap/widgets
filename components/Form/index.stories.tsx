@@ -4,6 +4,8 @@ import { Story, Meta } from '@storybook/react/types-6-0'
 import Form, { FormProps } from './index'
 import Input from '../Input'
 import Button from '../Button'
+import Checkbox from '../Checkbox'
+import Radio from '../Radio'
 
 export default {
   title: 'Form',
@@ -42,6 +44,35 @@ const Template: Story<FormProps> = args => {
             rules={[ { required: true, message: '请输入密码' } ]}
           >
             <Input.Password placeholder="请输入密码"/>
+          </Form.Item>
+          <Form.Item
+            name="sex"
+            label="性别"
+            rules={[ { required: true, message: '请选择性别' } ]}
+          >
+            <Radio.Group>
+              <Radio value="1">男</Radio>
+              <Radio value="2">女</Radio>
+            </Radio.Group>
+          </Form.Item>
+          <Form.Item
+            name="hobby"
+            label="爱好"
+            rules={[ { required: true, message: '请选择爱好' } ]}
+          >
+            <Checkbox.Group>
+              <Checkbox value="1">篮球</Checkbox>
+              <Checkbox value="2">足球</Checkbox>
+              <Checkbox value="3">排球</Checkbox>
+              <Checkbox value="4">游戏</Checkbox>
+            </Checkbox.Group>
+          </Form.Item>
+          <Form.Item
+            name="remark"
+            label="备注"
+            rules={[ { required: true, message: '请输入备注' } ]}
+          >
+            <Input.Textarea autosize placeholder="请输入备注"/>
           </Form.Item>
           <Form.Item>
             <Button htmlType="submit">登录</Button>

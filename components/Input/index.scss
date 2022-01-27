@@ -107,7 +107,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
   font-size: 15px;
   @include b(input) {
     resize: none;
-    height: 48px;
+    //height: 48px;
   }
 
   &:after{
