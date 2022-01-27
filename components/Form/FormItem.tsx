@@ -44,9 +44,21 @@ const FormItem: React.FC<FormItemProps> = ({
     }
   }, [formContext?.model, name])
 
-  const validator = () => {
-
-  }
+  const validator = React.useCallback(() => {
+    if (name && rules) {
+      const av = new AsyncValidator({ [name]: rules })
+      return av.validate({ [name]: value }, { firstFields: true })
+        .then(res => {
+          setError('')
+          return res
+        }).catch(({ errors, fields }) => {
+          const error = errors ? errors[0].message : ''
+          setError(error)
+          throw fields
+      })
+    }
+    return Promise.resolve()
+  }, [rules, name, value])
 
   const prevName = usePrevious(name)
   React.useEffect(() => {
@@ -82,6 +94,9 @@ const FormItem: React.FC<FormItemProps> = ({
     const newValue = getValueFromEvent(args)
     setValue(newValue)
   }
+  const handleBlurCapture = () => {
+    validator().catch(() => {})
+  }
 
   if (React.isValidElement(children)) {
     children = React.cloneElement(children, {
@@ -94,6 +109,7 @@ const FormItem: React.FC<FormItemProps> = ({
     <div
       {...restProps}
       className={classes}
+      onBlurCapture={handleBlurCapture}
     >
       <label className={`${cls}-label`}>{label}</label>
       {children}

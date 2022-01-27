@@ -13,8 +13,11 @@ export default {
 
 const Template: Story<FormProps> = args => {
 
-  const handleSubmit = (e: any) => {
-    console.log(e)
+  const handleFinish = (e: any) => {
+    console.log('handleFinish => ', e)
+  }
+  const handleFinishFailed = (e: any) => {
+    console.log('handleFinishFailed => ', e)
   }
 
   return (
@@ -22,13 +25,22 @@ const Template: Story<FormProps> = args => {
       <dt>基础用法</dt>
       <dd>
         <Form
-          onFinish={handleSubmit}
-          initialValues={{ account: 1 }}
-          {...args} >
-          <Form.Item name="account" label="账号">
+          onFinish={handleFinish}
+          onFinishFailed={handleFinishFailed}
+          initialValues={{ account: '', password: '' }}
+        >
+          <Form.Item
+            name="account"
+            label="账号"
+            rules={[ { required: true, message: '请输入账号' }, { type: 'email', message: '电子邮箱输入有误' } ]}
+          >
             <Input clearable placeholder="请输入账号"/>
           </Form.Item>
-          <Form.Item name="password" label="密码">
+          <Form.Item
+            name="password"
+            label="密码"
+            rules={[ { required: true, message: '请输入密码' } ]}
+          >
             <Input.Password placeholder="请输入密码"/>
           </Form.Item>
           <Form.Item>
