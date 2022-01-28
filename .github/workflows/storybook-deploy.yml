@@ -9,29 +9,14 @@ on:
     branches: [ main ]
 
 jobs:
-  check:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    outputs:
-      is-new-version: ${{ steps.cpv.outputs.is-new-version }}
-      committed-version: ${{ steps.cpv.outputs.committed-version }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Check package version
-        id: cpv
-        uses: PostHog/check-package-version@v2
-
-  build:
-    needs: check
-    if: needs.check.outputs.is-new-version == 'true'
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 14.x ]
+    if: "contains(github.event.head_commit.message, '[SD]')"
     steps:
       - uses: actions/checkout@v2
       - name: Deploy storybook
         run: |
+          npm install
           npm run storybook:build
           npm run storybook:deploy -- -u "github-actions-bot <support+actions@github.com>"
         env:
