@@ -1,0 +1,56 @@
+
+# https://sergiodxa.com/articles/github-actions-npm-publish
+# https://github.com/marketplace/actions/get-release-notes
+
+name: storybook-deploy
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      is-new-version: ${{ steps.cpv.outputs.is-new-version }}
+      committed-version: ${{ steps.cpv.outputs.committed-version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Check package version
+        id: cpv
+        uses: PostHog/check-package-version@v2
+
+  build:
+    needs: check
+    if: needs.check.outputs.is-new-version == 'true'
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          node-version: [ 14.x ]
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v2
+          with:
+            node-version: ${{ matrix.node-version }}
+#        - run: npm ci
+#        - run: npm run lint
+#        - run: npm run test:ci
+#          env:
+#            TEST_COVERAGE_THRESHOLD: 0
+#            CI: true
+        - name: Deploy storybook
+          run: |
+#            git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/x-poppy/poppy-web.git
+            npm run storybook:build
+            npm run storybook:deploy -- -u "github-actions-bot <support+actions@github.com>"
+          env:
+            GITHUB_TOKEN: ${{ secrets.DAYSNAP_TOKEN }}
+
+#        - run: npm run build --if-present
+#        - uses: JS-DevTools/npm-publish@v1
+#          with:
+#            registry: https://registry.npmjs.org/
+#            token: ${{ secrets.NPM_TOKEN }}
+#            access: public

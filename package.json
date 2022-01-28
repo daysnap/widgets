@@ -1,5 +1,5 @@
 {
-  "name": "daysnap-widgets",
+  "name": "@daysnap/widgets",
   "version": "0.0.1",
   "description": "daysnap react ui",
   "main": "index.js",
@@ -9,7 +9,8 @@
     "create": "node bin/create",
     "remove": "node bin/remove",
     "dev": "start-storybook -p 6006 -s ./.storybook/public",
-    "build": "build-storybook",
+    "storybook:build": "build-storybook -s ./.storybook/public",
+    "storybook:deploy": "gh-pages -d storybook-static",
     "tsc": "tsc ",
     "pub": "node bin/pub"
   },
@@ -20,6 +21,7 @@
   "keywords": [
     "daysnap",
     "react",
+    "widget",
     "ui"
   ],
   "author": "Ajuan",
@@ -39,6 +41,7 @@
     "@types/react-is": "^17.0.3",
     "babel-loader": "^8.2.3",
     "file-save": "^0.2.0",
+    "gh-pages": "^3.2.3",
     "humps": "^2.0.1",
     "inquirer": "^8.2.0",
     "json-templater": "^1.2.0",
