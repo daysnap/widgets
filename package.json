@@ -1,7 +1,7 @@
 {
   "name": "@daysnap/widgets",
   "version": "0.0.1",
-  "description": "daysnap react ui",
+  "description": "daysnap react ui or widget",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
