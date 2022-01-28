@@ -1,9 +1,10 @@
 
 .storybook/
+.github
 .idea/
-stories/
 storybook-static/
 node_modules/
-*.stories*
 babel.config.js
 bin/
+components/
+package-lock.json
