@@ -12,7 +12,8 @@
     "storybook:build": "build-storybook -s ./.storybook/public",
     "storybook:deploy": "gh-pages -d storybook-static",
     "tsc": "tsc ",
-    "pub": "node bin/pub"
+    "pub": "node bin/pub",
+    "build:types": "tsc -p tsconfig.build.json && cpr lib esm"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-is": "^17.0.3",
     "babel-loader": "^8.2.3",
+    "cpr": "^3.0.1",
     "file-save": "^0.2.0",
     "gh-pages": "^3.2.3",
     "humps": "^2.0.1",
@@ -48,11 +50,11 @@
     "node-dir": "^0.1.17",
     "node-sass": "^4.14.1",
     "ora": "^6.0.1",
+    "rc-align": "^4.0.11",
     "rc-trigger": "^5.2.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
-    "rc-align": "^4.0.11",
     "sass-loader": "^8.0.2"
   },
   "dependencies": {
