@@ -8,7 +8,7 @@ const paths = {
     esm: 'esm', // ES module 文件存放的目录名 - 暂时不关心
     dist: 'dist', // umd文件存放的目录名 - 暂时不关心
   },
-  styles: 'components/**/*.less', // 样式文件路径 - 暂时不关心
+  styles: 'components/**/*.scss', // 样式文件路径 - 暂时不关心
   scripts: [
     'components/**/*.{ts,tsx}',
     '!components/**/demo/*.{ts,tsx}'
@@ -21,37 +21,45 @@ const paths = {
  * @param {string} destDir 目标目录
  */
 function compileScripts(babelEnv, destDir) {
-  const { scripts } = paths;
+  const { scripts } = paths
   // 设置环境变量
-  process.env.BABEL_ENV = babelEnv;
+  process.env.BABEL_ENV = babelEnv
   return gulp
     .src(scripts)
     .pipe(babel()) // 使用gulp-babel处理
-    .pipe(gulp.dest(destDir));
+    .pipe(gulp.dest(destDir))
 }
 
 /**
  * 编译cjs
  */
 function compileCJS() {
-  const { dest } = paths;
-  return compileScripts('cjs', dest.lib);
+  const { dest } = paths
+  return compileScripts('cjs', dest.lib)
 }
 
 /**
  * 编译esm
  */
 function compileESM() {
-  const { dest } = paths;
-  return compileScripts('esm', dest.esm);
+  const { dest } = paths
+  return compileScripts('esm', dest.esm)
+}
+
+/**
+ * 拷贝样式文件
+ */
+function copyStyle() {
+  const { dest, styles } = paths
+  return gulp.src(styles).pipe(gulp.dest(dest.lib)).pipe(gulp.dest(dest.esm))
 }
 
 // 串行执行编译脚本任务（cjs,esm） 避免环境变量影响
-const buildScripts = gulp.series(compileCJS, compileESM);
+const buildScripts = gulp.series(compileCJS, compileESM)
 
 // 整体并行执行任务
-const build = gulp.parallel(buildScripts);
+const build = gulp.parallel(buildScripts, copyStyle)
 
-exports.build = build;
+exports.build = build
 
-exports.default = build;
+exports.default = build
