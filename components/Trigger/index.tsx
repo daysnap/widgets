@@ -1,7 +1,7 @@
 
 import Trigger from './Trigger'
 
-import './index.scss'
+// import './index.scss'
 
 export type { TriggerProps } from './Trigger'
 export { default as Trigger } from './Trigger'
