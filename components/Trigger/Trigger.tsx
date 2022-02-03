@@ -117,7 +117,7 @@ const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
       delaySetVisible(false)
     }
   }
-  const refDelayTimer = React.useRef<number>()
+  const refDelayTimer = React.useRef<any>()
   const delaySetVisible = (visible: boolean) => {
     if (refDelayTimer.current) {
       clearTimeout(refDelayTimer.current)

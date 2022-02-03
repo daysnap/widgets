@@ -2,7 +2,8 @@
   "name": "@daysnap/widgets",
   "version": "0.0.1",
   "description": "daysnap react ui or widget",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
   "typings": "lib/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,6 +15,8 @@
     "storybook:deploy": "gh-pages -d storybook-static",
     "tsc": "tsc",
     "pub": "node bin/pub",
+    "clean": "rimraf lib esm dist",
+    "build": "npm run clean && npm run build:types && gulp",
     "build:types": "tsc -p tsconfig.build.json && cpr lib esm"
   },
   "repository": {
@@ -33,7 +36,13 @@
   },
   "homepage": "https://github.com/daysnap/daysnap-widgets#readme",
   "devDependencies": {
-    "@babel/core": "^7.16.5",
+    "@babel/core": "^7.17.0",
+    "@babel/plugin-proposal-class-properties": "^7.16.7",
+    "@babel/plugin-transform-runtime": "^7.17.0",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/preset-typescript": "^7.16.7",
+    "@babel/runtime": "^7.17.0",
     "@storybook/addon-actions": "^6.4.9",
     "@storybook/addon-essentials": "^6.4.9",
     "@storybook/addon-links": "^6.4.9",
@@ -45,6 +54,8 @@
     "cpr": "^3.0.1",
     "file-save": "^0.2.0",
     "gh-pages": "^3.2.3",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
     "humps": "^2.0.1",
     "inquirer": "^8.2.0",
     "json-templater": "^1.2.0",
@@ -56,6 +67,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
+    "rimraf": "^3.0.2",
     "sass-loader": "^8.0.2"
   },
   "dependencies": {
