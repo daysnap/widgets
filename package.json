@@ -10,12 +10,15 @@
     "entry": "node bin/entry",
     "create": "node bin/create",
     "remove": "node bin/remove",
-    "dev": "start-storybook -p 6006 -s ./.storybook/public",
+    "dev": "dumi dev",
+    "storybook:dev": "start-storybook -p 6006 -s ./.storybook/public",
     "storybook:build": "build-storybook -s ./.storybook/public",
     "storybook:deploy": "gh-pages -d storybook-static",
     "tsc": "tsc",
     "pub": "node bin/pub",
     "clean": "rimraf lib esm dist",
+    "build:site": "rimraf doc-site && dumi build",
+    "preview:site": "npm run build:site && serve doc-site",
     "build": "npm run clean && npm run build:types && gulp",
     "build:types": "tsc -p tsconfig.build.json && cpr lib esm"
   },
@@ -58,6 +61,7 @@
     "@types/react-is": "^17.0.3",
     "babel-loader": "^8.2.3",
     "cpr": "^3.0.1",
+    "dumi": "^1.1.38",
     "file-save": "^0.2.0",
     "gh-pages": "^3.2.3",
     "gulp": "^4.0.2",
@@ -79,6 +83,7 @@
     "rimraf": "^3.0.2",
     "sass": "^1.49.7",
     "sass-loader": "^8.0.2",
+    "serve": "^13.0.2",
     "through2": "^4.0.2"
   },
   "dependencies": {
