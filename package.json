@@ -23,6 +23,12 @@
     "type": "git",
     "url": "git+https://github.com/daysnap/daysnap-widgets.git"
   },
+  "sideEffects": [
+    "dist/*",
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.scss"
+  ],
   "keywords": [
     "daysnap",
     "react",
@@ -72,7 +78,8 @@
     "react-router-dom": "^6.2.1",
     "rimraf": "^3.0.2",
     "sass": "^1.49.7",
-    "sass-loader": "^8.0.2"
+    "sass-loader": "^8.0.2",
+    "through2": "^4.0.2"
   },
   "dependencies": {
     "async-validator": "^4.0.7",

@@ -4,6 +4,7 @@ const babel = require('gulp-babel')
 const sass = require('gulp-sass')(require('sass'))
 const autoprefixer = require('gulp-autoprefixer')
 const cssnano = require('gulp-cssnano')
+const through2 = require('through2')
 
 const paths = {
   dest: {
@@ -18,6 +19,13 @@ const paths = {
   ], // 脚本文件路径
 }
 
+function cssInjection(content) {
+  return content
+    .replace(/\/style\/?'/g, "/style/css'")
+    .replace(/\/style\/?"/g, '/style/css"')
+    .replace(/\.scss/g, '.css');
+}
+
 function compileScripts(babelEnv, destDir) {
   const { scripts } = paths
   // 设置环境变量
@@ -25,6 +33,21 @@ function compileScripts(babelEnv, destDir) {
   return gulp
     .src(scripts)
     .pipe(babel()) // 使用gulp-babel处理
+    .pipe(
+      through2.obj(function z(file, encoding, next) {
+        this.push(file.clone())
+        // 找到目标
+        if (file.path.match(/(\/|\\)style(\/|\\)index\.js/)) {
+          const content = file.contents.toString(encoding)
+          file.contents = Buffer.from(cssInjection(content)) // 文件内容处理
+          file.path = file.path.replace(/index\.js/, 'css.js') // 文件重命名
+          this.push(file) // 新增该文件
+          next()
+        } else {
+          next()
+        }
+      })
+    )
     .pipe(gulp.dest(destDir))
 }
 
@@ -50,7 +73,7 @@ function sass2css() {
     .pipe(autoprefixer()) // 根据browserslistrc增加前缀
     .pipe(cssnano({ zindex: false, reduceIdents: false })) // 压缩
     .pipe(gulp.dest(paths.dest.lib))
-    .pipe(gulp.dest(paths.dest.esm));
+    .pipe(gulp.dest(paths.dest.esm))
 }
 
 // 串行执行编译脚本任务（cjs,esm） 避免环境变量影响
