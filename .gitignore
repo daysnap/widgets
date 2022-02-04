@@ -3,6 +3,7 @@ node_modules/
 dist/
 lib/
 esm/
+components11/
 
 # local env files
 .env.local
