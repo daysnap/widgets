@@ -1,6 +1,9 @@
 
 const gulp = require('gulp')
 const babel = require('gulp-babel')
+const sass = require('gulp-sass')(require('sass'))
+const autoprefixer = require('gulp-autoprefixer')
+const cssnano = require('gulp-cssnano')
 
 const paths = {
   dest: {
@@ -15,11 +18,6 @@ const paths = {
   ], // 脚本文件路径
 }
 
-/**
- * 编译脚本文件
- * @param {string} babelEnv babel环境变量
- * @param {string} destDir 目标目录
- */
 function compileScripts(babelEnv, destDir) {
   const { scripts } = paths
   // 设置环境变量
@@ -30,35 +28,36 @@ function compileScripts(babelEnv, destDir) {
     .pipe(gulp.dest(destDir))
 }
 
-/**
- * 编译cjs
- */
 function compileCJS() {
   const { dest } = paths
   return compileScripts('cjs', dest.lib)
 }
 
-/**
- * 编译esm
- */
 function compileESM() {
   const { dest } = paths
   return compileScripts('esm', dest.esm)
 }
 
-/**
- * 拷贝样式文件
- */
 function copyStyle() {
   const { dest, styles } = paths
   return gulp.src(styles).pipe(gulp.dest(dest.lib)).pipe(gulp.dest(dest.esm))
+}
+
+function sass2css() {
+  return gulp
+    .src(paths.styles)
+    .pipe(sass()) // 处理less文件
+    .pipe(autoprefixer()) // 根据browserslistrc增加前缀
+    .pipe(cssnano({ zindex: false, reduceIdents: false })) // 压缩
+    .pipe(gulp.dest(paths.dest.lib))
+    .pipe(gulp.dest(paths.dest.esm));
 }
 
 // 串行执行编译脚本任务（cjs,esm） 避免环境变量影响
 const buildScripts = gulp.series(compileCJS, compileESM)
 
 // 整体并行执行任务
-const build = gulp.parallel(buildScripts, copyStyle)
+const build = gulp.parallel(buildScripts, copyStyle, sass2css)
 
 exports.build = build
 
