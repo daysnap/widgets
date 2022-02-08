@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
+    "paths": {
+      "@daysnap/widgets": ["components"]
+    },
     "target": "esnext",
     "module": "commonjs",
     "jsx": "react",

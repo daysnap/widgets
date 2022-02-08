@@ -1,5 +1,7 @@
 
+import path from 'path'
 import { defineConfig } from 'dumi'
+import pkg from './package.json'
 
 // 此处更换为自己的仓库名
 let base: string | undefined = '/daysnap-widgets'
@@ -12,6 +14,8 @@ if (process.env.SITE_BUILD_ENV === 'PREVIEW') {
 
 export default defineConfig({
   title: 'DaySnap Widgets',
+  // favicon: '',
+  // logo: '',
   mode: 'site',
   outputPath: 'doc-site',
   base,
@@ -19,6 +23,23 @@ export default defineConfig({
   resolve: {
     includes: ['docs', 'components']
   },
+  alias: {
+    [pkg.name]: path.join(__dirname, './components'),
+  },
+  extraBabelPlugins:  [
+    [
+      'import',
+      {
+        libraryName: pkg.name,
+        libraryDirectory: '',
+        // camel2DashComponentName: false,
+        customStyleName: () => {
+          return `../style/index.scss`; // 注意：这里 ./ 不可省略
+        },
+      },
+      // 'daysnap-widgets',
+    ],
+  ],
   sass: {
     // 默认值 Dart Sass，如果要改用 Node Sass，可安装 node-sass 依赖，然后使用该配置项
     // implementation: require('node-sass'),
