@@ -18,7 +18,8 @@
     "pub": "node bin/pub",
     "clean": "rimraf lib esm dist",
     "build:site": "rimraf doc-site && dumi build",
-    "preview:site": "npm run build:site && serve doc-site",
+    "preview:site": "cross-env SITE_BUILD_ENV=PREVIEW npm run build:site && serve doc-site",
+    "deploy:site": "npm run build:site && gh-pages -d doc-site",
     "build": "npm run clean && npm run build:types && gulp",
     "build:types": "tsc -p tsconfig.build.json && cpr lib esm"
   },
@@ -52,15 +53,12 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
     "@babel/runtime": "^7.17.0",
-    "@storybook/addon-actions": "^6.4.9",
-    "@storybook/addon-essentials": "^6.4.9",
-    "@storybook/addon-links": "^6.4.9",
-    "@storybook/react": "^6.4.9",
     "@types/autosize": "^4.0.1",
     "@types/react-dom": "^17.0.11",
     "@types/react-is": "^17.0.3",
-    "babel-loader": "^8.2.3",
+    "@umijs/plugin-sass": "^1.1.1",
     "cpr": "^3.0.1",
+    "cross-env": "^7.0.3",
     "dumi": "^1.1.38",
     "file-save": "^0.2.0",
     "gh-pages": "^3.2.3",
@@ -73,18 +71,14 @@
     "inquirer": "^8.2.0",
     "json-templater": "^1.2.0",
     "node-dir": "^0.1.17",
-    "node-sass": "^4.14.1",
     "ora": "^6.0.1",
-    "rc-align": "^4.0.11",
-    "rc-trigger": "^5.2.10",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-router-dom": "^6.2.1",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "rimraf": "^3.0.2",
     "sass": "^1.49.7",
-    "sass-loader": "^8.0.2",
     "serve": "^13.0.2",
-    "through2": "^4.0.2"
+    "through2": "^4.0.2",
+    "typescript": "^4.5.5"
   },
   "dependencies": {
     "async-validator": "^4.0.7",
@@ -94,6 +88,7 @@
     "react-is": "^17.0.2"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   }
 }

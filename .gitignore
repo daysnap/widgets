@@ -4,6 +4,7 @@ dist/
 lib/
 esm/
 components11/
+.umi/
 
 # local env files
 .env.local
