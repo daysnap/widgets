@@ -25,6 +25,7 @@ export default defineConfig({
     // 传递给 Dart Sass 或 Node Sass 的配置项，可以是一个 Function
     // sassOptions: {},
   },
+  locales: [['zh-CN', '中文'], ['en-US', 'English']],
   exportStatic: {}, // 后续会部署到 github pages 直接全部生成静态页面 不走前端路由
   dynamicImport: {}, // 拆包 站点过大时可以优化首屏加载速度
   webpack5: {},

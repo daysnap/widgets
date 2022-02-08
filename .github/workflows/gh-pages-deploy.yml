@@ -1,7 +1,7 @@
 # https://sergiodxa.com/articles/github-actions-npm-publish
 # https://github.com/marketplace/actions/get-release-notes
 
-name: storybook-deploy
+name: gh-pages-deploy
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build-and-deploy:
-    if: "!contains(github.event.head_commit.message, '[skip sd ci]') && !contains(github.event.head_commit.message, '[skip ci]')"
+    if: "!contains(github.event.head_commit.message, '[skip gh ci]') && !contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,6 +27,6 @@ jobs:
       - name: Deploy storybook
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/daysnap/daysnap-widgets.git
-          npm run storybook:deploy -- -u "github-actions-bot <support+actions@github.com>"
+          npm run deploy:site -- -u "github-actions-bot <support+actions@github.com>"
         env:
           GITHUB_TOKEN: ${{ secrets.DAYSNAP_TOKEN }}
