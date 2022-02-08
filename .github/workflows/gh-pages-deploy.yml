@@ -23,7 +23,7 @@ jobs:
       - name: Install and Build
         run: |
           npm install
-          npm run storybook:build
+          npm run build:site
       - name: Deploy storybook
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/daysnap/daysnap-widgets.git

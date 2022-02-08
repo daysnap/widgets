@@ -19,7 +19,7 @@
     "dev": "dumi dev",
     "build:site": "rimraf doc-site && dumi build",
     "preview:site": "cross-env SITE_BUILD_ENV=PREVIEW npm run build:site && serve doc-site",
-    "deploy:site": "npm run build:site && gh-pages -d doc-site",
+    "deploy:site": "gh-pages -d doc-site",
     "build": "npm run clean && npm run build:types && gulp",
     "build:types": "tsc -p tsconfig.build.json && cpr lib esm"
   },
