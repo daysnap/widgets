@@ -27,12 +27,6 @@
     "type": "git",
     "url": "git+https://github.com/daysnap/daysnap-widgets.git"
   },
-  "sideEffects": [
-    "dist/*",
-    "es/**/style/*",
-    "lib/**/style/*",
-    "*.scss"
-  ],
   "keywords": [
     "daysnap",
     "react",

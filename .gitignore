@@ -1,12 +1,5 @@
 .DS_Store
 node_modules/
-dist/
-lib/
-esm/
-components11/
-components111/
-doc-site/
-.umi/
 
 # local env files
 .env.local
@@ -27,7 +20,16 @@ pnpm-debug.log*
 *.sln
 *.sw?
 
+# build
+dist/
+lib/
+esm/
+
+# dumi
+.umi/
+doc-site/
+
+# lock
 package-lock.json
 yarn.lock
 
-storybook-static/

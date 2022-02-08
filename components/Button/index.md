@@ -1,11 +1,11 @@
 ---
 title: Alert 警告提示
 nav:
-  title: 组件
-  order: 2
+title: 组件
+order: 2
 group:
-  title: 反馈
-  order: 1
+title: 反馈
+order: 1
 ---
 
 # Alert 警告提示
@@ -18,4 +18,4 @@ group:
 
 <code src="./demo/basic.tsx"></code>
 
-<API src="./index.tsx"></API>
+[comment]: <> (<API src="./index.tsx"></API>)
