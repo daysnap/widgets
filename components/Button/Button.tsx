@@ -2,7 +2,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
-import { Icon } from '../icon'
+import { Icon } from '../Icon'
 
 
 interface ChildrenProps extends Pick<ButtonProps, 'className' | 'onClick'>{
