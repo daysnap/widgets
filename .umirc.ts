@@ -17,11 +17,14 @@ if (process.env.SITE_BUILD_ENV === 'PREVIEW') {
 export default defineConfig({
   title: 'DaySnap Widgets',
   // favicon: '',
-  // logo: '',
+  logo: '/images/logo.png',
   mode: 'site',
   outputPath: 'doc-site',
   base,
   publicPath,
+  styles: [
+    `https://www.baidu.com/css/index.css`
+  ],
   resolve: {
     includes: ['docs', 'components']
   },
@@ -33,11 +36,9 @@ export default defineConfig({
       'import',
       {
         libraryName: pkg.name,
-        libraryDirectory: '.',
+        libraryDirectory: '',
         camel2DashComponentName: false,
-        customStyleName: () => {
-          return `../style/index.scss`; // 注意：这里 ./ 不可省略
-        },
+        style: true,
       },
       pkg.name,
     ],

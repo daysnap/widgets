@@ -1,7 +1,7 @@
 ---
-title: Happy UI
+title: DaySnap Widgets
 hero:
-  title: Happy UI
+  title: DaySnap Widgets
   desc: 文档站点基于 dumi 生成
   actions:
     - text: 快速上手
@@ -16,5 +16,5 @@ features:
   - icon: https://gw.alipayobjects.com/zos/bmw-prod/d1ee0c6f-5aed-4a45-a507-339a4bfe076c/k7bjsocq_w144_h144.png
     title: 特性 3
     desc: Balabala
-footer: Open-source MIT Licensed | Copyright © 2020<br />Powered by [dumi](https://d.umijs.org)
+footer: Open-source MIT Licensed | Copyright © 2022<br />Powered by [DaySnap](https://daysnap.owulia.com)
 ---

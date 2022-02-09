@@ -11,20 +11,20 @@ nav:
 **使用 npm 或 yarn 安装**
 
 ```shell
-npm install @zzzzw/happy-ui
+npm install @daysnap/widgets
 ```
 
 ```shell
-yarn add @zzzzw/happy-ui
+yarn add @daysnap/widgets
 ```
 
 ## 示例
 
 ```js
-import Alert from '@zzzzw/happy-ui/es/alert'; // 手动按需加载 js
-import '@zzzzw/happy-ui/es/alert/style'; // 手动按需加载 less
+import Button from '@daysnap/widgets/es/button' // 手动按需加载 js
+import '@daysnap/widgets/es/button/style' // 手动按需加载样式
 
-ReactDOM.render(<Alert kind="warning">这是一条警告提示</Alert>, mountNode);
+ReactDOM.render(<Button>普通按钮</Button>, mountNode)
 ```
 
 ### 自动按需加载
@@ -32,9 +32,9 @@ ReactDOM.render(<Alert kind="warning">这是一条警告提示</Alert>, mountNod
 使用 [babel-plugin-import ](https://www.npmjs.com/package/babel-plugin-import) 优化引入方式，如下：
 
 ```js
-import { Alert } from '@zzzzw/happy-ui'; // 与上述示例等价
+import { Button } from '@daysnap/widgets' // 与上述示例等价
 
-ReactDOM.render(<Alert kind="warning">这是一条警告提示</Alert>, mountNode);
+ReactDOM.render(<Button>普通按钮</Button>, mountNode)
 ```
 
 安装 `babel-plugin-import`
@@ -45,14 +45,14 @@ yarn add babel-plugin-import --dev
 
 配置`.babelrc` 或 `babel-loader`
 
-```json
+```json5
 {
   "plugins": [
     [
       "import",
       {
-        "libraryName": "@zzzzw/happy-ui",
-        "libraryDirectory": "esm", // default: lib
+        "libraryName": "@daysnap/widgets",
+        "libraryDirectory": "es", // default: lib
         "style": true // or 'css'
       }
     ]
