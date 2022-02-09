@@ -1,5 +1,5 @@
 {
-  "name": "daysnap-widgets",
+  "name": "@daysnap/widgets",
   "version": "0.0.1",
   "description": "daysnap react ui or widget",
   "main": "lib/index.js",

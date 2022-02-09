@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "daysnap-widgets": ["src"]
+      "@daysnap/widgets": ["components"]
     },
     "target": "esnext",
     "module": "commonjs",
