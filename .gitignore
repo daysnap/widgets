@@ -26,6 +26,7 @@ lib/
 esm/
 
 # dumi
+
 .umi/
 .umi-production/
 doc-site/
