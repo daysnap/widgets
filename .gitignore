@@ -32,6 +32,6 @@ esm/
 doc-site/
 
 # lock
-#package-lock.json
+package-lock.json
 yarn.lock
 
