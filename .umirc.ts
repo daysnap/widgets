@@ -26,14 +26,14 @@ export default defineConfig({
   },
   alias: {
     // [pkg.name]: path.join(__dirname, './components'),
-    // 'daysnap-widgets': path.join(__dirname, './src'),
+    'daysnap-widgets/lib': path.join(__dirname, './src'),
   },
   extraBabelPlugins:  [
     [
       'import',
       {
         libraryName: pkg.name,
-        libraryDirectory: '',
+        libraryDirectory: 'lib',
         // camel2DashComponentName: false,
         customStyleName: () => {
           return `../style/index.scss`; // 注意：这里 ./ 不可省略
