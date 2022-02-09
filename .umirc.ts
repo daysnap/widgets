@@ -24,7 +24,8 @@ export default defineConfig({
     includes: ['docs', 'components']
   },
   alias: {
-    [pkg.name]: path.join(__dirname, './components'),
+    // [pkg.name]: path.join(__dirname, './components'),
+    'daysnap-widgets': path.join(__dirname, './components'),
   },
   extraBabelPlugins:  [
     [
