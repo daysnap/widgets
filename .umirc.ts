@@ -12,6 +12,8 @@ if (process.env.SITE_BUILD_ENV === 'PREVIEW') {
   publicPath = undefined;
 }
 
+console.log('dd => ', path.join(__dirname, './components'))
+
 export default defineConfig({
   title: 'DaySnap Widgets',
   // favicon: '',
