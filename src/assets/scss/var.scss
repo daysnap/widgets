@@ -1,0 +1,122 @@
+
+//@function j($px, $bdse-font-size: 37.5px) {
+//    @if (unitless($px)) {
+//        @return (($px + 0px) / $bdse-font-size) * 1rem;
+//    } @else if (unit($px) == rem) {
+//        @return $px;
+//    } @else if (unit($px) == px) {
+//        @return $px;
+//    }
+//}
+
+@function j($px) {
+  @return $px * 1px;
+}
+
+@function f($px, $bdse-font-size: 37.5px) {
+    @if (unitless($px)) {
+        @return f($px + 0px); // That may fail.
+    } @else if (unit($px) == rem) {
+        @return $px;
+    }
+    @return (($px/1125 * 750) / $bdse-font-size) * 0.5rem;
+}
+
+// 内边距
+$padding-size: j(16);
+
+// 主题色
+$color-primary: var(--ds-primary-color);
+$color-success: var(--ds-success-color);
+$color-danger: var(--ds-danger-color);
+$color-warning: var(--ds-warning-color);
+$color-info: var(--ds-info-color);
+$color-text: var(--ds-text-color);
+$color-active: var(--ds-active-color);
+$color-background: var(--ds-background-color);
+$color-background-light: var(--ds-background-color-light);
+$color-text-link: var(--ds-text-link-color);
+
+// 边框
+$border-color: var(--ds-border-color);
+
+// ds-view
+$view-nav-bar-background-color: var(--ds-view-nav-bar-background-color);
+$view-nav-bar-text-color: var(--ds-view-nav-bar-text-color);
+
+
+$color-primary: #409EFF;
+$color-success: #67C23A;
+$color-danger: #F56C6C;
+$color-warning: #E6A23C;
+$color-info: #969799;
+$color-text: #323233;
+$color-active: #f2f3f5;
+$color-background: #f2f3f4;
+$color-background-light: #fff;
+$color-text-link: #576b95;
+
+$color-text-placeholder: #C0C4CC !default;
+$color-lighter: #EBEEF5 !default;
+
+/* Break-point
+--------------------------*/
+$--sm: 768px !default;
+$--md: 992px !default;
+$--lg: 1200px !default;
+$--xl: 1920px !default;
+
+
+$--breakpoints: (
+  'xs' : (max-width: $--sm - 1),
+  'sm' : (min-width: $--sm),
+  'md' : (min-width: $--md),
+  'lg' : (min-width: $--lg),
+  'xl' : (min-width: $--xl)
+);
+
+$hover-tint-percent: 20% !default;
+$active-shade-percent: 10% !default;
+
+$color-black: #000000 !default;
+$color-white: #fff !default;
+
+
+// dropdown
+$dropdown-divider-border-color: #2a3640;
+
+  // 主要文字颜色
+$color-text-primary: #303133;
+
+// 常规文字颜色
+$color-text-regular: #606266;
+
+// 次要文字颜色
+$color-text-secondary: #909399;
+
+// 占位文字颜色
+$color-text-placeholder: #C0C4CC;
+
+$border-color: #cad3dc;
+
+// 一级边框颜色
+$border-color-base: #DCDFE6;
+
+// 二级边框颜色
+$border-color-light: #E4E7ED;
+
+// 三级边框颜色
+$border-color-lighter: #EBEEF5;
+
+// 四级边框颜色
+$border-color-extra-light: #F2F6FC;
+
+// 基础白色
+$color-white: #FFFFFF;
+
+// 基础黑色
+$color-black: #000000;
+
+// 基础背景色
+//$background-color-base: #F5F7FA;
+$background-color-base: #f2f4f6;

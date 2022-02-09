@@ -1,0 +1,26 @@
+
+@mixin root() {
+    :root{
+        // Component Colors
+        --ds-primary-color: #409EFF;
+        --ds-success-color: #67C23A;
+        --ds-danger-color: #F56C6C;
+        --ds-warning-color: #E6A23C;
+        --ds-info-color: #969799;
+        --ds-text-color: #323233;
+        --ds-active-color: #f2f3f5;
+        --ds-background-color: #f2f3f4;
+        --ds-background-color-light: #fff;
+        --ds-text-link-color: #576b95;
+
+        // Border
+        --ds-border-color: #dcdee0;
+
+
+        // ds-view
+        --ds-view-nav-bar-background-color: #fff;
+        --ds-view-nav-bar-text-color: #333;
+
+        @content;
+    }
+}
