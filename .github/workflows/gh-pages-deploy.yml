@@ -8,14 +8,25 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy:
-    runs-on: ubuntu-18.04
+  build-and-deploy:
+    if: "!contains(github.event.head_commit.message, '[skip gh ci]') && !contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
-      - run: npm install
-      - run: npm run build:site
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
         with:
-          github_token: ${{ secrets.DAYSNAP_TOKEN }}
-          publish_dir: ./docs-dist
+          node-version: ${{ matrix.node-version }}
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build:site
+      - name: Deploy storybook
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/daysnap/daysnap-widgets.git
+          npm run deploy:site -- -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.DAYSNAP_TOKEN }}
