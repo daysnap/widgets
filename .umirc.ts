@@ -34,6 +34,7 @@ export default defineConfig({
       {
         libraryName: pkg.name,
         libraryDirectory: '.',
+        camel2DashComponentName: false,
         customStyleName: () => {
           return `../style/index.scss`; // 注意：这里 ./ 不可省略
         },
