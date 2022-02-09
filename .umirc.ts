@@ -22,7 +22,7 @@ export default defineConfig({
   base,
   publicPath,
   resolve: {
-    includes: ['docs', 'components']
+    includes: ['docs', 'src']
   },
   alias: {
     // [pkg.name]: path.join(__dirname, './components'),
