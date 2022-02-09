@@ -25,9 +25,14 @@ export default {
   base,
   publicPath,
   resolve: {
-    includes: ['docs', 'components']
+    includes: ['docs', 'components'],
+    extensions: [
+      //...
+      '.js', '.json', '.jsx', '.ts', '.tsx'
+    ]
   },
   alias: {
+
   //   // [pkg.name]: path.join(__dirname, './components'),
     'daysnap-widgets': path.join(__dirname, 'components'),
   },
