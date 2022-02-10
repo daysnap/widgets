@@ -1,12 +1,10 @@
 
 const path = require('path')
-const fs = require('fs')
 const nodeDir = require('node-dir')
 
-const r = (...args) => path.resolve(__dirname, ...args)
-const rt = (...args) => r('./templates', ...args)
-const rc = (...args) => r('../components', ...args)
-const resolve = (dir = '') => path.join(__dirname, '..', dir)
+const r = (...args) => path.resolve(__dirname, '..', ...args)
+const rt = (...args) => r('bin/templates', ...args)
+const rc = (...args) => r('components', ...args)
 
 function requireFilePath (directory = '', recursive, regExp) {
   if (directory[0] === '.') {
@@ -35,28 +33,10 @@ function requireDirname (data) {
   }).filter(Boolean)
 }
 
-function rmDir(path){
-  let files = [];
-  if(fs.existsSync(path)){
-    files = fs.readdirSync(path);
-    files.forEach((file, index) => {
-      let curPath = path + "/" + file;
-      if(fs.statSync(curPath).isDirectory()){
-        rmDir(curPath); //递归删除文件夹
-      } else {
-        fs.unlinkSync(curPath); //删除文件
-      }
-    });
-    fs.rmdirSync(path);
-  }
-}
-
 module.exports = {
   r,
   rt,
   rc,
-  rmDir,
-  resolve,
   requireFilePath,
   requireDirname,
 }

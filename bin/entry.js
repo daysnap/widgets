@@ -5,8 +5,6 @@ const components = requireDirname(
   requireFilePath(rc(), true, /\/index\.tsx$/)
 )
 
-console.log('components => ', components)
-
 module.exports = plop => {
   plop.setGenerator('entry', {
     description: '创建入口文件',
