@@ -1,12 +1,20 @@
 
 const path = require('path')
 const nodeDir = require('node-dir')
+const { exec } = require('child_process')
 
 const r = (...args) => path.resolve(__dirname, '..', ...args)
 const rt = (...args) => r('bin/templates', ...args)
 const rc = (...args) => r('components', ...args)
 
-function requireFilePath (directory = '', recursive, regExp) {
+const execAsync = cmd => new Promise((resolve, reject) => {
+  exec(cmd, (err,stdout,stderr) => {
+    if (err || stderr) reject(err || stderr)
+    else resolve(stdout)
+  })
+})
+
+const requireFilePath = (directory = '', recursive, regExp) => {
   if (directory[0] === '.') {
     // Relative path
     directory = path.join(__dirname, directory)
@@ -24,8 +32,7 @@ function requireFilePath (directory = '', recursive, regExp) {
     })
 }
 
-function requireDirname (data) {
-  console.log('data => ', data)
+const requireDirname = (data) => {
   const reg = /components\/(.+)\/index\.tsx$/
   return data.map(p => {
     const res = p.replace(/\\/g, '/').match(reg)
@@ -39,4 +46,5 @@ module.exports = {
   rc,
   requireFilePath,
   requireDirname,
+  execAsync,
 }

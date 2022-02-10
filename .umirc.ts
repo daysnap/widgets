@@ -16,7 +16,7 @@ if (process.env.SITE_BUILD_ENV === 'PREVIEW') {
 
 export default defineConfig({
   title: 'DaySnap Widgets',
-  // favicon: '',
+  favicon: '/favicon.ico',
   logo: '/images/logo.png',
   mode: 'site',
   outputPath: 'doc-site',
