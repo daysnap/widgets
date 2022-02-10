@@ -8,7 +8,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "entry": "node bin/entry",
-    "create": "node bin/create",
+    "create": "plop --plopfile ./bin/create.js",
+    "create1": "node bin/create1",
     "remove": "node bin/remove",
     "tsc": "tsc",
     "pub": "node bin/pub",

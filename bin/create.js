@@ -1,11 +1,11 @@
 
-import path from 'path'
+const path = require('path')
 
 const r = (...args) => path.resolve(__dirname, ...args)
 const rt = (...args) => r('./templates', ...args)
 const rc = (...args) => r('../components', ...args)
 
-export default (plop) => {
+module.exports = (plop) => {
   plop.setGenerator('component', {
     description: '创建一个新组件',
     prompts: [
@@ -39,8 +39,13 @@ export default (plop) => {
       },
       {
         type: 'add',
-        path: rc('{{ pascalCase name }}/interface.md'),
+        path: rc('{{ pascalCase name }}/interface.ts'),
         templateFile: rt('interface.hbs'),
+      },
+      {
+        type: 'add',
+        path: rc('{{ pascalCase name }}/demo/basic.tsx'),
+        templateFile: rt('demo/basic.hbs'),
       },
     ]
   })

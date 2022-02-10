@@ -3,7 +3,7 @@ import React from 'react'
 import { Button } from '@daysnap/widgets'
 
 export default () => {
-  const args = {
+  const args: any = {
     children: '按钮',
     loading: false,
     icon: 'icon-dianzan',
