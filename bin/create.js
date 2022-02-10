@@ -1,19 +1,17 @@
 
-const path = require('path')
 const { execSync } = require('child_process')
+const { rt: rtc, rc } = require('./utils')
 
-const r = (...args) => path.resolve(__dirname, ...args)
-const rt = (...args) => r('./templates', ...args)
-const rc = (...args) => r('../components', ...args)
+const rt = (...args) => rtc('component', ...args)
 
-module.exports = (plop) => {
+module.exports = plop => {
   plop.setActionType('end', async () => {
-    execSync(`node ./bin/entry.js`)
+    execSync(`npm run entry`)
   })
   plop.setGenerator('component', {
     description: '创建一个新组件',
     prompts: [
-      { type: 'input', name: 'name', message: '请输入组件名称' },
+      { type: 'input', name: 'name', message: '请输入组件名称？' },
     ],
     actions: [
       {

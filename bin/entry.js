@@ -1,35 +1,23 @@
 
-const fs = require('fs')
-const endOfLine = require('os').EOL
-const humps = require('humps')
-const render = require('json-templater/string')
-const { requireFilePath, resolve, requireDirname } = require('./utils')
+const { requireFilePath, rc, rt, requireDirname } = require('./utils')
 
-const OUTPUT = resolve('components/index.ts')
-const TEMPLATE_EXPORT = `
-export type { {{name}}Props } from './{{name}}'
-export { default as {{name}} } from './{{name}}'`
+const components = requireDirname(
+  requireFilePath(rc(), true, /\/index\.tsx$/)
+)
 
-const TEMPLATE = `
-/* 本文件自动生成 './bin/entry.js' */
-{{export}}
-`
-const {
-    templateExport,
-} = (s =>
-    requireDirname(s).reduce((r, dirname) => {
-        const { templateExport } = r
-        const name = humps.pascalize(dirname)
-        templateExport.push(render(TEMPLATE_EXPORT, { name, dirname }))
-        return r
-    }, { templateExport: [] })
-)(requireFilePath(resolve('components'), true, /\/index\.tsx$/))
+console.log('components => ', components)
 
-const content = render(TEMPLATE, {
-    version: require('../package.json').version,
-    export: templateExport.join(endOfLine),
-})
-
-fs.writeFileSync(OUTPUT, content)
-
-console.log('[entry] DONE:', OUTPUT)
+module.exports = plop => {
+  plop.setGenerator('entry', {
+    description: '创建入口文件',
+    prompts: [],
+    actions: [
+      {
+        type: 'add',
+        path: rc('index.tsx'),
+        templateFile: rt('entry.hbs'),
+        data: { components },
+      },
+    ]
+  })
+}

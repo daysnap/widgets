@@ -1,0 +1,8 @@
+
+/* 本文件自动生成 './bin/entry.js' */
+
+{{#each components}}
+export type { {{ this }}Props } from './{{ this }}'
+export { default as {{ this }} } from './{{ this }}'
+
+{{/each}}
