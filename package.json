@@ -10,7 +10,7 @@
     "entry": "plop --plopfile ./bin/entry.js --force",
     "create": "plop --plopfile ./bin/create.js",
     "remove": "plop --plopfile ./bin/remove.js",
-    "deploy": "node bin/deploy.js",
+    "deploy": "npm run build && node bin/deploy.js",
     "clean": "rimraf lib esm dist",
     "dev": "dumi dev",
     "build:site": "rimraf doc-site && dumi build",
@@ -28,6 +28,10 @@
     "react",
     "widget",
     "ui"
+  ],
+  "files": [
+    "lib",
+    "esm"
   ],
   "author": "Ajuan",
   "license": "ISC",
