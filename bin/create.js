@@ -1,129 +1,47 @@
 
-const { execSync } = require('child_process')
-const inquirer = require('inquirer')
-const humps = require('humps')
-const fileSave = require('file-save')
-const render = require('json-templater/string')
-const { requireFilePath, resolve, requireDirname } = require('./utils')
+import path from 'path'
 
-const componentName = process.argv[2]
-const TEMPLATE_JS = `
-import {{name}} from './{{name}}'
+const r = (...args) => path.resolve(__dirname, ...args)
+const rt = (...args) => r('./templates', ...args)
+const rc = (...args) => r('../components', ...args)
 
-import './index.scss'
-
-export type { {{name}}Props } from './{{name}}'
-export { default as {{name}} } from './{{name}}'
-
-export default {{name}}
-`
-const TEMPLATE_STORIES = `
-import React from 'react'
-import { Story, Meta } from '@storybook/react/types-6-0'
-import {{name}}, { {{name}}Props } from './index'
-
-export default {
-  title: '{{name}}',
-  component: {{name}},
-  argTypes: {},
-} as Meta
-
-const Template: Story<{{name}}Props> = args => <{{name}} {...args} />
-
-export const Basic = Template.bind({})
-Basic.storyName = '基础用法'
-Basic.args = {}
-`
-const TEMPLATE_COMPONENT = `
-import React from 'react'
-import classnames from 'classnames'
-import { createPrefixCls } from '../utils/create'
-
-export interface {{name}}Props {
-  className?: string
+export default (plop) => {
+  plop.setGenerator('component', {
+    description: '创建一个新组件',
+    prompts: [
+      { type: 'input', name: 'name', message: '请输入组件名称' },
+    ],
+    actions: [
+      {
+        type: 'add',
+        path: rc('{{ pascalCase name }}/index.ts'),
+        templateFile: rt('index.hbs'),
+      },
+      {
+        type: 'add',
+        path: rc('{{ pascalCase name }}/{{ pascalCase name }}.ts'),
+        templateFile: rt('component.hbs'),
+      },
+      {
+        type: 'add',
+        path: rc('{{ pascalCase name }}/style/index.ts'),
+        templateFile: rt('style/index.hbs'),
+      },
+      {
+        type: 'add',
+        path: rc('{{ pascalCase name }}/style/index.scss'),
+        templateFile: rt('style/style.hbs'),
+      },
+      {
+        type: 'add',
+        path: rc('{{ pascalCase name }}/index.md'),
+        templateFile: rt('doc.hbs'),
+      },
+      {
+        type: 'add',
+        path: rc('{{ pascalCase name }}/interface.md'),
+        templateFile: rt('interface.hbs'),
+      },
+    ]
+  })
 }
-
-const {{name}}: React.FC<{{name}}Props> = ({
-  className,
-  ...restProps
-}) => {
-
-  const cls = createPrefixCls('{{tagName}}')
-  const classes = classnames(
-    \`\${cls}\`,
-    className,
-  )
-
-  return (
-    <div
-      {...restProps}
-      className={classes}
-    />
-  )
-}
-
-export default {{name}}
-`
-const TEMPLATE_SCSS = `
-@import "../assets/scss/define.scss";
-
-@include b({{tagName}}){
-
-}
-`
-
-;(componentName
-    ? Promise.resolve({ componentName })
-    : inquirer.prompt([
-        {
-            type: 'input',
-            message: '请输入创建的组件名称：',
-            name: 'componentName',
-        }
-    ])
-).then(res => {
-
-    const { componentName } = res
-    const name = humps.pascalize(componentName)
-    const tagName = humps.decamelize(componentName, { separator: '-' })
-    const arrDirNames = requireDirname(requireFilePath(resolve('components'), true, /\/index\.tsx$/))
-    if (arrDirNames.includes(name)) {
-        console.error(`${name} 已存在.`)
-        process.exit(1)
-    }
-
-    const output = resolve(`components/${name}`)
-
-    fileSave(`${output}/index.tsx`)
-        .write(render(TEMPLATE_JS, {
-            name,
-        }))
-        .end('\n')
-
-    fileSave(`${output}/index.stories.tsx`)
-        .write(render(TEMPLATE_STORIES, {
-            name,
-        }))
-        .end('\n')
-
-    fileSave(`${output}/${name}.tsx`)
-        .write(render(TEMPLATE_COMPONENT, {
-            name,
-            tagName,
-        }))
-        .end('\n')
-
-    fileSave(`${output}/index.scss`)
-        .write(render(TEMPLATE_SCSS, {
-            name,
-            tagName,
-        }))
-        .end('\n')
-
-    console.log('[create] DONE：', output)
-
-    execSync(`node ./bin/entry.js`)
-
-}).catch(err => {
-    console.log('[create] CANCEL!', err)
-})

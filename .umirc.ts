@@ -22,9 +22,7 @@ export default defineConfig({
   outputPath: 'doc-site',
   base,
   publicPath,
-  styles: [
-    `https://www.baidu.com/css/index.css`
-  ],
+  styles: [],
   resolve: {
     includes: ['docs', 'components']
   },
