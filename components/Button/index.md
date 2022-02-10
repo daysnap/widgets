@@ -4,7 +4,7 @@ nav:
   title: 组件
   order: 2
 group:
-  title: 反馈
+  title: 基础
   order: 1
 ---
 

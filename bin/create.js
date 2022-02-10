@@ -1,11 +1,15 @@
 
 const path = require('path')
+const { execSync } = require('child_process')
 
 const r = (...args) => path.resolve(__dirname, ...args)
 const rt = (...args) => r('./templates', ...args)
 const rc = (...args) => r('../components', ...args)
 
 module.exports = (plop) => {
+  plop.setActionType('end', async () => {
+    execSync(`node ./bin/entry.js`)
+  })
   plop.setGenerator('component', {
     description: '创建一个新组件',
     prompts: [
@@ -47,6 +51,9 @@ module.exports = (plop) => {
         path: rc('{{ pascalCase name }}/demo/basic.tsx'),
         templateFile: rt('demo/basic.hbs'),
       },
+      {
+        type: 'end',
+      }
     ]
   })
 }
