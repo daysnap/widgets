@@ -14,12 +14,12 @@ module.exports = (plop) => {
     actions: [
       {
         type: 'add',
-        path: rc('{{ pascalCase name }}/index.ts'),
+        path: rc('{{ pascalCase name }}/index.tsx'),
         templateFile: rt('index.hbs'),
       },
       {
         type: 'add',
-        path: rc('{{ pascalCase name }}/{{ pascalCase name }}.ts'),
+        path: rc('{{ pascalCase name }}/{{ pascalCase name }}.tsx'),
         templateFile: rt('component.hbs'),
       },
       {
