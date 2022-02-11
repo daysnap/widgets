@@ -16,9 +16,18 @@ export { default as CanvasXor } from './CanvasXor'
 export type { CheckboxProps } from './Checkbox'
 export { default as Checkbox } from './Checkbox'
 
+export type { DialogProps } from './Dialog'
+export { default as Dialog } from './Dialog'
+
+export type { DropdownProps } from './Dropdown'
+export { default as Dropdown } from './Dropdown'
+
 export type { IconProps } from './Icon'
 export { default as Icon } from './Icon'
 
 export type { PortalProps } from './Portal'
 export { default as Portal } from './Portal'
+
+export type { TriggerProps } from './Trigger'
+export { default as Trigger } from './Trigger'
 

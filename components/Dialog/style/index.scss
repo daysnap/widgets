@@ -1,0 +1,129 @@
+
+@import "../../assets/scss/define.scss";
+
+@include b(dialog){
+  @extend %pf;
+  @extend %t0;
+  @extend %l0;
+  @extend %r0;
+  @extend %b0;
+  @extend %w100;
+  @extend %aic;
+  @extend %jcc;
+  @extend %oya;
+  @extend %df;
+  z-index: 999;
+  padding: 30px 16px;
+
+  @include m(mask) {
+    @extend %pa;
+    @extend %t0;
+    @extend %l0;
+    @extend %r0;
+    @extend %b0;
+    background: rgba(55, 58, 71, .9);
+    animation-name: ds-modal-mask;
+    animation-duration: .3s;
+  }
+
+  @include m(inner) {
+    @extend %pr;
+    @extend %w100;
+    max-width: j(520);
+    background-color: #fff;
+    animation-name: ds-modal-inner;
+    animation-duration: .3s;
+  }
+
+  @include m(header) {
+    @extend %df;
+    @extend %aic;
+    height: 60px;
+    padding-left: 20px;
+  }
+
+  @include m(title) {
+    @extend %df1;
+    @extend %twno;
+    @extend %fwn;
+    font-size: 18px;
+    color: $color-text-primary;
+  }
+
+  @include m(close) {
+    @extend %df;
+    @extend %aic;
+    @extend %jcc;
+    @extend %h100;
+    @extend %cp;
+    @include tst(color, .3s);
+    width: 60px;
+    color: $color-text-secondary;
+    i{
+      font-size: 24px;
+    }
+    &:hover{
+      color: $color-text-primary;
+    }
+  }
+
+  @include m(content) {
+    @extend %df;
+    @extend %fdc;
+    @extend %aic;
+    color: $color-text-regular;
+    padding: 30px 16px;
+  }
+
+  @include m(footer) {
+    @extend %df;
+    @extend %aic;
+    height: 50px;
+  }
+
+  @include m(button) {
+    @extend %df1;
+    @extend %pr;
+    @extend %h100;
+    @extend %cfff;
+    @extend %cp;
+    @include tst(all, .3s);
+    border: none;
+    background-color: transparent;
+
+    @include m(cancel) {
+      color: $color-primary;
+      background-color: $background-color-base;
+    }
+
+    @include m(confirm) {
+      background-color: $color-primary;
+    }
+
+  }
+
+}
+
+@keyframes ds-modal-mask {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ds-modal-inner {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+}
+

@@ -1,0 +1,179 @@
+
+@import "./mixins";
+
+@include b(dropdown){
+  @extend %pa;
+  @extend %bsb;
+  @include m(content){
+    @extend %pr;
+    min-width: 160px;
+    background-color: #202931;
+    border-radius: 6px;
+    padding: 10px 0;
+    box-shadow: 1px 10px 20px rgba(32, 41, 49, .5);
+    &:before{
+      @extend %pa;
+      content: '';
+      width: 0;
+      height: 0;
+      border-width: 7px;
+      border-style: solid;
+      border-color: transparent;
+    }
+  }
+
+  @include m(placement) {
+    @include m(topLeft){
+      @include placement(auto, auto, -14px, 16px);
+      animation-name: dropdownInDown;
+      @include e(content) {
+        &:before{
+          border-top-color: #202931;
+        }
+      }
+    }
+    @include m(topCenter){
+      @include placement(auto, auto, -14px, 50%);
+      animation-name: dropdownInDown;
+      @include e(content) {
+        &:before{
+          @include tft(translate3d(-50%, 0, 0));
+          border-top-color: #202931;
+        }
+      }
+    }
+    @include m(topRight){
+      @include placement(auto, 16px, -14px, auto);
+      animation-name: dropdownInDown;
+      @include e(content) {
+        &:before{
+          border-top-color: #202931;
+        }
+      }
+    }
+    @include m(bottomLeft){
+      @include placement(-14px, auto, auto, 16px);
+      animation-name: dropdownInUp;
+      @include e(content) {
+        &:before{
+          border-bottom-color: #202931;
+        }
+      }
+    }
+    @include m(bottomCenter){
+      @include placement(-14px, auto, auto, 50%);
+      animation-name: dropdownInUp;
+      @include e(content) {
+        &:before{
+          @include tft(translate3d(-50%, 0, 0));
+          border-bottom-color: #202931;
+        }
+      }
+    }
+    @include m(bottomRight){
+      @include placement(-14px, 16px, auto, auto);
+      animation-name: dropdownInUp;
+      @include e(content) {
+        &:before{
+          border-bottom-color: #202931;
+        }
+      }
+    }
+  }
+
+  @include m(hidden) {
+    @extend %dn;
+  }
+
+  @include m(divider) {
+    @extend %oh;
+    height: 0;
+    margin: 10px 0;
+    border-top: 1px solid $dropdown-divider-border-color;
+  }
+
+  @include m(item){
+    @extend %db;
+    @extend %bsb;
+    @extend %cp;
+    @extend %w100;
+    @include tst(all, .3s);
+    padding: 8px 16px;
+    font-weight: 400;
+    color: #aebcca;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    &:hover{
+      @extend %cfff;
+      background-color: #000;
+    }
+
+    @include b(icon){
+      &:first-child{
+        margin-right: 5px;
+      }
+    }
+
+    @include when(icon-only) {
+      @include b(icon){
+        &:first-child{
+          margin-right: 0;
+        }
+      }
+    }
+
+    @include when(loading) {
+      @extend %pr;
+      @extend %pen;
+      &:before {
+        @extend %pen;
+        @extend %pa;
+        content: '';
+        left: -1px;
+        top: -1px;
+        right: -1px;
+        bottom: -1px;
+        border-radius: inherit;
+        background-color: rgba(255,255,255, .05);
+      }
+    }
+
+    @include when(disabled) {
+      &,
+      &:hover,
+      &:focus {
+        color: $color-text-placeholder;
+        cursor: not-allowed;
+        background-image: none;
+        background-color: rgba(255,255,255, .1);
+      }
+    }
+
+  }
+
+}
+
+@keyframes dropdownInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes dropdownInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

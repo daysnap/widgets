@@ -1,0 +1,10 @@
+
+@import "../../assets/scss/define.scss";
+
+@include b(trigger){
+
+  @include m(hidden){
+    @extend %dn;
+  }
+
+}
