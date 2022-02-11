@@ -25,6 +25,9 @@ export { default as Dropdown } from './Dropdown'
 export type { IconProps } from './Icon'
 export { default as Icon } from './Icon'
 
+export type { InputProps } from './Input'
+export { default as Input } from './Input'
+
 export type { PortalProps } from './Portal'
 export { default as Portal } from './Portal'
 
