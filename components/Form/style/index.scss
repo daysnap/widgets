@@ -1,0 +1,68 @@
+
+@import "../../assets/scss/define.scss";
+
+@include b(form) {
+
+  @include m(item) {
+    @extend %pr;
+    @extend %db;
+    @extend %w100;
+    margin-bottom: 22px;
+
+    @include m(label) {
+      @extend %db;
+      @extend %pr;
+      color: $color-text-regular;
+      margin-bottom: 6px;
+    }
+
+    @include m(error) {
+      @extend %pa;
+      @extend %dn;
+      color: $color-danger;
+      font-size: 12px;
+      line-height: 1;
+      padding-top: 5px;
+      top: 100%;
+      left: 4px;
+    }
+
+    @include when(required) {
+      @include e(item-label) {
+        &:before{
+          @extend %pa;
+          left: -.6em;
+          content: '*';
+          color: $color-danger;
+        }
+      }
+    }
+
+    @include when(error) {
+
+      @include e(item-error){
+        @extend %db;
+      }
+
+      @include b(input-wrapper) {
+        border-color: $color-danger;
+        &.is-focused,
+        &:focus-within{
+          box-shadow:  0 0 0 j(3) rgba(245, 108, 108, .2);
+          border-color: $color-danger;
+        }
+      }
+
+      @include b(input) {
+        border-color: $color-danger;
+        &.is-focused,
+        &:focus-within{
+          box-shadow:  0 0 0 j(3) rgba(245, 108, 108, .2);
+          border-color: $color-danger;
+        }
+      }
+
+    }
+  }
+
+}

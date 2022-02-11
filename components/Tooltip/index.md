@@ -1,5 +1,5 @@
 ---
-title: Dropdown 下拉
+title: Tooltip
 nav:
   title: 组件
   order: 2
@@ -9,7 +9,7 @@ group:
   order: 1
 ---
 
-# Dropdown 下拉
+# Tooltip
 
 组件描述
 
