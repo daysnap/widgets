@@ -70,7 +70,7 @@
     "sass": "^1.49.7",
     "serve": "^13.0.2",
     "through2": "^4.0.2",
-    "typescript": "^4.5.5"
+    "typescript": "^4.5.5",
   },
   "dependencies": {
     "async-validator": "^4.0.7",
@@ -78,6 +78,10 @@
     "classnames": "^2.3.1",
     "dom-align": "^1.12.2",
     "react-is": "^17.0.2"
+  },
+  "resolutions": {
+    "@types/react-router": "^5.1.18",
+    "@types/react-router-dom": "^5.3.3"
   },
   "publishConfig": {
     "access": "public",
