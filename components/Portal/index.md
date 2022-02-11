@@ -1,5 +1,5 @@
 ---
-title: {{ pascalCase name }}
+title: Portal 挂载
 nav:
   title: 组件
   order: 2
@@ -9,7 +9,7 @@ group:
   order: 1
 ---
 
-# {{ pascalCase name }}
+# Portal 挂载
 
 组件描述
 

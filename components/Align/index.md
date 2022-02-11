@@ -1,5 +1,5 @@
 ---
-title: {{ pascalCase name }}
+title: Align 排列
 nav:
   title: 组件
   order: 2
@@ -9,7 +9,7 @@ group:
   order: 1
 ---
 
-# {{ pascalCase name }}
+# Align 排列
 
 组件描述
 
