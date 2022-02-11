@@ -23,7 +23,7 @@ pnpm-debug.log*
 # build
 dist/
 lib/
-esm/
+es/
 
 # dumi
 

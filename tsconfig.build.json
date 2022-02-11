@@ -9,6 +9,7 @@
     "**/demo/**",
     "node_modules",
     "lib",
-    "esm"
+    "es",
+    ".umirc.ts",
   ]
 }

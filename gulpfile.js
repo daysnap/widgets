@@ -9,7 +9,7 @@ const through2 = require('through2')
 const paths = {
   dest: {
     lib: 'lib', // commonjs 文件存放的目录名 - 本块关注
-    esm: 'esm', // ES module 文件存放的目录名 - 暂时不关心
+    esm: 'es', // ES module 文件存放的目录名 - 暂时不关心
     dist: 'dist', // umd文件存放的目录名 - 暂时不关心
   },
   styles: 'components/**/*.scss', // 样式文件路径 - 暂时不关心
@@ -58,7 +58,7 @@ function compileCJS() {
 
 function compileESM() {
   const { dest } = paths
-  return compileScripts('esm', dest.esm)
+  return compileScripts('es', dest.esm)
 }
 
 function copyStyle() {
