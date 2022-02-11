@@ -1,14 +1,15 @@
 ---
-name: Icon 图标
+title: Icon 图标
 nav:
   title: 组件
   order: 2
+  path: /components
 group:
   title: 基础
   order: 1
 ---
 
-# Icon
+# Icon 图标
 
 组件描述
 

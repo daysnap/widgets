@@ -3,6 +3,7 @@ title: Button 按钮
 nav:
   title: 组件
   order: 2
+  path: /components
 group:
   title: 基础
   order: 1
