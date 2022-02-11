@@ -2,23 +2,24 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
+import { IconProps } from './interface'
 
-export interface IconProps extends React.HTMLAttributes<HTMLElement>{
-  icon?: string,
-}
+const Icon = React.forwardRef<HTMLElement, IconProps>((props, ref) => {
+  const {
+    className,
+    icon,
+    prefixCls,
+    ...restProps
+  } = props
 
-const Icon = React.forwardRef<HTMLElement, IconProps>(({
-  className,
-  icon,
-  ...restProps
-}, ref) => {
-  const cls = createPrefixCls('icon')
+  const cls = createPrefixCls('icon', prefixCls)
   const classes = classnames(
     `iconfont`,
-    `${cls}`,
-    `${icon}`,
+    cls,
+    icon,
     className,
   )
+
   return (
     <i
       {...restProps}
@@ -29,4 +30,3 @@ const Icon = React.forwardRef<HTMLElement, IconProps>(({
 })
 
 export default Icon
-

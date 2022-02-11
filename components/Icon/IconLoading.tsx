@@ -2,19 +2,20 @@
 import React from 'react'
 import classnames from 'classnames'
 import { createPrefixCls } from '../utils/create'
-import Icon, { IconProps } from './Icon'
+import Icon from './Icon'
+import { IconLoadingProps } from './interface'
 
-export type IconLoadingProps = IconProps
+const IconLoading = React.forwardRef<HTMLElement, IconLoadingProps>((props) => {
+  const {
+    className,
+    prefixCls,
+    icon = 'icon-loading2',
+    ...restProps
+  } = props
 
-const IconLoading: React.FC<IconLoadingProps> = ({
-  className,
-  icon = 'icon-loading2',
-  ...restProps
-}) => {
-
-  const cls = createPrefixCls('icon-loading')
+  const cls = createPrefixCls('icon-loading', prefixCls)
   const classes = classnames(
-    `${cls}`,
+    cls,
     className
   )
 
@@ -25,7 +26,6 @@ const IconLoading: React.FC<IconLoadingProps> = ({
       icon={icon}
     />
   )
-
-}
+})
 
 export default IconLoading
