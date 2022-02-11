@@ -1,5 +1,5 @@
 ---
-title: Input 输入框
+title: Message
 nav:
   title: 组件
   order: 2
@@ -9,7 +9,7 @@ group:
   order: 1
 ---
 
-# Input 输入框
+# Message
 
 组件描述
 

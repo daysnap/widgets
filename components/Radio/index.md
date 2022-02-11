@@ -1,5 +1,5 @@
 ---
-title: Input 输入框
+title: Radio 单选框
 nav:
   title: 组件
   order: 2
@@ -9,7 +9,7 @@ group:
   order: 1
 ---
 
-# Input 输入框
+# Radio 单选框
 
 组件描述
 

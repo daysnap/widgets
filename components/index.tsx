@@ -28,8 +28,14 @@ export { default as Icon } from './Icon'
 export type { InputProps } from './Input'
 export { default as Input } from './Input'
 
+export type { MessageProps } from './Message'
+export { default as Message } from './Message'
+
 export type { PortalProps } from './Portal'
 export { default as Portal } from './Portal'
+
+export type { RadioProps } from './Radio'
+export { default as Radio } from './Radio'
 
 export type { TriggerProps } from './Trigger'
 export { default as Trigger } from './Trigger'
