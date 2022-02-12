@@ -4,6 +4,7 @@
 @include b(tooltip){
   @extend %pa;
   width: max-content;
+  z-index: 1020;
 
   @include m(hidden) {
     @extend %dn;

@@ -4,6 +4,8 @@
 @include b(dropdown){
   @extend %pa;
   @extend %bsb;
+  z-index: 1030;
+
   @include m(content){
     @extend %pr;
     min-width: 160px;
