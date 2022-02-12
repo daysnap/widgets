@@ -7,20 +7,21 @@ import Align, { OnAlign, AlignRef } from '../Align'
 import { supportRef, composeRef } from '../utils/ref'
 import { TriggerProps, TriggerRef } from './interface'
 
-const Trigger = React.forwardRef<TriggerRef, TriggerProps>(({
-  className,
-  children,
-  action,
-  showAction= [],
-  hideAction= [],
-  align,
-  onAlign,
-  autoDestroy= false,
-  prefixCls,
-  placements,
-  placement,
-  ...restProps
-}, ref) => {
+const Trigger = React.forwardRef<TriggerRef, TriggerProps>((props, ref) => {
+  const {
+    className,
+    children,
+    action,
+    showAction= [],
+    hideAction= [],
+    align,
+    onAlign,
+    autoDestroy= false,
+    prefixCls,
+    placements,
+    placement,
+    ...restProps
+  } = props
 
   const [child, ...restChildren] = React.Children.toArray(children)
   const refTrigger = React.useRef<HTMLElement>(null)
