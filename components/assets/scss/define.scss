@@ -416,23 +416,23 @@
     box-shadow: $x $y $m $n $rgba;
 }
 
-//%bw05{
-//    @extend %pr;
-//    &:before{
-//        @extend %pa;
-//        @extend %t0;
-//        @extend %l0;
-//        @extend %r0;
-//        @extend %bsb;
-//        @include tft(scaleY(0.5));
-//        @include tfo(0, 0);
-//        pointer-events: none;
-//        z-index: 0;
-//        content: '';
-//        height: 200%;
-//        //height: calc(200% - 11px);
-//    }
-//}
+%bw05{
+    @extend %pr;
+    &:before{
+        @extend %pa;
+        @extend %t0;
+        @extend %l0;
+        @extend %r0;
+        @extend %bsb;
+        @include tft(scaleY(0.5));
+        @include tfo(0, 0);
+        pointer-events: none;
+        z-index: 0;
+        content: '';
+        height: 200%;
+        //height: calc(200% - 11px);
+    }
+}
 
 %bw05{
     @extend %pr;
