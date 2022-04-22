@@ -5,7 +5,6 @@
       "@daysnap/widgets": ["components"]
     },
     "target": "esnext",
-    "module": "commonjs",
     "jsx": "react",
     "declaration": true,
     "declarationDir": "lib",
@@ -17,7 +16,6 @@
   },
   "include": [
     "components/**/*",
-    "typings.d.ts"
   ],
   "exclude": [
     "node_modules",
