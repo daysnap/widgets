@@ -6,8 +6,8 @@ import { defineConfig } from 'dumi'
 import pkg from './package.json'
 
 // 此处更换为自己的仓库名
-let base: string | undefined = '/daysnap-widgets'
-let publicPath: string | undefined = '/daysnap-widgets/'
+let base: string | undefined = '/widgets'
+let publicPath: string | undefined = '/widgets/'
 
 if (process.env.SITE_BUILD_ENV === 'PREVIEW') {
   base = undefined;
