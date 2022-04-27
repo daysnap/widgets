@@ -2,4 +2,4 @@
 
 UI组件库
 
-详情文档请 [点我](https://daysnap.github.io/daysnap-widgets/)
+详情文档请 [点我](https://daysnap.github.io/widgets/)
